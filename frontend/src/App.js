@@ -1,30 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
-        <p>
+    // const handleClick = async () = {
 
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+    // }
+    useEffect(() => {
+        fetch('localhot://8000/api/google/login/url')
+            .then((resp) => resp.json())
+            .then((data) => console.log(data));
+    }, []);
 
-
-
-          
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <h1>Development</h1>
+        </div>
+    );
 }
 
 export default App;
