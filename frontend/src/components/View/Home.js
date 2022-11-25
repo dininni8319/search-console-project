@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+
 const Home = () => {
   const [searchParams, setSearchParams ] = useSearchParams();
   let code = searchParams.get("code")
