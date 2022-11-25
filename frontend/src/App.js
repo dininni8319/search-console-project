@@ -2,8 +2,9 @@ import './App.css';
 import { useState, useEffect, useCallback } from 'react';
 
 function App() {
+   
     const [ url , setUrl] = useState('')
-    console.log(url);
+   
     const handleGoogleLogin = async() => {
     
         try {
