@@ -1,19 +1,36 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 function App() {
-    // const handleClick = async () = {
+    const [ url , setUrl] = useState('')
+    console.log(url);
+    const handleGoogleLogin = async() => {
+    
+        try {
+          const response = await(await fetch('http://localhost:8000/api/google/login/url'))  
+          
+          if(response) {
+            const url = await response.json();
+            setUrl(url)
+            // const response = await fetch(`http://localhost:8000/api/google/auth/login`,{
+            //     method: 'POST',
+            //     headers: { "Content-Type": "application/json" },
+            //     body: JSON.stringify({auth_code: code}),
+            // })
+            // setUrl(url)
+        
+          }
 
-    // }
-    useEffect(() => {
-        fetch('localhot://8000/api/google/login/url')
-            .then((resp) => resp.json())
-            .then((data) => console.log(data));
-    }, []);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
     return (
         <div className="App">
             <h1>Development</h1>
+            <button onClick={handleGoogleLogin}>Login with Google</button>
+            {url && <a href={url}>Clicca il link</a>}
         </div>
     );
 }
