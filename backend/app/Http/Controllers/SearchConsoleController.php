@@ -3,19 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use \Google\Service\Webmasters;
 class SearchConsoleController extends GoogleController
 {
-
     public function getSearchConsoleData(Request $request)
     {
-        // \Google\Service\Webmasters
         // $service = new \Google\Service\Webmasters\Resource\Sites
         $client = GoogleController::getUserClient();
-
-        $service = new \Google\Service\Webmasters($client);
-        
-        $request = new \Google\Service\Webmasters\SearchAnalyticsQueryRequest;
+        $service = new Webmasters($client);
+        $request = new Webmasters\SearchAnalyticsQueryRequest;
         
         $request->setStartRow(0);
         $request->setStartDate('2022-11-01');
@@ -34,15 +30,26 @@ class SearchConsoleController extends GoogleController
     public function getSite()
     {
         $client = GoogleController::getUserClient();
-
+        
+        // if ($client->getAccessToken()) {
+        //     # code...
+        // }
+        
         $service = new \Google\Service\Webmasters($client);
         
         $allWebSites = $service->sites->listSites()->siteEntry;
         
-        // dd($allWebSites, 'testing');
-        $allWebSites = $allWebSites[1]->siteUrl;
-        
-        return response()->json($allWebSites, 200);
+        $sites = [];
+
+        foreach ($allWebSites as $key => $value) {
+          array_push( $sites, $allWebSites[$key]->siteUrl);
+        }
+
+        return response()->json([
+          'success' => true,
+          'sites' => $sites,
+          'message' => 'Questi sono i siti trovati'
+        ], 200);
     }
 
     // needs to be fixed

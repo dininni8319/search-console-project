@@ -39,7 +39,14 @@ class GoogleController extends Controller
 
         // $user = User::where('id', '=', auth()->guard('api')->user()->id)->first();
         // il codice sopra e da rimettere quando l'app funziona
-        $user = User::where('id', '=', '3')->first();
+        $client = $this->getClient();
+        //Get the user data from google
+        
+        $client->getAccessToken();
+        
+        //Get the user data from google
+      
+        $user = User::where('id', '=','23' )->first();
 
         /**
          * Strip slashes from the access token json
@@ -48,7 +55,6 @@ class GoogleController extends Controller
          */
         $accessTokenJson = stripslashes($user->google_access_token_json);
 
-        $client = $this->getClient();
         $client->setAccessToken(($accessTokenJson));
 
         // Handle Refresh token
