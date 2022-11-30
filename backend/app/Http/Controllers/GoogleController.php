@@ -38,6 +38,8 @@ class GoogleController extends Controller
         //get logged user
 
         // $user = User::where('id', '=', auth()->guard('api')->user()->id)->first();
+        
+        // dd(auth()->user(), 'test');
         // il codice sopra e da rimettere quando l'app funziona
         $client = $this->getClient();
         //Get the user data from google
