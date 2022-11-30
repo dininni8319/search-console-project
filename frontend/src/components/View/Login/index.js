@@ -1,18 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Flex from '../../../common/Flex';
 import LoginForm from '../../UI/LoginForm';
+import AuthCardLayout from '../../../layouts/AuthCardLayout';
 
-const Login = () => (
-  <>
-    <Flex justifyContent="between" alignItems="center" className="mb-2">
-      <h5>Log in</h5>
-      <p className="fs--1 text-600 mb-0">
-        or <Link to="/authentication/simple/register">Create an account</Link>
-      </p>
-    </Flex>
-    <LoginForm />
-  </>
-);
+const Login = () => {
+  return (
+    <AuthCardLayout
+      leftSideContent={
+        <p className="text-white">
+          Don't have an account?
+          <br />
+          <Link
+            className="text-white text-decoration-underline"
+            to="/authentication/card/register"
+          >
+            Get started!
+          </Link>
+        </p>
+      }
+    >
+      <h3>Account Login</h3>
+      <LoginForm layout="card" hasLabel />
+    </AuthCardLayout>
+  );
+};
 
 export default Login;
