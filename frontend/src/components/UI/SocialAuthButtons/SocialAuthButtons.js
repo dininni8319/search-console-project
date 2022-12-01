@@ -25,8 +25,9 @@ const SocialAuthButtons = () => (
           size="sm"
           className="btn-outline-facebook mt-2 w-100"
         >
+        
           <FontAwesomeIcon
-            icon={['fab', 'facebook-square']}
+            icon={['fa-brands', 'facebook-square']}
             transform="grow-8"
             className="me-2"
           />{' '}
