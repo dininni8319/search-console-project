@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Col, Row } from 'react-bootstrap';
 import Logo from 'components/common/Logo';
 import { Outlet } from 'react-router-dom';
-
 import Section from 'components/common/Section';
 
 const ErrorLayout = () => {

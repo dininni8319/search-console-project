@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Button, Col, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const SocialAuthButtons = () => (
+const SocialAuthButtons = ({ handleGoogleLogin }) => (
   <Form.Group className="mb-0">
     <Row>
       <Col sm={6} className="pe-sm-1">
@@ -10,6 +10,7 @@ const SocialAuthButtons = () => (
           variant=""
           size="sm"
           className="btn-outline-google-plus mt-2 w-100"
+          onClick={handleGoogleLogin}
         >
           <FontAwesomeIcon
             icon={['fab', 'google-plus-g']}

@@ -6,15 +6,68 @@ import { Button, Form, Row, Col } from 'react-bootstrap';
 import Divider from 'components/common/Divider';
 import SocialAuthButtons from './SocialAuthButtons';
 
-const RegistrationForm = ({ hasLabel }) => {
+const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
   // State
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    password_confirmation: '',
     isAccepted: false
   });
+
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+
+    if (formData.password === formData.password_confirmation) {
+
+      fetch(`http://localhost:8000/api/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => {
+          if (response.ok) {
+            navigate("/");
+            return response.json();
+          } else {
+            alert("ops..");
+          }
+        })
+        .then(() => {
+          fetch(`${api_urls.backend}/api/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: email.value,
+              password: password.value,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data, 'testing the data');
+              const token = data.token;
+
+              /// una volta ricevuto il token, possiamo richiedere informazioni come username e email ad esempio
+              //alla rotta view profile
+              // fetch(`${api_urls.backend}/api/view-profile`, {
+              //   method: "GET",
+              //   headers: {
+              //     Authorization: `Bearer ${token}`,
+              //   },
+              // })
+              //   .then((response) => response.json())
+              //   .then((data) => {
+              //     login(data.data.name, token, data.data.id);
+              //     navigate("/adminarea"); //object history;
+              //   });
+            });
+        });
+    } else {
+      alert("the passwords are not the same");
+    }
+  };
 
   // Handler
   const handleSubmit = e => {
@@ -32,7 +85,7 @@ const RegistrationForm = ({ hasLabel }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleRegister}>
       <Form.Group className="mb-3">
         {hasLabel && <Form.Label>Name</Form.Label>}
         <Form.Control
@@ -70,8 +123,8 @@ const RegistrationForm = ({ hasLabel }) => {
           {hasLabel && <Form.Label>Confirm Password</Form.Label>}
           <Form.Control
             placeholder={!hasLabel ? 'Confirm Password' : ''}
-            value={formData.confirmPassword}
-            name="confirmPassword"
+            value={formData.password_confirmation}
+            name="password_confirmation"
             onChange={handleFieldChange}
             type="password"
           />
@@ -106,7 +159,7 @@ const RegistrationForm = ({ hasLabel }) => {
             !formData.name ||
             !formData.email ||
             !formData.password ||
-            !formData.confirmPassword ||
+            !formData.password_confirmation ||
             !formData.isAccepted
           }
         >
@@ -115,7 +168,7 @@ const RegistrationForm = ({ hasLabel }) => {
       </Form.Group>
       <Divider>or register with</Divider>
 
-      <SocialAuthButtons />
+      <SocialAuthButtons handleGoogleLogin={handleGoogleLogin}/>
     </Form>
   );
 };

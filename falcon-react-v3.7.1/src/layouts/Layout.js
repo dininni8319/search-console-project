@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import is from 'is_js';
 import MainLayout from './MainLayout';
@@ -9,6 +9,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { CloseButton } from 'components/common/Toast';
 import Error404 from 'components/errors/Error404';
 import Error500 from 'components/errors/Error500';
+import LandingPage from "components/views/LandingPage/LandingPage";
 import SplitLogin from 'components/authentication/split/Login';
 import SplitLogout from 'components/authentication/split/Logout';
 import SplitRegistration from 'components/authentication/split/Registration';
@@ -17,8 +18,29 @@ import SplitPasswordReset from 'components/authentication/split/PasswordReset';
 import SplitConfirmMail from 'components/authentication/split/ConfirmMail';
 import SplitLockScreen from 'components/authentication/split/LockScreen';
 import AppContext from 'context/Context';
+import Welcome from 'components/views/Welcome/Welcome';
 
 const Layout = () => {
+
+    const [ url , setUrl] = useState('')
+   
+    const handleGoogleLogin = async() => {
+    
+        try {
+          const response = await(await fetch('http://localhost:8000/api/google/login/url'))  
+          
+          if(response) {
+            const url = await response.json();
+            setUrl(url);
+            window.location.replace(url);
+            
+          }
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
   const HTMLClassList = document.getElementsByTagName('html')[0].classList;
   useContext(AppContext);
 
@@ -38,15 +60,18 @@ const Layout = () => {
     <>
       <Routes>
         {/* <Route path="landing" element={<Landing />} /> */}
-        <Route path="/" element={<SplitLogin />} />
+        <Route path="/landing" element={<LandingPage />} />
+        <Route path="/" element={<Welcome />} />
         <Route element={<ErrorLayout />}>
           <Route path="errors/404" element={<Error404 />} />
           <Route path="errors/500" element={<Error500 />} />
         </Route>
        
-        <Route path="authentication/split/logout" element={<SplitLogout />} />
+        <Route path="login" element={<SplitLogin handleGoogleLogin={handleGoogleLogin} />} />
+  
+        <Route path="logout" element={<SplitLogout handleGoogleLogin={handleGoogleLogin} />} />
         <Route
-          path="authentication/split/register"
+          path="register"
           element={<SplitRegistration />}
         />
         <Route

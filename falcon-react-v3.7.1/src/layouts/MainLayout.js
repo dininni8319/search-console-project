@@ -1,16 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import NavbarTop from 'components/navbar/top/NavbarTop';
 import NavbarVertical from 'components/navbar/vertical/NavbarVertical';
 import AppContext from 'context/Context';
 import Footer from 'components/footer/Footer';
-// import ProductProvider from 'components/app/e-commerce/ProductProvider';
 import classNames from 'classnames';
 
 const MainLayout = () => {
   const { hash, pathname } = useLocation();
   const isKanban = pathname.includes('kanban');
-  // const isChat = pathname.includes('chat');
 
   const {
     config: { isFluid, navbarPosition }
@@ -37,14 +34,6 @@ const MainLayout = () => {
       {(navbarPosition === 'vertical' || navbarPosition === 'combo') && (
         <NavbarVertical />
       )}
-      <ProductProvider>
-        <div className={classNames('content', { 'pb-0': isKanban })}>
-          <NavbarTop />
-          {/*------ Main Routes ------*/}
-          <Outlet />
-          {!isKanban && <Footer />}
-        </div>
-      </ProductProvider>
     </div>
   );
 };

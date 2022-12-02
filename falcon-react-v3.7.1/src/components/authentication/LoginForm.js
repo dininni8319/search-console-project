@@ -6,13 +6,45 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import SocialAuthButtons from './SocialAuthButtons';
 
-const LoginForm = ({ hasLabel, layout }) => {
+const LoginForm = ({ hasLabel, layout, handleGoogleLogin }) => {
   // State
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     remember: false
   });
+
+  
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    fetch(`http://localhost:8000/api/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: formData.email, password: formData.password }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data, 'test login');
+        const token = data.token;
+
+        /// una volta ricevuto il token, possiamo richiedere informazioni come username e email ad esempio
+        //alla rotta view profile
+        // fetch(`${api_urls.backend}/api/view-profile`, {
+        //   method: "GET",
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        // })
+        //   .then((response) => response.json())
+        //   .then((data) => {
+        //     console.log(data.data);
+        //     // let username = `${data.data.name}`
+        //     // login( username, token, data.data.id);
+        //     // navigate("/adminarea"); 
+        //   });
+      });
+  };
 
   // Handler
   const handleSubmit = e => {
@@ -30,7 +62,7 @@ const LoginForm = ({ hasLabel, layout }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleLogin}>
       <Form.Group className="mb-3">
         {hasLabel && <Form.Label>Email address</Form.Label>}
         <Form.Control
@@ -96,7 +128,7 @@ const LoginForm = ({ hasLabel, layout }) => {
 
       <Divider className="mt-4">or log in with</Divider>
 
-      <SocialAuthButtons />
+      <SocialAuthButtons handleGoogleLogin={handleGoogleLogin}/>
     </Form>
   );
 };
