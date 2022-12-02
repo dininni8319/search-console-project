@@ -1,48 +1,54 @@
 import Divider from 'components/common/Divider';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import SocialAuthButtons from './SocialAuthButtons';
+import { ConfigContext } from "context/Config/index";
+import { useNavigate } from "react-router";
+import { AuthContext } from "context/Auth/index";
 
-const LoginForm = ({ hasLabel, layout, handleGoogleLogin }) => {
+const LoginForm = ({ hasLabel, layout}) => {
   // State
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
+  const { api_urls } = useContext(ConfigContext);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     remember: false
   });
 
-  
   const handleLogin = (event) => {
     event.preventDefault();
 
-    fetch(`http://localhost:8000/api/login`, {
+    fetch(`${api_urls.backend}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: formData.email, password: formData.password }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data, 'test login');
         const token = data.token;
 
-        /// una volta ricevuto il token, possiamo richiedere informazioni come username e email ad esempio
-        //alla rotta view profile
-        // fetch(`${api_urls.backend}/api/view-profile`, {
-        //   method: "GET",
-        //   headers: {
-        //     Authorization: `Bearer ${token}`,
-        //   },
-        // })
-        //   .then((response) => response.json())
-        //   .then((data) => {
-        //     console.log(data.data);
-        //     // let username = `${data.data.name}`
-        //     // login( username, token, data.data.id);
-        //     // navigate("/adminarea"); 
-        //   });
+        if (token) {
+          fetch(`${api_urls.backend}/view-profile`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              
+              let username = `${data.data.name}`
+              login(username, token, data.data.id);
+              navigate("/auth_google"); 
+            });
+        } else {
+          navigate('/login')
+        }
       });
   };
 
@@ -128,7 +134,7 @@ const LoginForm = ({ hasLabel, layout, handleGoogleLogin }) => {
 
       <Divider className="mt-4">or log in with</Divider>
 
-      <SocialAuthButtons handleGoogleLogin={handleGoogleLogin}/>
+      <SocialAuthButtons />
     </Form>
   );
 };

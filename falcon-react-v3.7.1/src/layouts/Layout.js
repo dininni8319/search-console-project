@@ -19,7 +19,10 @@ import SplitConfirmMail from 'components/authentication/split/ConfirmMail';
 import SplitLockScreen from 'components/authentication/split/LockScreen';
 import AppContext from 'context/Context';
 import Welcome from 'components/views/Welcome/Welcome';
+import GoogleAuth from 'components/views/GoogleAuth/GoogleAuth';
+import AuthWithGoogle from 'components/views/AuthWithGoogle/index';
 import { ConfigContext } from "context/Config/index";
+import ProtectedRoute from 'Utilities/ProtectedRoute';
 
 const Layout = () => {
 
@@ -61,13 +64,30 @@ const Layout = () => {
         <Routes>
           {/* <Route path="landing" element={<Landing />} /> */}
           <Route path="/" element={<Welcome />} />
-          <Route path="/home" element={<LandingPage />} />
+
+          <Route path="/google_auth" element={
+            // <ProtectedRoute>
+              <GoogleAuth />
+            // </ProtectedRoute>
+          } />
+
+          <Route path="/home" element={
+            // <ProtectedRoute>
+              <LandingPage />
+            // </ProtectedRoute>
+          } />
+
+          <Route path="/auth_google" element={
+            // <ProtectedRoute>
+              <AuthWithGoogle />
+            // </ProtectedRoute>
+          } />
           <Route element={<ErrorLayout />}>
             <Route path="errors/404" element={<Error404 />} />
             <Route path="errors/500" element={<Error500 />} />
           </Route>
         
-          <Route path="login" element={<SplitLogin handleGoogleLogin={handleGoogleLogin} />} />
+          <Route path="login" element={<SplitLogin />} />
     
           <Route path="logout" element={<SplitLogout handleGoogleLogin={handleGoogleLogin} />} />
           <Route

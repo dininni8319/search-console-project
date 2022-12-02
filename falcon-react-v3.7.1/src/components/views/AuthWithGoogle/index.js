@@ -3,8 +3,10 @@ import { Link, useSearchParams  } from 'react-router-dom';
 import MainLayout from 'layouts/MainLayout';
 import Flex from 'components/common/Flex';
 import { ConfigContext } from "context/Config/index";
+import Starter from 'components/pages/Starter';
+import style from 'App.css';
 
-const LandingPage = () => {
+const AuthWithGoogle = () => {
   const [searchParams, setSearchParams ] = useSearchParams();
   let code = searchParams.get("code")
 
@@ -23,11 +25,12 @@ const LandingPage = () => {
   return (
     <>
       <Flex alignItems="center" justifyContent="center">
-        <h1 className='bg-danger fs-1'>Landing Page</h1>
+        <div className='d-flex justify-content-center align-items-center class-custom-height'>
+          <Starter />
+        </div>
       </Flex>
-
     </>
   );
 };
 
-export default LandingPage;
+export default AuthWithGoogle;

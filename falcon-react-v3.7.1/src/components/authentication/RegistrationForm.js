@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from "react-router";
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import Divider from 'components/common/Divider';
 import SocialAuthButtons from './SocialAuthButtons';
+import { ConfigContext } from "context/Config/index";
+import { AuthContext } from "context/Auth/index";
 
 const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
+  
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
+  const { api_urls } = useContext(ConfigContext);
   // State
   const [formData, setFormData] = useState({
     name: '',
@@ -16,52 +23,48 @@ const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
     isAccepted: false
   });
 
-
   const handleRegister = (event) => {
     event.preventDefault();
 
     if (formData.password === formData.password_confirmation) {
 
-      fetch(`http://localhost:8000/api/register`, {
+      fetch(`${api_urls.backend}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       })
         .then((response) => {
           if (response.ok) {
-            navigate("/");
+            navigate("/auth_google");
             return response.json();
           } else {
             alert("ops..");
           }
         })
         .then(() => {
-          fetch(`${api_urls.backend}/api/login`, {
+          fetch(`${api_urls.backend}/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              email: email.value,
-              password: password.value,
+              email: formData.email,
+              password: formData.password,
             }),
           })
             .then((response) => response.json())
             .then((data) => {
-              console.log(data, 'testing the data');
               const token = data.token;
 
-              /// una volta ricevuto il token, possiamo richiedere informazioni come username e email ad esempio
-              //alla rotta view profile
-              // fetch(`${api_urls.backend}/api/view-profile`, {
-              //   method: "GET",
-              //   headers: {
-              //     Authorization: `Bearer ${token}`,
-              //   },
-              // })
-              //   .then((response) => response.json())
-              //   .then((data) => {
-              //     login(data.data.name, token, data.data.id);
-              //     navigate("/adminarea"); //object history;
-              //   });
+              fetch(`${api_urls.backend}/view-profile`, {
+                method: "GET",
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  login(data.data.name, token, data.data.id);
+                  navigate("/auth_google"); //object history;
+                });
             });
         });
     } else {
