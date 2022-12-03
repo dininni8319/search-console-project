@@ -3,6 +3,8 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import editing from 'assets/img/icons/spot-illustrations/21.png';
 import { GoogleContext } from "context/Google/index";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import GoogleIcon from 'assets/img/icons/icons8-google.svg';
 
 const Starter = () => {
   const { handleGoogleLogin } = useContext(GoogleContext);
@@ -21,8 +23,12 @@ const Starter = () => {
               variant="falcon-primary"
               as={Link}
               onClick={handleGoogleLogin}
+              className="bg-primary"
             >
-              Getting started
+              <span className='bg-white p-2 ms-0'>
+                <img src={GoogleIcon} width='40px' height='40px' className='py-1'/>
+              </span>
+              <span className='ps-2 text-white'>Entra con google</span>
             </Button>
           </Col>
         </Row>

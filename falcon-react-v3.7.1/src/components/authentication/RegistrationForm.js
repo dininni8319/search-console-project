@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useReducer } from 'react';
 import { useNavigate } from "react-router";
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -9,12 +9,36 @@ import SocialAuthButtons from './SocialAuthButtons';
 import { ConfigContext } from "context/Config/index";
 import { AuthContext } from "context/Auth/index";
 
+const initialState = {
+  name: '',
+  email: '',
+  password: '',
+  password_confirmation: '',
+  isAccepted: false
+}
+
+const reducer = (state, action) => {
+  return {...state, [action.input]: action.value}
+}
+
 const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
   
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const { api_urls } = useContext(ConfigContext);
   // State
+  
+  const handleChange = (e) => {
+    const { name, value, checked } = e.target;
+    const action  = {
+      input: name,
+      value: name === 'isAccepted'? checked : value,
+    }
+    dispatch(action)
+  }
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -146,7 +170,9 @@ const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
                 isAccepted: e.target.checked
               })
             }
+           
           />
+
           <Form.Check.Label className="form-label">
             I accept the <Link to="#!">terms</Link> and{' '}
             <Link to="#!">privacy policy</Link>

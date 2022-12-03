@@ -4,8 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \Google\Service\Webmasters;
+
 class SearchConsoleController extends GoogleController
 {
+    public function __construct(){
+        // $this->middleware("auth:api");
+        $this->middleware("auth:api");
+    }
+    
     public function getSearchConsoleData(Request $request)
     {
         // $service = new \Google\Service\Webmasters\Resource\Sites
@@ -45,11 +51,18 @@ class SearchConsoleController extends GoogleController
           array_push( $sites, $allWebSites[$key]->siteUrl);
         }
 
-        return response()->json([
-          'success' => true,
-          'sites' => $sites,
-          'message' => 'Questi sono i siti trovati'
-        ], 200);
+        if ($sites) {
+            return response()->json([
+              'success' => true,
+              'sites' => $sites,
+              'message' => 'Questi sono i siti trovati'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Non ho trovato nessun sito!'
+            ], 400);
+        }
     }
 
     // needs to be fixed
@@ -62,7 +75,6 @@ class SearchConsoleController extends GoogleController
             $addSite = $service->sites->add($request->site);
 
             // $request = $service->site->addProperty('https://salvatore-dininni.com');
-            
             return response()->json($addSite, 201); ;
         }
 

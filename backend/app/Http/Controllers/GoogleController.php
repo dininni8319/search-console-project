@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller as Controller;
 
 class GoogleController extends Controller
@@ -35,21 +36,11 @@ class GoogleController extends Controller
 
     protected function getUserClient()
     {
-        //get logged user
-
-        // $user = User::where('id', '=', auth()->guard('api')->user()->id)->first();
+        $user = User::where('id', '=', auth()->guard('api')->user()->id)->first();
         
-        // dd(auth()->user(), 'test');
-        // il codice sopra e da rimettere quando l'app funziona
         $client = $this->getClient();
-        //Get the user data from google
-        
         $client->getAccessToken();
         
-        //Get the user data from google
-      
-        $user = User::where('id', '=','23' )->first();
-
         /**
          * Strip slashes from the access token json
          * if you don't strip mysql's escaping, everything will seem to work

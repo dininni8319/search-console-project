@@ -22,6 +22,10 @@ const LoginForm = ({ hasLabel, layout}) => {
 
   const handleLogin = (event) => {
     event.preventDefault();
+    
+    toast.success(`Logged in as ${formData.email}`, {
+      theme: 'colored'
+    });
 
     fetch(`${api_urls.backend}/login`, {
       method: "POST",
@@ -50,14 +54,6 @@ const LoginForm = ({ hasLabel, layout}) => {
           navigate('/login')
         }
       });
-  };
-
-  // Handler
-  const handleSubmit = e => {
-    e.preventDefault();
-    toast.success(`Logged in as ${formData.email}`, {
-      theme: 'colored'
-    });
   };
 
   const handleFieldChange = e => {
