@@ -19,8 +19,8 @@ const FormSelect = () => {
   const handleDispatch = useCallback((action) => {
     dispatch(action)
   },[])
-  
-  const { makeRequest: fetchAllSites} = useApiRequest(handleDispatch);
+
+  const { makeRequest: fetchAllSites } = useApiRequest(handleDispatch);
 
   useEffect(() =>{
     fetchAllSites(

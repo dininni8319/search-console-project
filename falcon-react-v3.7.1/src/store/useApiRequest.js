@@ -16,7 +16,6 @@ const useApiRequest = (handleDispatch) => {
     } catch (error) {
       handleDispatch({ type: ERROR, error })
     }
-
   },[])
 
   return { makeRequest }
