@@ -1,11 +1,13 @@
-import { useState, useEffect, useContext, useCallback } from 'react';
+import { useState, useEffect, useReducer, useContext, useCallback } from 'react';
 import { ConfigContext } from "context/Config/index";
 import { getUrl } from '../../../utils';
 import { AuthContext } from "context/Auth/index";
 import useApiRequest from '../../../store/useApiRequest';
+import authReducer, { initialState } from '../../../store/apiReducer';
 
 const FormSelect = () => {
-  
+
+  const [state, dispatch] = useReducer(authReducer, initialState);
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
 
@@ -13,19 +15,19 @@ const FormSelect = () => {
     method: "GET",
     headers: { Authorization: `Bearer ${user?.token}`},
   }
-  
-  const { state, makeRequest: fetchAllSites} = useApiRequest( 
-    `${api_urls.backend}/search/console/allsites`, 
-    params
-  )
 
-  const handleRequest = useCallback(() => {
-    fetchAllSites()
+  const handleDispatch = useCallback((action) => {
+    dispatch(action)
   },[])
   
+  const { makeRequest: fetchAllSites} = useApiRequest(handleDispatch);
+
   useEffect(() =>{
-    handleRequest();
-  }, [handleRequest])
+    fetchAllSites(
+      `${api_urls.backend}/search/console/allsites`, 
+      params
+    );
+  }, [fetchAllSites])
 
   return (
     <> 

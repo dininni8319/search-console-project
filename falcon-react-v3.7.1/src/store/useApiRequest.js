@@ -1,27 +1,25 @@
-import { useCallback, useReducer } from "react";
+import { useCallback } from "react";
 import { LOADING, SUCCESS, ERROR } from './actionTypes';
-import authReducer, { initialState } from './apiReducer'
 
-const useApiRequest = (endpoint, params = {}) => {
-  const [state, dispatch] = useReducer(authReducer, initialState);
-
-  const makeRequest = useCallback(async () => {
-    dispatch({ type: LOADING });
+const useApiRequest = (handleDispatch) => {
+  
+  const makeRequest = useCallback(async (endpoint, params = {}) => {
+    handleDispatch({ type: LOADING });
 
     try {
       const response = await (await fetch(endpoint, params))
     
       const { sites } = await response.json()
   
-      dispatch({ type: SUCCESS, data: sites })
+      handleDispatch({ type: SUCCESS, data: sites })
 
     } catch (error) {
-      dispatch({type: ERROR, error})
+      handleDispatch({ type: ERROR, error })
     }
 
-  },[endpoint, params])
+  },[])
 
-  return {state, makeRequest}
+  return { makeRequest }
 };
 
 export default useApiRequest;
