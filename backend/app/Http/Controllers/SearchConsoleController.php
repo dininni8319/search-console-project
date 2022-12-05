@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 use \Google\Service\Webmasters;
 
@@ -35,11 +36,9 @@ class SearchConsoleController extends GoogleController
 
     public function getSite()
     {
+        $userId = auth()->guard('api')->user()->id;
+
         $client = GoogleController::getUserClient();
-        
-        // if ($client->getAccessToken()) {
-        //     # code...
-        // }
         
         $service = new \Google\Service\Webmasters($client);
         
@@ -51,10 +50,21 @@ class SearchConsoleController extends GoogleController
           array_push( $sites, $allWebSites[$key]->siteUrl);
         }
 
+        $projects = Project::where('user_id', $userId)->get()->toArray();
+        
+        $newProjects = [];
+
+        foreach ($projects as $key => $value) {
+            array_push( $newProjects, $value['project']);
+          }
+
+        $newSites = array_diff($sites, $newProjects);
+
+        // dd($newSites, $sites);
         if ($sites) {
             return response()->json([
               'success' => true,
-              'sites' => $sites,
+              'sites' => $newSites,
               'message' => 'Questi sono i siti trovati'
             ], 200);
         } else {

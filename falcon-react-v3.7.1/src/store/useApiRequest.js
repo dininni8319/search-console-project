@@ -11,8 +11,11 @@ const useApiRequest = (handleDispatch) => {
     
       const { sites } = await response.json()
   
-      handleDispatch({ type: SUCCESS, data: sites })
-
+      let sitesToArray = Object.values(sites)
+      
+      console.log(sites, 'testing the sites');
+      handleDispatch({ type: SUCCESS, data: sitesToArray })
+    
     } catch (error) {
       handleDispatch({ type: ERROR, error })
     }

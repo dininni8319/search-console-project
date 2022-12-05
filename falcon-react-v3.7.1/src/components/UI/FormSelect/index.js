@@ -7,12 +7,13 @@ import authReducer, { initialState } from '../../../store/apiReducer';
 import { useNavigate } from "react-router";
 
 const FormSelect = () => {
+
   const [formData, setFormData ] = useState({project: ''});
   const [state, dispatch] = useReducer(authReducer, initialState);
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  console.log(state);
   const params = {
     method: "GET",
     headers: { Authorization: `Bearer ${user?.token}`},
@@ -45,18 +46,23 @@ const FormSelect = () => {
     fetch(`${api_urls.backend}/search/console/new_project`, paramsPost)
       .then(resp => resp.json())
       .then(data => {
-        if (data.success) {
-          navigate('/home');
-        }
 
+        if (data.success) {
+          navigate('/analytics_page');
+        } else {
+          navigate('/home');
+
+        }   
       })
   }
 
-  useEffect(() =>{
-    fetchAllSites(
-      `${api_urls.backend}/search/console/allsites`, 
-      params
-    );
+  useEffect(() => {
+   
+      fetchAllSites(
+        `${api_urls.backend}/search/console/allsites`, 
+        params
+      );
+  
   }, [fetchAllSites])
 
   return (
@@ -74,7 +80,7 @@ const FormSelect = () => {
             required
           >
             <option value="">Seleziona una proprietà.</option>
-            {state?.data.map((site, id) => {
+            {state?.data?.map((site, id) => {
               return <option key={id} value={site}>{getUrl(site)}</option>
             })}
           </select>

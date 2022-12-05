@@ -10,8 +10,10 @@ const GoogleAuth = () => {
   
   return (
     <>
+     {/* pagina del dettagli delle analytics */}
       <Flex alignItems="center" justifyContent="between">
-        <h1 className='bg-danger fs-1'>Analitics Page</h1>
+    
+        <h1 className='bg-danger fs-1'>Congratulazione il tuo progetto è stato creato, Analitics Page</h1>
       </Flex>
     </>
   );

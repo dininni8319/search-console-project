@@ -15,7 +15,6 @@ class ProjectController extends Controller
     public function storeProject(Request $request)
     {
         $userId = auth()->guard('api')->user()->id;
-        // dd($userId, $request->project, 'testing the project');
         
         $validator = Validator::make($request->all(),[
             'project' => 'required|string',
