@@ -5,7 +5,9 @@ import { settings } from './config';
 import { getColor, getItemFromStore } from 'helpers/utils';
 import { configReducer } from './reducers/configReducer';
 import useToggleStyle from './hooks/useToggleStyle';
-
+import { AuthProvider } from "context/Auth/index";
+import { ConfigProvider } from "context/Config/index";
+import { GoogleProvider } from "context/Google/index";
 const Main = props => {
   const configState = {
     isFluid: getItemFromStore('isFluid', settings.isFluid),
@@ -66,7 +68,13 @@ const Main = props => {
 
   return (
     <AppContext.Provider value={{ config, setConfig, configDispatch }}>
-      {props.children}
+      <ConfigProvider> 
+        <AuthProvider>
+          <GoogleProvider>
+            {props.children}
+          </GoogleProvider>
+        </AuthProvider>
+      </ConfigProvider>
     </AppContext.Provider>
   );
 };

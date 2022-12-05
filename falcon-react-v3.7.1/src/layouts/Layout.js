@@ -67,9 +67,9 @@ const Layout = () => {
           <Route path="/" element={<Welcome />} />
 
           <Route path="/analytics_page" element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <GoogleAuth />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           } />
 
           <Route path="/home" element={
@@ -79,15 +79,15 @@ const Layout = () => {
           } />
 
           <Route path="/landing_page" element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <LandingPage />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           } />
   
           <Route path="/auth_google" element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <AuthWithGoogle />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           } />
           <Route element={<ErrorLayout />}>
             <Route path="errors/404" element={<Error404 />} />

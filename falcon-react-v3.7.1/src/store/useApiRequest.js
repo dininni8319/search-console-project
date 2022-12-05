@@ -13,7 +13,6 @@ const useApiRequest = (handleDispatch) => {
   
       let sitesToArray = Object.values(sites)
       
-      console.log(sites, 'testing the sites');
       handleDispatch({ type: SUCCESS, data: sitesToArray })
     
     } catch (error) {

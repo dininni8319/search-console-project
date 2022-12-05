@@ -1,20 +1,26 @@
-import { useContext, useEffect } from 'react';
-import { Link, useSearchParams  } from 'react-router-dom';
-import MainLayout from 'layouts/MainLayout';
+import { useContext } from 'react';
 import Flex from 'components/common/Flex';
-import { ConfigContext } from "context/Config/index";
-import { AuthContext } from "context/Auth/index";
 import FormSelect from 'components/UI/FormSelect';
-import { useNavigate } from "react-router";
+import NavbarVertical from 'components/navbar/vertical/NavbarVertical';
+import AppContext from 'context/Context';
+import NavbarTop from 'components/navbar/top/NavbarTop';
+import classNames from 'classnames';
+import { Outlet, useLocation } from 'react-router-dom';
+import MainLayout from 'layouts/MainLayout';
 
 const LandingPage = () => {
  
+  const { hash, pathname } = useLocation();
+  const isKanban = pathname.includes('kanban');
+  const {
+    config: { isFluid, navbarPosition }
+  } = useContext(AppContext);
+
   return (
-    <>
-      <Flex alignItems="center" justifyContent="center">
-       <FormSelect />
-      </Flex>
-    </>
+    <MainLayout>
+     
+        <FormSelect />
+    </MainLayout>
   );
 };
 

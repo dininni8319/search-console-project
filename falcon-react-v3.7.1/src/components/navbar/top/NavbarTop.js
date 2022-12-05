@@ -23,8 +23,8 @@ const NavbarTop = () => {
 
   const handleBurgerMenu = () => {
     navbarPosition === 'top' && setConfig('navbarCollapsed', !navbarCollapsed);
-    (navbarPosition === 'vertical' || navbarPosition === 'combo') &&
-      setConfig('showBurgerMenu', !showBurgerMenu);
+    // (navbarPosition === 'vertical' || navbarPosition === 'combo') &&
+    //   setConfig('showBurgerMenu', !showBurgerMenu);
   };
 
   const setDropShadow = () => {
@@ -80,7 +80,7 @@ const NavbarTop = () => {
           className="scrollbar pb-3 pb-lg-0"
         >
           <Nav navbar>
-            <NavbarTopDropDownMenus />
+            {/* <NavbarTopDropDownMenus /> */}
           </Nav>
         </Navbar.Collapse>
       ) : (
