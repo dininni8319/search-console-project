@@ -65,7 +65,7 @@ class SearchConsoleController extends GoogleController
         }
     }
 
-    // needs to be fixed
+    //needs to be fixed, is not working jet
     public function addProperty(Request $request)
     {
         if ($request->site) {

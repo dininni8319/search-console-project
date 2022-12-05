@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\AuthPassportController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\SearchConsoleController;
 
@@ -32,7 +33,6 @@ Route::group(['middleware' => 'CORS'],function ($router){
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('/email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
     });
-
     
     Route::get('/home', function () {
         return response()->json('Hello world', 200);
@@ -45,9 +45,11 @@ Route::group(['middleware' => 'CORS'],function ($router){
     //search console
     Route::get('/google/search/console', [SearchConsoleController::class, 'getSearchConsoleData']);
     Route::get('/search/console/allsites', [SearchConsoleController::class, 'getSite']);
-    
     //not working jet
     Route::post('/search/console/addProperty', [SearchConsoleController::class, 'addProperty']);
+    
+    //project
+    Route::post('/search/console/new_project', [ProjectController::class, 'storeProject']);
 });
    
 

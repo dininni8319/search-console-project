@@ -11,6 +11,7 @@ const AuthWithGoogle = () => {
   let code = searchParams.get("code")
 
   const { api_urls } = useContext(ConfigContext);
+  
   useEffect(() => {
     fetch(`${api_urls.backend}/google/auth/login`,{
         method: 'POST',

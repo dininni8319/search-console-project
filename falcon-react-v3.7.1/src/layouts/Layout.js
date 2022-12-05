@@ -19,7 +19,7 @@ import SplitConfirmMail from 'components/authentication/split/ConfirmMail';
 import SplitLockScreen from 'components/authentication/split/LockScreen';
 import AppContext from 'context/Context';
 import Welcome from 'components/views/Welcome/Welcome';
-import GoogleAuth from 'components/views/GoogleAuth/GoogleAuth';
+import GoogleAuth from 'components/views/AnaliticsPage/AnaliticsPage';
 import AuthWithGoogle from 'components/views/AuthWithGoogle/index';
 import { ConfigContext } from "context/Config/index";
 import ProtectedRoute from 'Utilities/ProtectedRoute';
@@ -65,7 +65,7 @@ const Layout = () => {
           {/* <Route path="landing" element={<Landing />} /> */}
           <Route path="/" element={<Welcome />} />
 
-          <Route path="/google_auth" element={
+          <Route path="/analytics_page" element={
             // <ProtectedRoute>
               <GoogleAuth />
             // </ProtectedRoute>
