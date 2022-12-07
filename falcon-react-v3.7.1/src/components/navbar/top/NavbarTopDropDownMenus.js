@@ -2,10 +2,7 @@ import React, { useContext } from 'react';
 import NavbarDropdown from './NavbarDropdown';
 import {
   dashboardRoutes,
-  appRoutes,
   pagesRoutes,
-  modulesRoutes,
-  documentationRoutes
 } from 'routes/routes';
 import { Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';

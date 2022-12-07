@@ -18,8 +18,7 @@ const LandingPage = () => {
 
   return (
     <MainLayout>
-     
-        <FormSelect />
+      <FormSelect />
     </MainLayout>
   );
 };

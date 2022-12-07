@@ -106,11 +106,11 @@ const NavbarVertical = () => {
                   <hr className="navbar-vertical-hr my-2" />
                 </div>
                 <Nav navbar>
-                  <NavbarTopDropDownMenus />
+                  {/* <NavbarTopDropDownMenus /> */}
                 </Nav>
               </div>
             )}
-            <PurchaseCard />
+            {/* <PurchaseCard /> */}
           </>
         </div>
       </Navbar.Collapse>
