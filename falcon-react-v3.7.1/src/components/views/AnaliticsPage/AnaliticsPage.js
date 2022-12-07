@@ -1,12 +1,22 @@
 import { useState,useEffect, useContext, useReducer, useCallback } from 'react';
-import Flex from 'components/common/Flex';
+// import Flex from 'components/common/Flex';
 import { ConfigContext } from "context/Config/index";
 import { AuthContext } from "context/Auth/index";
 import useApiRequest from '../../../store/useApiRequest';
 import authReducer, { initialState } from '../../../store/apiReducer';
 import MainLayout from 'layouts/MainLayout';
 import { useNavigate } from "react-router";
-import { getUrl } from "../../../utils";
+import { getUrl, getOptions, turnObjIntoArray } from "../../../utils";
+import ReactEChartsCore from 'echarts-for-react/lib/core';
+import * as echarts from 'echarts/core';
+import { LineChart } from 'echarts/charts';
+import {
+  GridComponent,
+  LegendComponent,
+  TitleComponent,
+  TooltipComponent
+} from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers'
 
 const GoogleAuth = () => {
   const navigate = useNavigate();
@@ -19,9 +29,9 @@ const GoogleAuth = () => {
     headers: { Authorization: `Bearer ${user?.token}`},
   }
 
-  const [ analytics, setAnalytic ] = useState([]);
+  const [ analytics, setAnalytic ] = useState({});
   const [formData, setFormData ] = useState('');
-
+  
   const handleChange = (e) => {
     setFormData(e.target.value);
   }
@@ -40,13 +50,12 @@ const GoogleAuth = () => {
     .then(response => response.json())
     .then(data => {
 
-      console.log(data, 'testing the data');
-
       if (data.success) {
-        // navigate('/analytics_page');
-  
-      } else {
-        // navigate('/');
+
+        setAnalytic({
+          ...analytics,
+          data
+        })
       }
     }) 
   }, [formData])
@@ -66,6 +75,14 @@ const GoogleAuth = () => {
 
   }, [getAllProjects])
 
+  echarts.use([
+    TitleComponent,
+    TooltipComponent,
+    GridComponent,
+    LineChart,
+    CanvasRenderer,
+    LegendComponent
+  ]);
 
   return (
     <>
@@ -74,10 +91,17 @@ const GoogleAuth = () => {
         data={state?.data} 
         handleChange={handleChange}
       >
-      <Flex alignItems="center" justifyContent="between">
-    
-        <h1 className='bg-danger fs-1'>Congratulazione il tuo progetto è stato creato, Analitics Page</h1>
-      </Flex>
+      
+        <div className='d-flex align-items-center justify-content-center class-custom-height'>
+            <div className='bg-white p-1 shadow rounded-1 chart-custom-style'>
+              <ReactEChartsCore
+                echarts={echarts}
+                option={getOptions(analytics?.data)}
+                style={{ height: '16.25rem' }}
+              />
+            </div>
+
+        </div>
      </MainLayout>
     </>
   );

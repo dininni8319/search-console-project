@@ -21,9 +21,10 @@ class SearchConsoleAnalyticsAction
     $request->setStartDate($dateStart ? $dateStart : $twoWeeksBefore);
     $request->setEndDate($dateEnd ? $dateEnd : $dateNow);
     $request->setSearchType('web');
-    $request->setRowLimit(10);
+    $request->setRowLimit(100);
     
-    $request->setDimensions(array('date', 'country','device','page'));
+    // $request->setDimensions(array('query'));
+    $request->setDimensions(array('query','date', 'country','device','page'));
     $query_search = $service->searchanalytics->query('https://'.$site, $request); 
     
     $rows = $query_search->getRows();
