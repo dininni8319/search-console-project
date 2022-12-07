@@ -80,10 +80,8 @@ class SearchConsoleController extends GoogleController
     {
         if ($request->site) {
             $client = GoogleController::getUserClient();
-
             $service = new \Google\Service\Webmasters($client);
             $addSite = $service->sites->add($request->site);
-
             // $request = $service->site->addProperty('https://salvatore-dininni.com');
             return response()->json($addSite, 201); ;
         }

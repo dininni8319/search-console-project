@@ -69,7 +69,6 @@ class AuthPassportController extends Controller
             }
 
             $accessToken = $user->createToken('authToken')->accessToken; 
-
             $responseMessage = "Login Successful";
 
             return response()->json([
@@ -83,7 +82,6 @@ class AuthPassportController extends Controller
         } else {
 
             $responseMessage = 'Sorry this user does not exist';
-            
             return response()->json([
 
                 'success' => false,
@@ -100,7 +98,6 @@ class AuthPassportController extends Controller
         if (!$user) {
 
             $responseMessage = 'Invalid Bearer Token';
-
             return response()->json([
 
                 'success' => false,
@@ -111,7 +108,6 @@ class AuthPassportController extends Controller
         }
 
         $token = $user->token();
-
         $token->revoke();
 
         $responseMessage = 'successfully logged out';
@@ -127,9 +123,8 @@ class AuthPassportController extends Controller
         $user = Auth::guard('api')->user(); // the user must be authenticated 
         
         if (!$user) {
-
+            
             $responseMessage = 'Invalid Bearer Token';
-
             return response()->json([
                 'success' => false,
                 'message' => $responseMessage,
@@ -138,12 +133,10 @@ class AuthPassportController extends Controller
         }
 
         $responseMessage = 'user profile';
-
         return response()->json([
             'success' => true,
             'message' => $responseMessage,
             'data' => $user
         ], 200);
-
     }
 }

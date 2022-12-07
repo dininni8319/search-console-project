@@ -47,10 +47,7 @@ class AuthController extends GoogleController
                 $user->google_access_token_json = json_encode($accessToken);
                 $user->save();
             }
-       /**
-         * Log in and return token
-         * HTTP 201
-         */
+    
         $token = $user->createToken('Google')->accessToken;
         return response()->json([
            'success' => true,
