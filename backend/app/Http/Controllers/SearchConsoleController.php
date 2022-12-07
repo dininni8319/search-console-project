@@ -6,30 +6,19 @@ use Carbon\Carbon;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use \Google\Service\Webmasters;
+use App\Actions\SearchConsoleAnalyticsAction;
 
 class SearchConsoleController extends GoogleController
 {
     public function __construct(){
-        // $this->middleware("auth:api");
         $this->middleware("auth:api");
     }
     
-    public function getSearchConsoleData(Request $request)
+    public function getSearchConsoleData(Request $request, SearchConsoleAnalyticsAction $action)
     {
         // $service = new \Google\Service\Webmasters\Resource\Sites
         $client = GoogleController::getUserClient();
-        $service = new Webmasters($client);
-        $request = new Webmasters\SearchAnalyticsQueryRequest;
-        
-        $request->setStartRow(0);
-        $request->setStartDate('2022-11-01');
-        $request->setEndDate('2022-11-15');
-        $request->setSearchType('web');
-        $request->setRowLimit(30);
-        // $request->setDimensions(array('query','country','device','date','page'));
-        $request->setDimensions(array('query', 'date', 'country','device','page'));
-        $query_search = $service->searchanalytics->query("https://www.esperienzelocal.com", $request); 
-        $rows = $query_search->getRows();
+        $rows = $action->handle($client, $request->site, $request->start, $request->end);
          
         if (!$rows) {
             return response()->json([
@@ -45,25 +34,12 @@ class SearchConsoleController extends GoogleController
           ], 200);    
     }
 
-    public function getSearchConsoleWeekData($site)
+    public function getSearchConsoleWeekData($site, SearchConsoleAnalyticsAction $action)
     {
         $client = GoogleController::getUserClient();
-        $service = new Webmasters($client);
-        $request = new Webmasters\SearchAnalyticsQueryRequest;
         
-        $request->setStartRow(0);
-        $dateNow = Carbon::now()->format('Y-m-d');
-        $twoWeeksBefore = Carbon::now()->subDays(7)->format('Y-m-d');
-        $request->setStartDate($twoWeeksBefore);
-        $request->setEndDate($dateNow);
-        $request->setSearchType('web');
-        $request->setRowLimit(30);
-        
-        $request->setDimensions(array('date', 'country','device','page'));
-        $query_search = $service->searchanalytics->query('https://'.$site, $request); 
-        
-        $rows = $query_search->getRows();
-        
+        $rows = $action->handle($client, $site);
+
         if (!$rows) {
             return response()->json([
                 'success' => false,
@@ -73,39 +49,19 @@ class SearchConsoleController extends GoogleController
 
         return response()->json([
             'success' => true,
-            'data' => $rows,
+            'data' => $rows['rows'],
+            'performace' => $rows['performance'],
             'message' => 'Questi sono i siti trovati'
           ], 200);  
     }
     
-    public function getSite()
+    public function getSite(SearchConsoleAnalyticsAction $action)
     {
-        $userId = auth()->guard('api')->user()->id;
-
         $client = GoogleController::getUserClient();
         
-        $service = new \Google\Service\Webmasters($client);
-        
-        $allWebSites = $service->sites->listSites()->siteEntry;
-        
-        $sites = [];
+        $newSites = $action->handleSites($client);
 
-        foreach ($allWebSites as $key => $value) {
-          array_push($sites, $allWebSites[$key]->siteUrl);
-        }
-
-        $projects = Project::where('user_id', $userId)->get()->toArray();
-        
-        $newProjects = [];
-
-        foreach ($projects as $key => $value) {
-            array_push( $newProjects, $value['project']);
-        }
-
-        $newSites = array_diff($sites, $newProjects);
-
-        // dd($newSites, $sites);
-        if ($sites) {
+        if ($newSites) {
             return response()->json([
               'success' => true,
               'data' => $newSites,
@@ -131,7 +87,6 @@ class SearchConsoleController extends GoogleController
             // $request = $service->site->addProperty('https://salvatore-dininni.com');
             return response()->json($addSite, 201); ;
         }
-
         $msg = 'You must add a site!';
         return response()->json($msg,404);
     }

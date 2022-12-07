@@ -43,9 +43,9 @@ Route::group(['middleware' => 'CORS'],function ($router){
     Route::post('google/auth/login', [AuthController::class, 'postLogin']);
 
     //search console
-    Route::get('/google/search/console', [SearchConsoleController::class, 'getSearchConsoleData']);
     Route::get('/search/console/allsites', [SearchConsoleController::class, 'getSite']);
     Route::get('/search/console/weekly_data/{site}', [SearchConsoleController::class, 'getSearchConsoleWeekData']);
+    Route::post('/google/search/console/analytics', [SearchConsoleController::class, 'getSearchConsoleData']);
     //not working jet
     Route::post('/search/console/addProperty', [SearchConsoleController::class, 'addProperty']);
     
