@@ -51,7 +51,6 @@ const FormSelect = () => {
           navigate('/analytics_page');
         } else {
           navigate('/home');
-
         }   
       })
   }

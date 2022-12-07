@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use \Google\Service\Webmasters;
@@ -26,14 +27,57 @@ class SearchConsoleController extends GoogleController
         $request->setSearchType('web');
         $request->setRowLimit(30);
         // $request->setDimensions(array('query','country','device','date','page'));
-        $request->setDimensions(array('date', 'country','device','page'));
-        // $query_search = $service->searchanalytics->query("https://www.masserialatofala.it/", $request); 
+        $request->setDimensions(array('query', 'date', 'country','device','page'));
         $query_search = $service->searchanalytics->query("https://www.esperienzelocal.com", $request); 
         $rows = $query_search->getRows();
-        
-        return $rows;  
+         
+        if (!$rows) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Non ho trovato nessun sito!'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $rows,
+            'message' => 'Questi sono i siti trovati'
+          ], 200);    
     }
 
+    public function getSearchConsoleWeekData($site)
+    {
+        $client = GoogleController::getUserClient();
+        $service = new Webmasters($client);
+        $request = new Webmasters\SearchAnalyticsQueryRequest;
+        
+        $request->setStartRow(0);
+        $dateNow = Carbon::now()->format('Y-m-d');
+        $twoWeeksBefore = Carbon::now()->subDays(7)->format('Y-m-d');
+        $request->setStartDate($twoWeeksBefore);
+        $request->setEndDate($dateNow);
+        $request->setSearchType('web');
+        $request->setRowLimit(30);
+        
+        $request->setDimensions(array('date', 'country','device','page'));
+        $query_search = $service->searchanalytics->query('https://'.$site, $request); 
+        
+        $rows = $query_search->getRows();
+        
+        if (!$rows) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Non ho trovato nessun sito!'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $rows,
+            'message' => 'Questi sono i siti trovati'
+          ], 200);  
+    }
+    
     public function getSite()
     {
         $userId = auth()->guard('api')->user()->id;
@@ -47,7 +91,7 @@ class SearchConsoleController extends GoogleController
         $sites = [];
 
         foreach ($allWebSites as $key => $value) {
-          array_push( $sites, $allWebSites[$key]->siteUrl);
+          array_push($sites, $allWebSites[$key]->siteUrl);
         }
 
         $projects = Project::where('user_id', $userId)->get()->toArray();
@@ -56,7 +100,7 @@ class SearchConsoleController extends GoogleController
 
         foreach ($projects as $key => $value) {
             array_push( $newProjects, $value['project']);
-          }
+        }
 
         $newSites = array_diff($sites, $newProjects);
 
@@ -64,7 +108,7 @@ class SearchConsoleController extends GoogleController
         if ($sites) {
             return response()->json([
               'success' => true,
-              'sites' => $newSites,
+              'data' => $newSites,
               'message' => 'Questi sono i siti trovati'
             ], 200);
         } else {

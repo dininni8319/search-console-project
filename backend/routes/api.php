@@ -45,11 +45,13 @@ Route::group(['middleware' => 'CORS'],function ($router){
     //search console
     Route::get('/google/search/console', [SearchConsoleController::class, 'getSearchConsoleData']);
     Route::get('/search/console/allsites', [SearchConsoleController::class, 'getSite']);
+    Route::get('/search/console/weekly_data/{site}', [SearchConsoleController::class, 'getSearchConsoleWeekData']);
     //not working jet
     Route::post('/search/console/addProperty', [SearchConsoleController::class, 'addProperty']);
     
     //project
     Route::post('/search/console/new_project', [ProjectController::class, 'storeProject']);
+    Route::get('/search/console/all_projects', [ProjectController::class, 'getAllProjects']);
 });
    
 

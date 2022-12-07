@@ -5,10 +5,9 @@ import NavbarVertical from 'components/navbar/vertical/NavbarVertical';
 import AppContext from 'context/Context';
 import classNames from 'classnames';
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, data, handleChange, /* handleSubmit */ }) => {
   const { hash, pathname } = useLocation();
   const isKanban = pathname.includes('kanban');
-  // const isChat = pathname.includes('chat');
 
   const {
     config: { isFluid, navbarPosition }
@@ -26,13 +25,17 @@ const MainLayout = ({ children }) => {
     }, 0);
   }, []);
 
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
   return (
     <div className='container-fluid'>
-        <NavbarVertical />
+        <NavbarVertical 
+          data={data} 
+          handleChange={handleChange}
+        />
         <div className={classNames('content', { 'pb-0': isKanban })}>
           <NavbarTop />
           {/*------ Main Routes ------*/}

@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import AppContext from 'context/Context';
 import Logo from 'components/common/Logo';
 import SearchBox from './SearchBox';
-import NavbarTopDropDownMenus from './NavbarTopDropDownMenus';
 import { navbarBreakPoint, topNavbarBreakpoint } from 'config';
 import autoCompleteInitialItem from 'data/autocomplete/autocomplete';
 import TopNavRightSideNavItem from './TopNavRightSideNavItem';
@@ -80,7 +79,6 @@ const NavbarTop = () => {
           className="scrollbar pb-3 pb-lg-0"
         >
           <Nav navbar>
-            {/* <NavbarTopDropDownMenus /> */}
           </Nav>
         </Navbar.Collapse>
       ) : (

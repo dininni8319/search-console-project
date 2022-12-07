@@ -35,7 +35,7 @@ class ProjectController extends Controller
             if ($project) {
                 return response()->json([
                     'success' => true,
-                    'message' => 'Il progietto è stato creato!'
+                    'message' => 'Il progetto è stato creato!'
                 ], 201);
             }
             return response()->json([
@@ -43,5 +43,33 @@ class ProjectController extends Controller
                 'message' => 'Qualcosa è andato storto!'
           ],400);
         }
+    }
+
+    public function getAllProjects()
+    {
+        $userId = auth()->guard('api')->user()->id;
+
+        if ($userId) {
+           
+            $projects = Project::where('user_id', $userId)->get();
+
+            $newProjects = [];
+
+            foreach ($projects as $key => $value) {
+                array_push($newProjects, $value['project']);
+            }
+
+            if ($projects) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Questi sono i progetti che ho trovato!',
+                    'data' => $newProjects
+                ], 200);
+            }
+            return response()->json([
+                'success' => false,
+                'message' => 'Non ho trovato nessun progetto!'
+          ],404);
+        } 
     }
 }

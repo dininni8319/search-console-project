@@ -8,6 +8,7 @@ import useToggleStyle from './hooks/useToggleStyle';
 import { AuthProvider } from "context/Auth/index";
 import { ConfigProvider } from "context/Config/index";
 import { GoogleProvider } from "context/Google/index";
+
 const Main = props => {
   const configState = {
     isFluid: getItemFromStore('isFluid', settings.isFluid),

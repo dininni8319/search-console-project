@@ -9,9 +9,9 @@ const useApiRequest = (handleDispatch) => {
     try {
       const response = await (await fetch(endpoint, params))
     
-      const { sites } = await response.json()
+      const { data } = await response.json()
   
-      let sitesToArray = Object.values(sites)
+      let sitesToArray = Object.values(data)
       
       handleDispatch({ type: SUCCESS, data: sitesToArray })
     
