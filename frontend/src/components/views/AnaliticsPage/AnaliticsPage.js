@@ -32,7 +32,7 @@ const GoogleAuth = () => {
 
   const [ analytics, setAnalytic ] = useState({});
   const [formData, setFormData ] = useState('');
-  
+
   const handleChange = (e) => {
     setFormData(e.target.value);
   }
@@ -92,7 +92,7 @@ const GoogleAuth = () => {
         data={state?.data} 
         handleChange={handleChange}
       >
-        <Saas />
+        <Saas analytics={analytics}/>
         {/* <div className='d-flex align-items-center justify-content-center class-custom-height'>
             <div className='bg-white p-1 shadow rounded-1 chart-custom-style'>
               <ReactEChartsCore

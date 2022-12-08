@@ -4,22 +4,19 @@ import SoftBadge from 'components/common/SoftBadge';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CountUp from 'react-countup';
 
-const SaasConversion = () => {
+const SaasConversion = ( { data, title, color }) => {
   return (
     <Card className="h-100">
       <Card.Body>
-        <Row className="flex-between-center">
+        <Row className="flex-column">
           <Col className="d-md-flex d-lg-block flex-between-center">
-            <h6 className="mb-md-0 mb-lg-2">Conversion</h6>
-            <SoftBadge bg="primary" pill>
-              <FontAwesomeIcon icon="caret-up" /> 29.4%
-            </SoftBadge>
+            <h6 className="mb-md-0 mb-lg-2">{title}</h6>
           </Col>
           <Col xs="auto">
-            <h4 className="fs-3 fw-normal text-primary">
+            <h4 className={`fs-3 fw-normal ${color}`}>
               <CountUp
                 start={0}
-                end={28.5}
+                end={data}
                 suffix="%"
                 duration={2.75}
                 decimals={2}

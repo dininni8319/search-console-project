@@ -22,7 +22,15 @@ import TransactionSummary from './TransactionSummary';
 import GrossRevenue from './gross-revenue/GrossRevenue';
 import CandleChart from './candle-chart/CandleChart';
 
-const Saas = () => {
+const Saas = ({ analytics }) => {
+  console.log(analytics?.data?.performance, 'test');
+// message "Questi sono i siti trovati"
+// clicks
+// ctr
+// impressions
+// position
+// success
+
   return (
     <>
       <Row className="g-3">
@@ -31,14 +39,18 @@ const Saas = () => {
         </Col>
         <Col>
           <Row className="g-3">
-            <Col md={4} xxl={12}>
-              <SaasActiveUser data={activeUser} />
+            <Col md={3} xxl={12}>
+              <SaasActiveUser data={analytics?.data?.performance} title='Click Totali' />
             </Col>
-            <Col md={4} xxl={12}>
-              <SaasRevenue />
+            <Col md={3} xxl={12}>
+            
+            <SaasRevenue data={analytics?.data?.performance} title="Impressions"/>
             </Col>
-            <Col md={4} xxl={12}>
-              <SaasConversion />
+            <Col md={3} xxl={12}>
+              <SaasConversion data={analytics?.data?.performance.position} title='Posizione Media' color='text-primary'/>
+            </Col>
+            <Col md={3} xxl={12}>
+              <SaasConversion data={analytics?.data?.performance?.ctr} title='CTR Media' color='text-danger'/>
             </Col>
           </Row>
         </Col>
@@ -46,13 +58,11 @@ const Saas = () => {
       <Row className="g-3 mb-3">
         <Col xxl={9}>
           <DepositeStatus />
-          <StatisticsCards />
           <Row className="g-3">
             <Col xs={12}>
-              <CandleChart data={candleChartData} />
             </Col>
             <Col lg={4}>
-              {/* <ActiveUsers users={users} end={7} /> */}
+             
             </Col>
             <Col lg={8}>
               <GrossRevenue data={grossRevenue} />
@@ -71,7 +81,7 @@ const Saas = () => {
               {/* <BandwidthSaved /> */}
             </Col>
             <Col md xxl={12}>
-              <DoMoreCard />
+              {/* <DoMoreCard /> */}
             </Col>
           </Row>
         </Col>

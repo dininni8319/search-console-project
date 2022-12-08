@@ -50,7 +50,7 @@ class SearchConsoleController extends GoogleController
         return response()->json([
             'success' => true,
             'data' => $rows['rows'],
-            'performace' => $rows['performance'],
+            'performance' => $rows['performance'],
             'message' => 'Questi sono i siti trovati'
           ], 200);  
     }
