@@ -17,6 +17,7 @@ import {
   TooltipComponent
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers'
+import Saas from 'components/dashboard/saas';
 
 const GoogleAuth = () => {
   const navigate = useNavigate();
@@ -91,8 +92,8 @@ const GoogleAuth = () => {
         data={state?.data} 
         handleChange={handleChange}
       >
-      
-        <div className='d-flex align-items-center justify-content-center class-custom-height'>
+        <Saas />
+        {/* <div className='d-flex align-items-center justify-content-center class-custom-height'>
             <div className='bg-white p-1 shadow rounded-1 chart-custom-style'>
               <ReactEChartsCore
                 echarts={echarts}
@@ -101,7 +102,7 @@ const GoogleAuth = () => {
               />
             </div>
 
-        </div>
+        </div> */}
      </MainLayout>
     </>
   );
