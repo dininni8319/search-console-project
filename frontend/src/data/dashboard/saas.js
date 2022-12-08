@@ -19,10 +19,10 @@ export const activeUser = [3, 7, 6, 8, 5, 12, 11];
 
 export const statsData = [
   {
-    title: 'Customers',
+    title: 'Click Totali',
     value: 58.39,
     decimal: true,
-    suffix: 'k',
+    suffix: 'N',
     prefix: '',
     valueClassName: 'text-warning',
     badgeBg: 'warning',
@@ -32,7 +32,7 @@ export const statsData = [
     image: bg1
   },
   {
-    title: 'Orders',
+    title: 'Impressions',
     value: 23.43,
     decimal: true,
     suffix: 'k',
@@ -45,7 +45,20 @@ export const statsData = [
     image: bg2
   },
   {
-    title: 'Revenue',
+    title: 'CTR Media',
+    value: 43594,
+    decimal: false,
+    suffix: '',
+    prefix: '$',
+    valueClassName: '',
+    badgeBg: 'success',
+    badgeText: '9.54%',
+    link: '/',
+    linkText: 'Statistics',
+    image: bg3
+  },
+  {
+    title: 'Posizione Media',
     value: 43594,
     decimal: false,
     suffix: '',

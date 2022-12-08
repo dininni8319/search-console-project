@@ -93,16 +93,6 @@ const GoogleAuth = () => {
         handleChange={handleChange}
       >
         <Saas analytics={analytics}/>
-        {/* <div className='d-flex align-items-center justify-content-center class-custom-height'>
-            <div className='bg-white p-1 shadow rounded-1 chart-custom-style'>
-              <ReactEChartsCore
-                echarts={echarts}
-                option={getOptions(analytics?.data)}
-                style={{ height: '16.25rem' }}
-              />
-            </div>
-
-        </div> */}
      </MainLayout>
     </>
   );

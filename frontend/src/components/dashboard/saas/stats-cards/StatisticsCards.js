@@ -3,12 +3,10 @@ import { Col, Row } from 'react-bootstrap';
 import StatisticsCard from './StatisticsCard';
 import { statsData } from 'data/dashboard/saas';
 
-const StatisticsCards = ( props ) => {
-
-  console.log(props?.performance);
+const StatisticsCards = () => {
   return (
     <Row className="g-3 mb-3">
-      {props?.performance && Object.values(props.performance).map((stat, index) => (
+      {statsData.map((stat, index) => (
         <Col key={stat.title} sm={index === 2 ? 12 : 6} md={4}>
           <StatisticsCard stat={stat} style={{ minWidth: '12rem' }} />
         </Col>

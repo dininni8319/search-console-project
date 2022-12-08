@@ -4,9 +4,9 @@ import { Card, Col, Form, Row } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
 import LinePaymentChart from './LinePaymentChart';
 
-const LinePayment = ({ data }) => {
+const LinePayment = ({ data, analytics }) => {
   const chartRef = useRef(null);
-  const [paymentStatus, setPaymentStatus] = useState('successful');
+  // const [paymentStatus, setPaymentStatus] = useState('successful');
 
   return (
     <Card className="rounded-3 overflow-hidden h-100 shadow-none">
@@ -27,7 +27,7 @@ const LinePayment = ({ data }) => {
             <Form.Select
               size="sm"
               className="mb-3"
-              value={paymentStatus}
+              // value={paymentStatus}
               onChange={e => setPaymentStatus(e.target.value)}
             >
               <option value="all">All Payments</option>
@@ -37,10 +37,11 @@ const LinePayment = ({ data }) => {
           </Col>
         </Row>
         <LinePaymentChart
+          analytics={analytics}
           ref={chartRef}
           data={data}
-          paymentStatus={paymentStatus}
-          style={{ height: '200px' }}
+          // paymentStatus={paymentStatus}
+          style={{ height: '300px' }}
         />
       </Card.Body>
     </Card>

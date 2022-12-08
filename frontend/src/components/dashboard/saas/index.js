@@ -35,7 +35,7 @@ const Saas = ({ analytics }) => {
     <>
       <Row className="g-3">
         <Col xxl={9}>
-          <LinePayment data={payment} />
+          <LinePayment data={payment} analytics={analytics}/>
         </Col>
         <Col>
           <Row className="g-3">
@@ -58,6 +58,7 @@ const Saas = ({ analytics }) => {
       <Row className="g-3 mb-3">
         <Col xxl={9}>
           <DepositeStatus />
+          <StatisticsCards data={analytics?.data}/>
           <Row className="g-3">
             <Col xs={12}>
             </Col>

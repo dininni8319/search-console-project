@@ -1,6 +1,7 @@
-import { getColor, getPastDates } from 'helpers/utils';
+import { getColor, getPastDates, rgbaColor } from 'helpers/utils';
 import dayjs from 'dayjs';
 import { tooltipFormatter } from 'helpers/echart-utils';
+
 
 export function getUrl(site) {
   const reg = /^https?:\/\/|\/+$/g;
@@ -34,7 +35,7 @@ export const getOptions = data => ({
     padding: [7, 10],
     backgroundColor: getColor('gray-100'),
     borderColor: getColor('gray-300'),
-    textStyle: { color: getColor('dark') },
+    textStyle: { color: getColor('white') },
     borderWidth: 1,
     transitionDuration: 0,
     formatter: tooltipFormatter
@@ -57,18 +58,16 @@ export const getOptions = data => ({
     },
     axisTick: {
       show: true,
-      length: 20,
+      length: 10,
       lineStyle: {
-        color: getColor('gray-200')
-      },
-
-      interval: 5
+        color: rgbaColor('#fff', 0.1)
+      }
     },
     axisLabel: {
-      color: getColor('gray-600'),
+      color: getColor('white-600'),
       formatter: value => dayjs(value).format('MMM DD'),
       align: 'left',
-      fontSize: 11,
+      fontSize: 16,
       padding: [0, 0, 0, 5],
       interval: 5
     }
@@ -83,9 +82,9 @@ export const getOptions = data => ({
       }
     },
     axisLabel: {
-      show: true,
+      show: false,
       color: getColor('gray-600'),
-      formatter: value => `${Math.round((value / 1000) * 10) / 10}k`
+      // formatter: value => `${Math.round((value / 1000) * 10) / 10}k`
     },
     axisTick: { show: false },
     axisLine: { show: false }
@@ -152,11 +151,12 @@ export const getOptions = data => ({
       symbolSize: 2
     },
   ],
-  grid: {
-    containLabel: true,
-    right: '5px',
-    left: 0,
-    bottom: 0,
-    top: 10
-  }
+  grid: { right: 15, left: 15, bottom: '15%', top: 0 }
+  // grid: {
+  //   containLabel: true,
+  //   right: '5px',
+  //   left: 0,
+  //   bottom: 0,
+  //   top: 0
+  // }
 });
