@@ -1,21 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { Routes, Route } from "react-router-dom";
-import './index.css';
+import ReactDOM from 'react-dom';
 import App from './App';
-import Home from "./components/View/Home";
-import { BrowserRouter } from "react-router-dom";
-import Login from './components/View/Login';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Main from './Main';
+import 'helpers/initFA';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <BrowserRouter>
-      <Routes>
-          <Route path="/" element={<App />}/>
-          <Route path="/home" element={<Home />}/>
-          <Route path="/login" element={<Login />}/>
-      </Routes>
-    </BrowserRouter>
-
+ReactDOM.render(
+  <React.StrictMode>
+    <Main>
+      <App />
+    </Main>
+  </React.StrictMode>,
+  document.getElementById('main')
 );

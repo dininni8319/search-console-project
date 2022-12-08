@@ -1,33 +1,15 @@
-import './App.css';
-import { useState, useEffect, useCallback } from 'react';
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import 'react-datepicker/dist/react-datepicker.css';
+import 'react-toastify/dist/ReactToastify.min.css';
+import Layout from './layouts/Layout';
 
-function App() {
-   
-    const [ url , setUrl] = useState('')
-   
-    const handleGoogleLogin = async() => {
-    
-        try {
-          const response = await(await fetch('http://localhost:8000/api/google/login/url'))  
-          
-          if(response) {
-            const url = await response.json();
-            setUrl(url);
-            window.location.replace(url);
-            
-          }
-
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
-
-    return (
-        <div className="App">
-            <h1>Development</h1>
-            <button onClick={handleGoogleLogin}>Login with Google</button>
-        </div>
-    );
-}
+const App = () => {
+  return (
+    <Router basename={process.env.PUBLIC_URL}>
+      <Layout />
+    </Router>
+  );
+};
 
 export default App;
