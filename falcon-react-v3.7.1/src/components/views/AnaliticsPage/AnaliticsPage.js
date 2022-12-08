@@ -31,6 +31,7 @@ const GoogleAuth = () => {
   }
 
   const [ analytics, setAnalytic ] = useState({});
+  
   const [formData, setFormData ] = useState('');
   
   const handleChange = (e) => {
