@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Flex from 'components/common/Flex';
 import Navbar from 'components/navbar/top/Navbar';
 import Background from 'components/common/Background';
-import welcomeImg from '../../../assets/img/4445.jpg';
+import welcomeImg from '../../../assets/img/4445.jpeg';
 
 const Welcome = () => {
   return (
