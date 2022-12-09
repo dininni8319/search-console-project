@@ -10,7 +10,7 @@ const LinePayment = ({ analytics }) => {
   return (
     <Card className="rounded-3 overflow-hidden shadow-none h-90">
       <Card.Body
-        className="bg-line-chart-gradient"
+        className="bg-line-chart-gradient pb-5"
         as={Flex}
         justifyContent="between"
         direction="column"

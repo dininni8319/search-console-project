@@ -96,11 +96,11 @@ export const getOptions = data => ({
       showSymbol: false,
       symbol: 'circle',
       itemStyle: {
-        borderColor: getColor('primary'),
+        borderColor: '#00bbf9',
         borderWidth: 2
       },
       lineStyle: {
-        color: getColor('primary')
+        color: '#00bbf9'
       },
       symbolSize: 2
     },
@@ -111,11 +111,11 @@ export const getOptions = data => ({
       showSymbol: false,
       symbol: 'circle',
       itemStyle: {
-        borderColor: getColor('success'),
+        borderColor: '#fee440',
         borderWidth: 2
       },
       lineStyle: {
-        color: getColor('success')
+        color: '#fee440'
       },
       symbolSize: 2
     },
@@ -126,11 +126,11 @@ export const getOptions = data => ({
       showSymbol: false,
       symbol: 'circle',
       itemStyle: {
-        borderColor: getColor('danger'),
+        borderColor: '#9b5de5',
         borderWidth: 2
       },
       lineStyle: {
-        color: getColor('info')
+        color: '#9b5de5'
       },
       symbolSize: 2
     },
@@ -141,11 +141,11 @@ export const getOptions = data => ({
       showSymbol: false,
       symbol: 'circle',
       itemStyle: {
-        borderColor: getColor('primary'),
+        borderColor: '#f15bb5',
         borderWidth: 2
       },
       lineStyle: {
-        color: getColor('primary')
+        color: '#f15bb5'
       },
       symbolSize: 2
     },

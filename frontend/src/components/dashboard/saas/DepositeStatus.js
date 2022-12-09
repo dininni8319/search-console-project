@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const DepositeStatus = () => {
   return (
-    <Card className="bg-light my-3">
+    <Card className="bg-light mb-2  mt-sm-2 mt-0">
       <Card.Body className="p-3">
         <p className="fs--1 mb-0">
           <Link to="#!">

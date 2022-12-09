@@ -23,11 +23,11 @@ const months = [
   'Dec'
 ];
 
-const grossTableRows = [
+let grossTableRows = [
   {
     id: 1,
-    title: 'Point of sale',
-    revenue: '$791.64',
+    title: 'Click Totali',
+    revenue: 0,
     marketValue: {
       up: false,
       value: '13%'
@@ -35,8 +35,17 @@ const grossTableRows = [
   },
   {
     id: 2,
-    title: 'Online Store',
-    revenue: '$113.86',
+    title: 'Impressions',
+    revenue: 0,
+    marketValue: {
+      up: true,
+      value: '178%'
+    }
+  },
+  {
+    id: 2,
+    title: 'CTR Media',
+    revenue: 0,
     marketValue: {
       up: true,
       value: '178%'
@@ -44,19 +53,25 @@ const grossTableRows = [
   },
   {
     id: 3,
-    title: 'Online Store',
-    revenue: '$0.00',
+    title: 'Posizione Media',
+    revenue: 0,
     marketValue: {
       up: false,
-      value: ''
+      value: '',
     }
   }
 ];
 
-const GrossRevenue = ({ data }) => {
+const GrossRevenue = ({ analytics }) => {
   const [selectedMonth, setSelectedMonth] = useState(months[0]);
   const [previousMonth, setPreviousMonth] = useState(months[11]);
   const chartRef = useRef(null);
+  
+  grossTableRows[0].revenue = analytics?.data?.performance.clicks;
+  grossTableRows[1].revenue = analytics?.data?.performance.impressions;
+  grossTableRows[2].revenue = (analytics?.data?.performance.ctr)?.toFixed(2)  + '%';
+  grossTableRows[3].revenue = (analytics?.data?.performance.position)?.toFixed(2) + '%';
+
 
   useEffect(() => {
     if (selectedMonth) {
@@ -80,15 +95,7 @@ const GrossRevenue = ({ data }) => {
       <Card.Header>
         <Row className="justify-content-between gx-0">
           <Col xs="auto">
-            <h1 className="fs-0 text-900">Gross revenue</h1>
-            <Flex>
-              <h4 className="text-primary mb-0">$165.50</h4>
-              <div className="ms-3">
-                <SoftBadge pill bg="primary">
-                  <FontAwesomeIcon icon="caret-up" /> 5%
-                </SoftBadge>
-              </div>
-            </Flex>
+            <h1 className="fs-0 text-900">Performance degl'ultimi tre mesi</h1>
           </Col>
           <Col xs="auto">
             <Form.Select
@@ -115,34 +122,16 @@ const GrossRevenue = ({ data }) => {
                   <td className="pb-2 pt-0 text-end" style={{ width: '20%' }}>
                     {row.revenue}
                   </td>
-                  <td
-                    className="pb-2 pt-0 text-end text-700"
-                    style={{ maxWidth: '20%' }}
-                  >
-                    {row.marketValue.value && (
-                      <FontAwesomeIcon
-                        icon={classNames({
-                          'long-arrow-alt-up': row.marketValue.up,
-                          'long-arrow-alt-down': !row.marketValue.up
-                        })}
-                        className={classNames('me-1', {
-                          'text-success': row.marketValue.up,
-                          'text-danger': !row.marketValue.up
-                        })}
-                      />
-                    )}
-
-                    {row.marketValue.value ? row.marketValue.value : '-'}
-                  </td>
                 </tr>
               ))}
             </tbody>
           </Table>
+
           <GrossRevenueChart
             ref={chartRef}
             selectedMonth={selectedMonth}
             previousMonth={previousMonth}
-            data={data}
+            analytics={analytics}
             className="px-3 h-100"
             style={{ minHeight: '14.375rem' }}
           />

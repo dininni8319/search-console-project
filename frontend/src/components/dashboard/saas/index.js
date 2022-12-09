@@ -12,50 +12,58 @@ import DepositeStatus from './DepositeStatus';
 import StatisticsCards from './stats-cards/StatisticsCards';
 import TransactionSummary from './TransactionSummary';
 import GrossRevenue from './gross-revenue/GrossRevenue';
+import DoMoreCard from './DoMoreCard';
+
 const Saas = ({ analytics }) => {
 
   return (
     <>
-      <Row className="g-3">
-        <Col xxl={9} className="g-3">
+      <Row className="g-2">
+        <Col xxl={9}>
           <LinePayment analytics={analytics}/>
         </Col>
-        <Col xxl={3}>
-          <StatisticsCards data={analytics?.data}/>
+        <Col>
+          <Row className="g-2">
+            <Col xxl={12}>
+            <StatisticsCards data={analytics?.data}/>
+            </Col>
+    
+          </Row>
         </Col>
       </Row>
-      <Row className="g-3">
-        <Col xxl={2}>
-          <SaasActiveUser data={analytics?.data?.performance} title='Click Totali' />
-        </Col>
-        <Col xxl={2}>
-           <SaasRevenue data={analytics?.data?.performance} title="Impressions"/>
-        </Col>
-        <Col xxl={2}>
-          <SaasConversion data={analytics?.data?.performance.position} title='Posizione Media' color='text-primary'/>
-        </Col>
-        <Col xxl={3}>
-          <SaasConversion data={analytics?.data?.performance?.ctr} title='CTR Media' color='text-danger'/>
-        </Col>
-      </Row>
-      
-      <Row className="g-3 mb-3">
+      <Row className="g-3 mb-2">
         <Col xxl={9}>
           <DepositeStatus />
-          
-          <Row className="g-3">
-            <Col xs={12}>
+          <Row className="g-2">
+            <Col md xxl={3}>
+                <SaasActiveUser data={analytics?.data?.performance} title='Click Totali' />
             </Col>
-            <Col lg={4}>
-             
+            <Col xxl={3}>
+              <SaasRevenue data={analytics?.data?.performance} title="Impressions"/>
             </Col>
-            <Col lg={8}>
-              <GrossRevenue data={grossRevenue} />
+            <Col xxl={3}>
+              <SaasConversion data={analytics?.data?.performance.position} title='Posizione Media' color='text-primary'/>
+            </Col>
+            <Col xxl={3}>
+              <SaasConversion data={analytics?.data?.performance?.ctr} title='CTR Media' color='text-danger'/>
+            </Col>
+            <Col lg={12}>
+              <GrossRevenue analytics={analytics} />            
+            </Col>
+          </Row>
+        </Col>
+        <Col xxl={3}>
+          <Row className="g-3 mt-2">
+            <Col md xxl={12}>
+              <DoMoreCard />
             </Col>
           </Row>
         </Col>
       </Row>
+      {/* <TransactionSummary data={transactionSummary} /> */}
     </>
+
+  
   );
 };
 
