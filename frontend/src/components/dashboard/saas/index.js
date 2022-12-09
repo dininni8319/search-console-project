@@ -42,7 +42,7 @@ const Saas = ({ analytics }) => {
               <SaasRevenue data={analytics?.data?.performance} title="Impressions"/>
             </Col>
             <Col xxl={3}>
-              <SaasConversion data={analytics?.data?.performance.position} title='Posizione Media' color='text-primary'/>
+              <SaasConversion data={analytics?.data?.performance?.position} title='Posizione Media' color='text-primary'/>
             </Col>
             <Col xxl={3}>
               <SaasConversion data={analytics?.data?.performance?.ctr} title='CTR Media' color='text-danger'/>

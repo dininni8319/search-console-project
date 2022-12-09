@@ -68,7 +68,7 @@ const FormSelect = () => {
     <> 
       <form className="needs-validation col-11 col-md-6 mt-5 pt-5 d-flex flex-column bg-white p-5 shadow rounded" onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="organizerSingle" className='h3 mb-3'>Seleziona il sito che desideri collegare</label>
+          <label htmlFor="organizerSingle" className='h3 mb-3'>{state.data.length > 0 ?"Seleziona il sito che desideri collegare" : 'Al momento non ci sono progetti!'}</label>
           <select 
             className="form-select js-choice" 
             id="organizerSingle2" size="1" 
