@@ -26,7 +26,7 @@ const StatisticsCard = ({ stat, ...rest }) => {
   return (
     <Card className={classNames(className, 'overflow-hidden')} {...rest}>
       <Background image={image} className="bg-card" />
-      <Card.Body className="position-relative">
+      <Card.Body className="position-relative ">
         <h6>
           {title}
           {badgeText && (
@@ -38,7 +38,7 @@ const StatisticsCard = ({ stat, ...rest }) => {
         <div
           className={classNames(
             valueClassName,
-            'display-4 fs-4 mb-2 fw-normal font-sans-serif'
+            ' mb-2 fw-normal font-sans-serif'
           )}
         >
           <CountUp
@@ -52,14 +52,14 @@ const StatisticsCard = ({ stat, ...rest }) => {
             decimal="."
           />
         </div>
-        <Link to={link} className="fw-semi-bold fs--1 text-nowrap">
+        {/* <Link to={link} className="fw-semi-bold fs--1 text-nowrap">
           {linkText}
           <FontAwesomeIcon
             icon="angle-right"
             className="ms-1"
             transform="down-1"
           />
-        </Link>
+        </Link> */}
       </Card.Body>
     </Card>
   );

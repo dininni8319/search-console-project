@@ -4,12 +4,11 @@ import { Card, Col, Form, Row } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
 import LinePaymentChart from './LinePaymentChart';
 
-const LinePayment = ({ data, analytics }) => {
+const LinePayment = ({ analytics }) => {
   const chartRef = useRef(null);
-  // const [paymentStatus, setPaymentStatus] = useState('successful');
 
   return (
-    <Card className="rounded-3 overflow-hidden h-100 shadow-none">
+    <Card className="rounded-3 overflow-hidden shadow-none h-90">
       <Card.Body
         className="bg-line-chart-gradient"
         as={Flex}
@@ -18,29 +17,26 @@ const LinePayment = ({ data, analytics }) => {
       >
         <Row className="align-items-center g-0">
           <Col className="light">
-            <h4 className="text-white mb-0">Today $764.39</h4>
-            <p className="fs--1 fw-semi-bold text-white">
-              Yesterday <span className="opacity-50">$684.87</span>
+            <h4 className="text-white mb-0">Click Totali</h4>
+            <p className="fs--3 fw-semi-bold text-white">
+              {analytics?.data?.performance?.clicks}
             </p>
           </Col>
-          <Col xs="auto" className="d-none d-sm-block">
+          {/* <Col xs="auto" className="d-none d-sm-block">
             <Form.Select
               size="sm"
               className="mb-3"
-              // value={paymentStatus}
               onChange={e => setPaymentStatus(e.target.value)}
             >
               <option value="all">All Payments</option>
               <option value="successful">Successful Payments</option>
               <option value="failed">Failed Payments</option>
             </Form.Select>
-          </Col>
+          </Col> */}
         </Row>
         <LinePaymentChart
           analytics={analytics}
           ref={chartRef}
-          data={data}
-          // paymentStatus={paymentStatus}
           style={{ height: '300px' }}
         />
       </Card.Body>

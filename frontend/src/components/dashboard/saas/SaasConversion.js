@@ -3,10 +3,13 @@ import { Card, Col, Row } from 'react-bootstrap';
 import SoftBadge from 'components/common/SoftBadge';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CountUp from 'react-countup';
+import Background from 'components/common/Background';
+import bg3 from 'assets/img/icons/spot-illustrations/corner-3.png';
 
 const SaasConversion = ( { data, title, color }) => {
   return (
     <Card className="h-100">
+      <Background image={bg3} className="bg-card" />
       <Card.Body>
         <Row className="flex-column">
           <Col className="d-md-flex d-lg-block flex-between-center">

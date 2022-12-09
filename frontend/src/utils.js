@@ -2,7 +2,6 @@ import { getColor, getPastDates, rgbaColor } from 'helpers/utils';
 import dayjs from 'dayjs';
 import { tooltipFormatter } from 'helpers/echart-utils';
 
-
 export function getUrl(site) {
   const reg = /^https?:\/\/|\/+$/g;
 

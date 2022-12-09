@@ -4,6 +4,9 @@ import { Card, Col, Row } from 'react-bootstrap';
 import BasicECharts from 'components/common/BasicEChart';
 import * as echarts from 'echarts/core';
 import { LineChart } from 'echarts/charts';
+import Background from 'components/common/Background';
+import bg1 from 'assets/img/icons/spot-illustrations/corner-1.png';
+
 import {
   GridComponent,
   TooltipComponent,
@@ -51,6 +54,7 @@ const SaasActiveUser = ({ data, title }) => {
 
   return (
     <Card className="h-100">
+      <Background image={bg1} className="bg-card" />
       <Card.Body>
         <Row className="flex-between-center g-0">
           <Col xs={6} className="d-lg-block flex-between-center">
