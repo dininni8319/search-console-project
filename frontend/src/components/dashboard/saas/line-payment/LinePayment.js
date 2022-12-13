@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
 import LinePaymentChart from './LinePaymentChart';
+import Modal from '../../../UI/Modal/Modal';
 
-const LinePayment = ({ analytics }) => {
+const LinePayment = ({ analytics, isOpen, setIsOpen }) => {
   const chartRef = useRef(null);
 
+  const closeModal = () => setIsOpen(false)
   return (
     <Card className="rounded-3 overflow-hidden shadow-none h-90">
       <Card.Body
@@ -22,17 +24,18 @@ const LinePayment = ({ analytics }) => {
               {analytics?.data?.performance?.clicks}
             </p>
           </Col>
-          {/* <Col xs="auto" className="d-none d-sm-block">
-            <Form.Select
-              size="sm"
-              className="mb-3"
-              onChange={e => setPaymentStatus(e.target.value)}
-            >
-              <option value="all">All Payments</option>
-              <option value="successful">Successful Payments</option>
-              <option value="failed">Failed Payments</option>
-            </Form.Select>
-          </Col> */}
+          <Col xs="auto" className="d-none d-sm-block">
+           {isOpen && <Modal 
+              closeModal={closeModal}
+              title="Customizza la tua Ricerca"
+              // message="sel"
+              confirmMessage="Elimina"
+              declineMessage="Annulla"
+              // action={handleDelete}
+            />}
+            <button className='btn btn-warning text-white' onClick={() => setIsOpen(true)}>Seleziona una data</button>
+          
+          </Col>
         </Row>
         <LinePaymentChart
           analytics={analytics}

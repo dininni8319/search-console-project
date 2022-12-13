@@ -44,7 +44,7 @@ class SearchConsoleAnalyticsAction
     }
 
     $performance['position'] = $performance['position'] / $count;
-    $performance['ctr'] = floor(($performance['ctr'] / $count) * 100);
+    $performance['ctr'] = ($performance['ctr'] / $count) * 100;
 
     $data = collect([
       'rows' => $rows,

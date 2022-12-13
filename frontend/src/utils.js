@@ -8,22 +8,40 @@ export function getUrl(site) {
   return (site).replace(reg, '');
 }
 
-export function turnObjIntoArray(data, allowedKey) {
-  let arr = [];
-  const allowed = [allowedKey];
+export function perCent(num) {
+  return (num * 100).toFixed(2);
+}
 
+export function turnObjIntoArray(data, allowData) {
+  let arr = [];
+  const allowed = [allowData];
   for (let i = 0; i < data?.length; i++) {
     const el = data[i];
-   
+
     const filtered = Object.keys(el)
     .filter(key => allowed.includes(key))
     .reduce((arr, key) => {
-     
-      arr = [el[key]].concat(arr);
+       
+     if (allowed[0] === 'keys') {
+         arr = el[key].concat(arr);
+        } else if (allowed[0] === 'ctr') {
+        let ctr = perCent(el[key]);
+
+        arr = [ctr].concat(arr);
+        
+      } else if (allowed[0] === 'position') {
+        let position = (el[key]).toFixed(2);
+
+        arr = [position].concat(arr);
+        
+      } else {
+        arr = [el[key]].concat(arr);
+     }
       return arr;
     }, []);
     arr = arr.concat(filtered);
   }
+  
   return arr;
 }
 
@@ -41,7 +59,7 @@ export const getOptions = data => ({
   },
   xAxis: {
     type: 'category',
-    data: getPastDates(90).map(date => dayjs(date).format('DD MMM, YYYY')),
+    data: turnObjIntoArray(data?.data, 'keys').map(date => dayjs(date).format('DD MMM, YYYY')),
     boundaryGap: false,
     silent: true,
     axisPointer: {

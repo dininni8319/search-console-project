@@ -39,6 +39,12 @@ export const pagesRoutes = {
       active: true
     },
     {
+      name: 'Rendimento',
+      icon: 'flag',
+      to: '/rendimento',
+      active: true
+    },
+    {
       name: 'Landing',
       icon: 'globe',
       to: '/',

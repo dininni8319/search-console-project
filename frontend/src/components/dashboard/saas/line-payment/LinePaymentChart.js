@@ -29,7 +29,7 @@ const getOption = (data, isDark) => ({
   },
   xAxis: {
     type: 'category',
-    data: getPastDates(90).map(date => dayjs(date).format('DD MMM, YYYY')),
+    data: turnObjIntoArray(data?.data, 'keys').map(date => dayjs(date).format('DD MMM, YYYY')),
     boundaryGap: false,
     silent: true,
     splitLine: { show: false },
@@ -132,7 +132,7 @@ const LinePaymentChart = forwardRef(({ analytics,  style }, ref) => {
   const {
     config: { isDark }
   } = useContext(AppContext);
-  // console.log(getPastDates(90).map(date => dayjs(date).format('DD MMM, YYYY')));
+
   return (
     <ReactEChartsCore
       echarts={echarts}
