@@ -6,7 +6,7 @@ import useApiRequest from '../../../store/useApiRequest';
 import authReducer, { initialState } from '../../../store/apiReducer';
 import MainLayout from 'layouts/MainLayout';
 import { useNavigate } from "react-router";
-import { getUrl, getOptions, turnObjIntoArray } from "../../../utils";
+import { getUrl } from "../../../utils";
 import ReactEChartsCore from 'echarts-for-react/lib/core';
 import * as echarts from 'echarts/core';
 import { LineChart } from 'echarts/charts';
@@ -31,7 +31,7 @@ const GoogleAuth = () => {
   }
 
   const [ analytics, setAnalytic ] = useState({});
-  const [formData, setFormData ] = useState('');
+  const [ formData, setFormData ] = useState('');
 
   const handleChange = (e) => {
     setFormData(e.target.value);
@@ -48,17 +48,17 @@ const GoogleAuth = () => {
 
     const site = getUrl(formData);
     fetch(`${api_urls.backend}/search/console/weekly_data/${site}`, paramsGet)
-    .then(response => response.json())
-    .then(data => {
+      .then(response => response.json())
+      .then(data => {
 
-      if (data.success) {
+        if (data.success) {
 
-        setAnalytic({
-          ...analytics,
-          data
-        })
-      }
-    }) 
+          setAnalytic({
+            ...analytics,
+            data
+          })
+        }
+      }) 
   }, [formData])
 
   const handleDispatch = useCallback((action) => {
@@ -68,7 +68,6 @@ const GoogleAuth = () => {
   const { makeRequest: getAllProjects } = useApiRequest(handleDispatch);
 
   useEffect(() => {
-   
     getAllProjects(
       `${api_urls.backend}/search/console/all_projects`, 
       params

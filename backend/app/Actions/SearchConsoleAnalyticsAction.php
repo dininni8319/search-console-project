@@ -12,7 +12,6 @@ class SearchConsoleAnalyticsAction
   {
     $service = new Webmasters($client);
     $request = new Webmasters\SearchAnalyticsQueryRequest;
-    
     $request->setStartRow(0);
 
     $dateNow = Carbon::now()->format('Y-m-d');
@@ -21,12 +20,11 @@ class SearchConsoleAnalyticsAction
     $request->setStartDate($dateStart ? $dateStart : $twoWeeksBefore);
     $request->setEndDate($dateEnd ? $dateEnd : $dateNow);
     $request->setSearchType('web');
-    $request->setRowLimit(100);
-    
-    // $request->setDimensions(array('query'));
-    $request->setDimensions(array('query','date', 'country','device','page'));
+    $request->setRowLimit(5000);
+    $request->setAggregationType('byProperty');// you can also query byPage or auto
+    $request->setDimensions(array('date'));
+    // $request->setDimensions(array('query','date', 'country','device','page'));
     $query_search = $service->searchanalytics->query('https://'.$site, $request); 
-    
     $rows = $query_search->getRows();
 
     $performance = [
@@ -36,6 +34,8 @@ class SearchConsoleAnalyticsAction
       "ctr" => 0,
     ];
 
+    $count = count($rows);
+
     foreach ($rows as $key => $value) {
       $performance['clicks'] += $value['clicks'];
       $performance['impressions'] += $value['impressions'];
@@ -43,9 +43,13 @@ class SearchConsoleAnalyticsAction
       $performance['ctr'] += $value['ctr'];
     }
 
+    $performance['position'] = $performance['position'] / $count;
+    $performance['ctr'] = floor(($performance['ctr'] / $count) * 100);
+
     $data = collect([
       'rows' => $rows,
       'performance' => $performance,
+      'count' => $count,
     ]);
     return $data;
   }
@@ -68,13 +72,13 @@ class SearchConsoleAnalyticsAction
     $newProjects = [];
 
     foreach ($projects as $key => $value) {
-        array_push( $newProjects, $value['project']);
+      array_push( $newProjects, $value['project']);
     }
 
     $newSites = array_diff($sites, $newProjects);
 
     return $newSites;
-
   }
+  
 }
 

@@ -132,7 +132,7 @@ const LinePaymentChart = forwardRef(({ analytics,  style }, ref) => {
   const {
     config: { isDark }
   } = useContext(AppContext);
-
+  // console.log(getPastDates(90).map(date => dayjs(date).format('DD MMM, YYYY')));
   return (
     <ReactEChartsCore
       echarts={echarts}

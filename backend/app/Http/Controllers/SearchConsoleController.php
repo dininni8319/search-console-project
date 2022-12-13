@@ -37,7 +37,6 @@ class SearchConsoleController extends GoogleController
     public function getSearchConsoleWeekData($site, SearchConsoleAnalyticsAction $action)
     {
         $client = GoogleController::getUserClient();
-        
         $rows = $action->handle($client, $site);
 
         if (!$rows) {
@@ -51,7 +50,8 @@ class SearchConsoleController extends GoogleController
             'success' => true,
             'data' => $rows['rows'],
             'performance' => $rows['performance'],
-            'message' => 'Questi sono i siti trovati'
+            'count' => $rows['count'],
+            'message' => 'Questi sono i siti trovati',
           ], 200);  
     }
     
