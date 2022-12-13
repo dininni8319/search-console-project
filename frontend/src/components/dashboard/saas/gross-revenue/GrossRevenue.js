@@ -67,10 +67,10 @@ const GrossRevenue = ({ analytics }) => {
   const [previousMonth, setPreviousMonth] = useState(months[11]);
   const chartRef = useRef(null);
   
-  grossTableRows[0].revenue = analytics?.data?.performance.clicks;
-  grossTableRows[1].revenue = analytics?.data?.performance.impressions;
-  grossTableRows[2].revenue = (analytics?.data?.performance.ctr)?.toFixed(2)  + '%';
-  grossTableRows[3].revenue = (analytics?.data?.performance.position)?.toFixed(2) + '%';
+  grossTableRows[0].revenue = analytics?.data?.performance?.clicks;
+  grossTableRows[1].revenue = analytics?.data?.performance?.impressions;
+  grossTableRows[2].revenue = (analytics?.data?.performance?.ctr)?.toFixed(2)  + '%';
+  grossTableRows[3].revenue = (analytics?.data?.performance?.position)?.toFixed(2) + '%';
 
 
   useEffect(() => {

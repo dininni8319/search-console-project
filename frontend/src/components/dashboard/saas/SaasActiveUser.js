@@ -74,8 +74,8 @@ const SaasActiveUser = ({ data, title }) => {
   );
 };
 
-SaasActiveUser.propTypes = {
-  data: PropTypes.array.isRequired
-};
+// SaasActiveUser.propTypes = {
+//   data: PropTypes.array.isRequired
+// };
 
 export default SaasActiveUser;

@@ -1,46 +1,192 @@
 import classes from "./Modal.module.css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { createPortal } from "react-dom";
-import DatePicker from "react-datepicker";
+import React, { useState, useContext } from 'react';
+import { ConfigContext } from "context/Config/index";
+import { useNavigate } from "react-router";
+import { AuthContext } from "context/Auth/index";
+
+
 const Backdrop = (props) => {
   return <div className={classes.backdrop} onClick={props.closeModal}></div>;
 };
 
 const Overlay = (props) => {
+  const { api_urls } = useContext(ConfigContext);
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+  const [formData, setFormData] = useState({
+    num:'',
+    start: '',
+    end:''
+  });
+
+  console.log(formData, props?.site, 'testing the form data');
+
+  const [startDate, setStartDate] = useState(new Date());
+  // const [selected, set] = useState(new Date());
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    formData.site = props?.site;
+    
+    fetch(`${api_urls.backend}/google/search/console/analytics`, {
+      method: "POST",
+      headers: { 
+        Authorization: `Bearer ${user?.token}`,
+        "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+
+          props.setAnalytic({
+            ...props.analytics,
+            data
+          })
+          navigate("/rendimento")
+          
+        }
+      });     
+  };
 
   return (
     <div className={classes.modal}>
       <div className="text-center">
+        <FontAwesomeIcon icon={faSpinner} className="fa-1x text-main mx-1 text-success" />
         <h3 className="fx-bold h2"> {props.title}</h3>
       </div>
-      <p>{props.message}</p>
-      <div className="mt-5 d-flex justify-content-between">
-        <form>
+      {/* <p>{props.message}</p> */}
 
-           <DatePicker
-             placeholderText="Seleziona una data di inzio"
-           />
-            <DatePicker
-             placeholderText="Seleziona la data fine"
-           />
-        </form>
+        <form className="d-flex flex-column mt-2 align-items-center" onSubmit={handleSubmit}>
+          <div className="col-md-5 mb-2">
+            <input 
+                type='checkbox'  
+                className='mx-3 checkbox-round' 
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    num: '7'
+                  })
+                  
+            }}/>
+            <label className="form-label fs-1" htmlFor="userName">Ultimi 7 giorni</label>
+          </div>
+          <div className="col-md-5 mb-2">
+            <input 
+              type='checkbox'  
+              className='mx-3 checkbox-round'
+              /*  value={date} */ 
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  num: '28'
+                })
+              }}
+            />
+            <label className="form-label fs-1" htmlFor="userName">Ultimi 28 giorni</label>
+          </div>
+          <div className="col-md-5 mb-2">
+            <input 
+              type='checkbox'  
+              className='mx-3 checkbox-round'
+              /*  value={date} */ 
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  num: '3'
+                })   
+              }}
+            />
+            <label className="form-label fs-1" htmlFor="userName">Ultimi 3 mesi</label>
 
+          </div>
+          <div className="col-md-5 mb-2">
+            <input 
+              type='checkbox'  
+              className='mx-3 checkbox-round'
+              /*  value={date} */ 
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  num: '6'
+                })   
+              }}
+            />
+            <label className="form-label fs-1" htmlFor="userName">Ultimi 6 mesi</label>
+          </div>
 
-        <button
-          className="btn btn-outline-success rounded-0 px-3 fw-bold"
-          onClick={props.closeModal}
-        >
-          {props.declineMessage}
-        </button>
+          <div className="col-md-5 mb-2">
+            <input 
+              type='checkbox'  
+              className='mx-3 checkbox-round'
+              /*  value={date} */ 
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  num: '12'
+                })   
+              }}
+            />
+            <label className="form-label fs-1" htmlFor="userName">Ultimi 12 mesi</label>
 
-        {/* <button
-          className="btn btn-outline-danger rounded-0 px-3 fw-bold"
-          // onClick={() => props.action()}
-        >
-          {props.confirmMessage}
-        </button> */}
-      </div>
+          </div>
+          <div className="col-md-5 mb-2">
+            <input 
+              type='checkbox'  
+              className='mx-3 checkbox-round'
+              /*  value={date} */ 
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  num: '16'
+                })   
+              }} 
+            />
+            <label className="form-label fs-1" htmlFor="userName">Ultimi 16 mesi</label>
+
+          </div>
+          <div className='d-flex my-2'>
+            <div className="col-md-5 ">
+
+              <label className="form-label" htmlFor="userName">Data di inizio</label>
+                <input
+                  type='date'  
+                  className='mx-3'
+                  value={formData.start}  
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData,
+                      start: e.target.value
+                    })   
+                  }}
+                />
+            </div>
+            <div className="col-md-5">
+
+              <label className="form-label" htmlFor="userName">Data di fine</label>
+                <input
+                 type='date'
+                 className='mx-3'
+                 onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    end: e.target.value
+                  })   
+                }}
+                />
+            </div>
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="btn btn-outline-success rounded-0 px-3 fw-bold"
+            >
+              Applica
+            </button>
+          </div>
+          </form>
     </div>
   );
 };

@@ -18,7 +18,7 @@ class SearchConsoleController extends GoogleController
     {
         // $service = new \Google\Service\Webmasters\Resource\Sites
         $client = GoogleController::getUserClient();
-        $rows = $action->handle($client, $request->site, $request->start, $request->end);
+        $rows = $action->handle($client, $request->site, $request->start, $request->end, $request->num);
          
         if (!$rows) {
             return response()->json([

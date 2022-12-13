@@ -8,7 +8,6 @@ import classNames from 'classnames';
 const MainLayout = ({ children, data, handleChange, isOpen/* handleSubmit */ }) => {
   const { hash, pathname } = useLocation();
   const isKanban = pathname.includes('kanban');
-
   const {
     config: { isFluid, navbarPosition }
   } = useContext(AppContext);
@@ -32,16 +31,18 @@ const MainLayout = ({ children, data, handleChange, isOpen/* handleSubmit */ }) 
 
   return (
     <div className='container-fluid'>
-       {!isOpen && <NavbarVertical 
+     {!isOpen && <NavbarVertical 
           data={data} 
           handleChange={handleChange}
         />}
         <div className={classNames('content', { 'pb-0': isKanban })}>
-         {!isOpen && <NavbarTop />}
+        {!isOpen &&  <NavbarTop />}
           {/*------ Main Routes ------*/}
           
           {children}
         </div>
+       
+
     </div>
   );
 };

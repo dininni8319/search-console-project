@@ -15,7 +15,7 @@ import GrossRevenue from './gross-revenue/GrossRevenue';
 import DoMoreCard from './DoMoreCard';
 
 const Saas = ({ analytics, isOpen, setIsOpen }) => {
-  console.log(analytics?.data, 'testing the keys');
+
   return (
     <>
       <Row className="g-2">

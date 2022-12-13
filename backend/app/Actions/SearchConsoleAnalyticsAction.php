@@ -8,14 +8,17 @@ use \Google\Service\Webmasters;
 
 class SearchConsoleAnalyticsAction 
 {
-  public function handle($client, $site, $dateStart = null, $dateEnd = null)
+  public function handle($client, $site, $dateStart = null, $dateEnd = null, $num = null)
   {
     $service = new Webmasters($client);
     $request = new Webmasters\SearchAnalyticsQueryRequest;
     $request->setStartRow(0);
 
     $dateNow = Carbon::now()->format('Y-m-d');
-    $twoWeeksBefore = Carbon::now()->subMonths(3)->format('Y-m-d');
+    // if (intval($num) === 7 || intval($num) === 28) {
+      
+    // }
+    $twoWeeksBefore = Carbon::now()->subMonths($num)->format('Y-m-d');
 
     $request->setStartDate($dateStart ? $dateStart : $twoWeeksBefore);
     $request->setEndDate($dateEnd ? $dateEnd : $dateNow);

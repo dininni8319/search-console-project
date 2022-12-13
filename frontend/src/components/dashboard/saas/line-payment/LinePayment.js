@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
 import LinePaymentChart from './LinePaymentChart';
-import Modal from '../../../UI/Modal/Modal';
 
 const LinePayment = ({ analytics, isOpen, setIsOpen }) => {
   const chartRef = useRef(null);
-
-  const closeModal = () => setIsOpen(false)
+  const handleClick = (event) => {
+     event.preventDefault();
+     setIsOpen(true)
+  }
   return (
     <Card className="rounded-3 overflow-hidden shadow-none h-90">
       <Card.Body
@@ -24,17 +25,8 @@ const LinePayment = ({ analytics, isOpen, setIsOpen }) => {
               {analytics?.data?.performance?.clicks}
             </p>
           </Col>
-          <Col xs="auto" className="d-none d-sm-block">
-           {isOpen && <Modal 
-              closeModal={closeModal}
-              title="Customizza la tua Ricerca"
-              // message="sel"
-              confirmMessage="Elimina"
-              declineMessage="Annulla"
-              // action={handleDelete}
-            />}
-            <button className='btn btn-warning text-white' onClick={() => setIsOpen(true)}>Seleziona una data</button>
-          
+          <Col xs="auto" className="d-sm-block">
+          <button type='button' className='btn btn-warning text-white' onClick={(e) => handleClick(e)}>Seleziona una data</button>
           </Col>
         </Row>
         <LinePaymentChart

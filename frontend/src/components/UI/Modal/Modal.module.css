@@ -10,10 +10,10 @@
 
 .modal {
   position: fixed;
-  top: 10vh;
+  top: 5vh;
   left: 35%;
   width: 80%;
-  height: 60%;
+  min-height: 550px;
   z-index: 1000;
   overflow: hidden;
   border: 1px solid white;
