@@ -46,7 +46,7 @@ const Overlay = (props) => {
             data
           })
           navigate("/rendimento")
-          
+          props.closeModal()
         }
       });     
   };

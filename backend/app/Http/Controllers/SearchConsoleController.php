@@ -29,7 +29,9 @@ class SearchConsoleController extends GoogleController
 
         return response()->json([
             'success' => true,
-            'data' => $rows,
+            'data' => $rows['rows'],
+            'performance' => $rows['performance'],
+            'count' => $rows['count'],
             'message' => 'Questi sono i siti trovati'
           ], 200);    
     }
