@@ -73,11 +73,11 @@ const Layout = () => {
             </ProtectedRoute>
           } />
           
-          <Route path="/rendimento" element={
+          {/* <Route path="/rendimento" element={
             <ProtectedRoute>
               <Rendimento />
             </ProtectedRoute>
-          } />
+          } /> */}
           <Route path="/home" element={
             // <ProtectedRoute>
               <Home />

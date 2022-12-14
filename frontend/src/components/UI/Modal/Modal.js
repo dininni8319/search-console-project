@@ -6,7 +6,7 @@ import React, { useState, useContext } from 'react';
 import { ConfigContext } from "context/Config/index";
 import { useNavigate } from "react-router";
 import { AuthContext } from "context/Auth/index";
-
+// import DatePicker from "react-datepicker";
 
 const Backdrop = (props) => {
   return <div className={classes.backdrop} onClick={props.closeModal}></div>;
@@ -14,18 +14,18 @@ const Backdrop = (props) => {
 
 const Overlay = (props) => {
   const { api_urls } = useContext(ConfigContext);
-  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const [checkValue, setCheckValue] = useState(false)
   const [formData, setFormData] = useState({
     num:'',
     start: '',
     end:''
   });
+  
+  const navigate = useNavigate();
 
   console.log(formData, props?.site, 'testing the form data');
 
-  const [startDate, setStartDate] = useState(new Date());
-  // const [selected, set] = useState(new Date());
   const handleSubmit = (event) => {
     event.preventDefault();
     formData.site = props?.site;
@@ -40,12 +40,12 @@ const Overlay = (props) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-
+              
           props.setAnalytic({
             ...props.analytics,
             data
           })
-          navigate("/rendimento")
+          navigate("/analytics_page")
           props.closeModal()
         }
       });     
@@ -54,8 +54,8 @@ const Overlay = (props) => {
   return (
     <div className={classes.modal}>
       <div className="text-center">
-        <FontAwesomeIcon icon={faSpinner} className="fa-1x text-main mx-1 text-success" />
-        <h3 className="fx-bold h2"> {props.title}</h3>
+        {/* <FontAwesomeIcon icon={faSpinner} className="fa-1x text-main mx-1 text-success" /> */}
+        <h3 className="fx-bold"> {props.title}</h3>
       </div>
       {/* <p>{props.message}</p> */}
 
@@ -64,12 +64,13 @@ const Overlay = (props) => {
             <input 
                 type='checkbox'  
                 className='mx-3 checkbox-round' 
+                // checked={checkValue}
                 onChange={(e) => {
+                  // setCheckValue(!checkValue)
                   setFormData({
                     ...formData,
                     num: '7'
-                  })
-                  
+                })
             }}/>
             <label className="form-label fs-1" htmlFor="userName">Ultimi 7 giorni</label>
           </div>
@@ -147,13 +148,12 @@ const Overlay = (props) => {
             <label className="form-label fs-1" htmlFor="userName">Ultimi 16 mesi</label>
 
           </div>
-          <div className='d-flex my-2'>
-            <div className="col-md-5 ">
-
-              <label className="form-label" htmlFor="userName">Data di inizio</label>
+          <div className='d-flex justify-content-around my-2'>
+            <div className="col-12 col-md-6">
+                <label className="form-label" htmlFor="userName">Data di inizio</label>
                 <input
                   type='date'  
-                  className='mx-3'
+                  className='date-input'
                   value={formData.start}  
                   onChange={(e) => {
                     setFormData({
@@ -163,25 +163,31 @@ const Overlay = (props) => {
                   }}
                 />
             </div>
-            <div className="col-md-5">
-
+            <div className="d-flex flex-column col-12 col-md-6">
               <label className="form-label" htmlFor="userName">Data di fine</label>
-                <input
-                 type='date'
-                 className='mx-3'
-                 onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    end: e.target.value
-                  })   
-                }}
-                />
+              <input
+                type='date'
+                className='date-input'
+                onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  end: e.target.value
+                })   
+              }}
+              />
             </div>
           </div>
-          <div>
+          <div className='d-flex justify-content-between w-100 p-2'>
+            <button
+                type="submit"
+                onClick={props.closeModal}
+                className="btn btn-secondary rounded-0 px-3 fw-bold"
+            >
+              Annula
+            </button>
             <button
               type="submit"
-              className="btn btn-outline-success rounded-0 px-3 fw-bold"
+              className="btn btn-secondary rounded-0 px-3 fw-bold"
             >
               Applica
             </button>

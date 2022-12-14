@@ -37,6 +37,7 @@ const GoogleAuth = () => {
   const closeModal = () => {
     setIsOpen(false)
   }
+  
   const handleChange = (e) => {
     setFormData(e.target.value);
   }

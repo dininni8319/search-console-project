@@ -7,7 +7,7 @@ import authReducer, { initialState } from '../../../store/apiReducer';
 import MainLayout from 'layouts/MainLayout';
 import { useNavigate } from "react-router";
 import { getUrl } from "../../../utils";
-import ReactEChartsCore from 'echarts-for-react/lib/core';
+import Modal from '../../UI/Modal/Modal';
 import * as echarts from 'echarts/core';
 import { LineChart } from 'echarts/charts';
 import {
@@ -24,19 +24,24 @@ const GoogleAuth = () => {
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
   const [state, dispatch] = useReducer(authReducer, initialState);
-
+  const [isOpen, setIsOpen] = useState(false);
   const params = {
     method: "GET",
     headers: { Authorization: `Bearer ${user?.token}`},
   }
 
+  const closeModal = () => {
+    setIsOpen(false)
+  }
+
   const [ analytics, setAnalytic ] = useState({});
   const [ formData, setFormData ] = useState('');
-
+  const site = getUrl(formData);
+  
   const handleChange = (e) => {
     setFormData(e.target.value);
   }
-
+ 
   useEffect(() => {
     const paramsGet = {
       method: "GET",
@@ -90,9 +95,25 @@ const GoogleAuth = () => {
       <MainLayout 
         data={state?.data} 
         handleChange={handleChange}
+        isOpen={isOpen} 
+        setIsOpen={setIsOpen}
       >
-        <Saas analytics={analytics}/>
+        <Saas 
+          analytics={analytics}   
+          isOpen={isOpen} 
+          setIsOpen={setIsOpen}
+        />
      </MainLayout>
+     {isOpen && <Modal 
+        closeModal={closeModal}
+        title="Customizza la tua Ricerca"
+        message="sel"
+        confirmMessage="Elimina"
+        declineMessage="Annulla"
+        site={site}
+        setAnalytic={setAnalytic}
+        analytics={analytics} 
+      />}
     </>
   );
 };

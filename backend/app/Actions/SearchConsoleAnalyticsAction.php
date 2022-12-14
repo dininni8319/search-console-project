@@ -15,46 +15,85 @@ class SearchConsoleAnalyticsAction
     $request->setStartRow(0);
 
     $dateNow = Carbon::now()->format('Y-m-d');
-    // if (intval($num) === 7 || intval($num) === 28) {
-      
-    // }
-    $twoWeeksBefore = Carbon::now()->subMonths($num)->format('Y-m-d');
+    if (intval($num) === 7 || intval($num) === 28) {
+      $twoWeeksBefore = Carbon::now()->subDays($num)->format('Y-m-d');
 
-    $request->setStartDate($dateStart ? $dateStart : $twoWeeksBefore);
-    $request->setEndDate($dateEnd ? $dateEnd : $dateNow);
-    $request->setSearchType('web');
-    $request->setRowLimit(5000);
-    $request->setAggregationType('byProperty');// you can also query byPage or auto
-    $request->setDimensions(array('date'));
-    // $request->setDimensions(array('query','date', 'country','device','page'));
-    $query_search = $service->searchanalytics->query('https://'.$site, $request); 
-    $rows = $query_search->getRows();
+      $request->setStartDate($dateStart ? $dateStart : $twoWeeksBefore);
+      $request->setEndDate($dateEnd ? $dateEnd : $dateNow);
+      $request->setSearchType('web');
+      $request->setRowLimit(5000);
+      $request->setAggregationType('byProperty');// you can also query byPage or auto
+      $request->setDimensions(array('date'));
+      // $request->setDimensions(array('query','date', 'country','device','page'));
+      $query_search = $service->searchanalytics->query('https://'.$site, $request); 
+      $rows = $query_search->getRows();
+  
+      $performance = [
+        "clicks" => 0,
+        "impressions" => 0,
+        "position" => 0,
+        "ctr" => 0,
+      ];
+  
+      $count = count($rows);
+  
+      foreach ($rows as $key => $value) {
+        $performance['clicks'] += $value['clicks'];
+        $performance['impressions'] += $value['impressions'];
+        $performance['position'] += $value['position'];
+        $performance['ctr'] += $value['ctr'];
+      }
+  
+      $performance['position'] = $performance['position'] / $count;
+      $performance['ctr'] = ($performance['ctr'] / $count) * 100;
+  
+      $data = collect([
+        'rows' => $rows,
+        'performance' => $performance,
+        'count' => $count,
+      ]);
+      return $data;
+    } else {
+      $twoWeeksBefore = Carbon::now()->subMonths($num)->format('Y-m-d');
+  
+      $request->setStartDate($dateStart ? $dateStart : $twoWeeksBefore);
+      $request->setEndDate($dateEnd ? $dateEnd : $dateNow);
+      $request->setSearchType('web');
+      $request->setRowLimit(5000);
+      $request->setAggregationType('byProperty');// you can also query byPage or auto
+      $request->setDimensions(array('date'));
+      // $request->setDimensions(array('query','date', 'country','device','page'));
+      $query_search = $service->searchanalytics->query('https://'.$site, $request); 
+      $rows = $query_search->getRows();
+  
+      $performance = [
+        "clicks" => 0,
+        "impressions" => 0,
+        "position" => 0,
+        "ctr" => 0,
+      ];
+  
+      $count = count($rows);
+  
+      foreach ($rows as $key => $value) {
+        $performance['clicks'] += $value['clicks'];
+        $performance['impressions'] += $value['impressions'];
+        $performance['position'] += $value['position'];
+        $performance['ctr'] += $value['ctr'];
+      }
+  
+      $performance['position'] = $performance['position'] / $count;
+      $performance['ctr'] = ($performance['ctr'] / $count) * 100;
+  
+      $data = collect([
+        'rows' => $rows,
+        'performance' => $performance,
+        'count' => $count,
+      ]);
+      return $data;
 
-    $performance = [
-      "clicks" => 0,
-      "impressions" => 0,
-      "position" => 0,
-      "ctr" => 0,
-    ];
-
-    $count = count($rows);
-
-    foreach ($rows as $key => $value) {
-      $performance['clicks'] += $value['clicks'];
-      $performance['impressions'] += $value['impressions'];
-      $performance['position'] += $value['position'];
-      $performance['ctr'] += $value['ctr'];
     }
 
-    $performance['position'] = $performance['position'] / $count;
-    $performance['ctr'] = ($performance['ctr'] / $count) * 100;
-
-    $data = collect([
-      'rows' => $rows,
-      'performance' => $performance,
-      'count' => $count,
-    ]);
-    return $data;
   }
 
   public function handleSites($client){

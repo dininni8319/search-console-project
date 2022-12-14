@@ -38,12 +38,12 @@ export const pagesRoutes = {
       to: '/landing_page',
       active: true
     },
-    {
-      name: 'Rendimento',
-      icon: 'flag',
-      to: '/rendimento',
-      active: true
-    },
+    // {
+    //   name: 'Rendimento',
+    //   icon: 'flag',
+    //   to: '/rendimento',
+    //   active: true
+    // },
     {
       name: 'Landing',
       icon: 'globe',
