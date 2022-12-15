@@ -16,7 +16,7 @@ import { tooltipFormatter } from 'helpers/echart-utils';
 
 echarts.use([LineChart, TooltipComponent, GridComponent, LegendComponent]);
 
-const getOption = (data, isDark) => ({
+const getOption = (data, isDark, lenArr) => ({
     tooltip: {
     trigger: 'axis',
     padding: [7, 10],
@@ -28,7 +28,7 @@ const getOption = (data, isDark) => ({
     formatter: tooltipFormatter
   },
   xAxis: {
-    type: 'category',
+    type: 'category', /* `${ lenArr.length < 90 ?'DD MMM, YYYY': 'MMM'}` */
     data: turnObjIntoArray(data?.data, 'keys').map(date => dayjs(date).format('DD MMM, YYYY')),
     boundaryGap: false,
     silent: true,
@@ -55,8 +55,8 @@ const getOption = (data, isDark) => ({
     axisLabel: {
       color: getColor('gray-400'),
       fontWeight: 100,
-      fontSize: 10,
-      margin: 5,
+      fontSize: 8,
+      margin: 2,
       interval: 5,
       formatter: value => dayjs(value).format('MMM DD')
     }
@@ -120,7 +120,7 @@ const getOption = (data, isDark) => ({
     }
   ],
    grid: {
-    containLabel: true,
+    containLabel: lenArr.length > 120? false : true,
     right: '5px',
     left: 0,
     bottom: 0,
@@ -133,11 +133,13 @@ const LinePaymentChart = forwardRef(({ analytics,  style }, ref) => {
     config: { isDark }
   } = useContext(AppContext);
 
+  const lenArr = turnObjIntoArray(analytics?.data?.data, 'keys')
+  console.log(lenArr);
   return (
     <ReactEChartsCore
       echarts={echarts}
       ref={ref}
-      option={getOption(analytics?.data, isDark)}
+      option={getOption(analytics?.data, isDark, lenArr)}
       style={style}
     />
   );

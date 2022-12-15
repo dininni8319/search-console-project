@@ -4,7 +4,6 @@ import { checkBoxInputs } from "../checkBoxInputs";
   const [ checked, setChecked ] = useState([]);
 
   const handleChecked = (value) => {
-    console.log(checked[0], 'testing the checked');
     //  if (checked?.length > 0) {
     //   setChecked([]);
     //  } else 
@@ -29,7 +28,6 @@ import { checkBoxInputs } from "../checkBoxInputs";
               onChange={(e) => {
                 handleChecked(inputs?.num
               )
-  
           }}/>
         <label className="form-label fs-1 mt-3" htmlFor="userName">{inputs?.description}</label>
       </div>
