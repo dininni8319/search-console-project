@@ -6,6 +6,7 @@ import React, { useState, useContext } from 'react';
 import { ConfigContext } from "context/Config/index";
 import { useNavigate } from "react-router";
 import { AuthContext } from "context/Auth/index";
+import FormModal from '../FormModal';
 // import DatePicker from "react-datepicker";
 
 const Backdrop = (props) => {
@@ -23,9 +24,6 @@ const Overlay = (props) => {
   });
   
   const navigate = useNavigate();
-
-  console.log(formData, props?.site, 'testing the form data');
-
   const handleSubmit = (event) => {
     event.preventDefault();
     formData.site = props?.site;
@@ -39,8 +37,7 @@ const Overlay = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.success) {
-              
+        if (data.success) {   
           props.setAnalytic({
             ...props.analytics,
             data
@@ -58,141 +55,12 @@ const Overlay = (props) => {
         <h3 className="fx-bold"> {props.title}</h3>
       </div>
       {/* <p>{props.message}</p> */}
-
-        <form className="d-flex flex-column mt-2 align-items-center" onSubmit={handleSubmit}>
-          <div className="col-md-5 mb-2">
-            <input 
-                type='checkbox'  
-                className='mx-3 checkbox-round' 
-                // checked={checkValue}
-                onChange={(e) => {
-                  // setCheckValue(!checkValue)
-                  setFormData({
-                    ...formData,
-                    num: '7'
-                })
-            }}/>
-            <label className="form-label fs-1" htmlFor="userName">Ultimi 7 giorni</label>
-          </div>
-          <div className="col-md-5 mb-2">
-            <input 
-              type='checkbox'  
-              className='mx-3 checkbox-round'
-              /*  value={date} */ 
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  num: '28'
-                })
-              }}
-            />
-            <label className="form-label fs-1" htmlFor="userName">Ultimi 28 giorni</label>
-          </div>
-          <div className="col-md-5 mb-2">
-            <input 
-              type='checkbox'  
-              className='mx-3 checkbox-round'
-              /*  value={date} */ 
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  num: '3'
-                })   
-              }}
-            />
-            <label className="form-label fs-1" htmlFor="userName">Ultimi 3 mesi</label>
-
-          </div>
-          <div className="col-md-5 mb-2">
-            <input 
-              type='checkbox'  
-              className='mx-3 checkbox-round'
-              /*  value={date} */ 
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  num: '6'
-                })   
-              }}
-            />
-            <label className="form-label fs-1" htmlFor="userName">Ultimi 6 mesi</label>
-          </div>
-
-          <div className="col-md-5 mb-2">
-            <input 
-              type='checkbox'  
-              className='mx-3 checkbox-round'
-              /*  value={date} */ 
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  num: '12'
-                })   
-              }}
-            />
-            <label className="form-label fs-1" htmlFor="userName">Ultimi 12 mesi</label>
-
-          </div>
-          <div className="col-md-5 mb-2">
-            <input 
-              type='checkbox'  
-              className='mx-3 checkbox-round'
-              /*  value={date} */ 
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  num: '16'
-                })   
-              }} 
-            />
-            <label className="form-label fs-1" htmlFor="userName">Ultimi 16 mesi</label>
-
-          </div>
-          <div className='d-flex justify-content-around my-2'>
-            <div className="col-12 col-md-6">
-                <label className="form-label" htmlFor="userName">Data di inizio</label>
-                <input
-                  type='date'  
-                  className='date-input'
-                  value={formData.start}  
-                  onChange={(e) => {
-                    setFormData({
-                      ...formData,
-                      start: e.target.value
-                    })   
-                  }}
-                />
-            </div>
-            <div className="d-flex flex-column col-12 col-md-6">
-              <label className="form-label" htmlFor="userName">Data di fine</label>
-              <input
-                type='date'
-                className='date-input'
-                onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  end: e.target.value
-                })   
-              }}
-              />
-            </div>
-          </div>
-          <div className='d-flex justify-content-between w-100 p-2'>
-            <button
-                type="submit"
-                onClick={props.closeModal}
-                className="btn btn-secondary rounded-0 px-3 fw-bold"
-            >
-              Annula
-            </button>
-            <button
-              type="submit"
-              className="btn btn-secondary rounded-0 px-3 fw-bold"
-            >
-              Applica
-            </button>
-          </div>
-          </form>
+       <FormModal 
+          handleSubmit={handleSubmit}
+          formData={formData}
+          setFormData={setFormData}
+          closeModal={props.closeModal}
+       />
     </div>
   );
 };
