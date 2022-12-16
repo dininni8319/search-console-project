@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Card, Col, Form, Row, Table, Button } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
-import SoftBadge from 'components/common/SoftBadge';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import GrossRevenueChart from './GrossRevenueChart';
@@ -71,7 +70,6 @@ const GrossRevenue = ({ analytics }) => {
   grossTableRows[1].revenue = analytics?.data?.performance?.impressions;
   grossTableRows[2].revenue = (analytics?.data?.performance?.ctr)?.toFixed(2)  + '%';
   grossTableRows[3].revenue = (analytics?.data?.performance?.position)?.toFixed(2) + '%';
-
 
   useEffect(() => {
     if (selectedMonth) {

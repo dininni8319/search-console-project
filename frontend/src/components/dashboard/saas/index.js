@@ -1,16 +1,11 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import LinePayment from './line-payment/LinePayment';
-import {
-  grossRevenue,
-  candleChartData
-} from 'data/dashboard/saas';
 import SaasActiveUser from './SaasActiveUser';
 import SaasRevenue from './SaasRevenue';
 import SaasConversion from './SaasConversion';
 import DepositeStatus from './DepositeStatus';
-import StatisticsCards from './stats-cards/StatisticsCards';
-import TransactionSummary from './TransactionSummary';
+import StatisticsCards from './stats-cards/StatisticsCards'
 import GrossRevenue from './gross-revenue/GrossRevenue';
 import DoMoreCard from './DoMoreCard';
 

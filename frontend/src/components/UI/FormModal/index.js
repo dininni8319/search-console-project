@@ -1,29 +1,30 @@
 import { useState } from "react";
 import { checkBoxInputs } from "../checkBoxInputs";
+
   const FormModal = ({ handleSubmit, formData, setFormData , closeModal}) => {
   const [ checked, setChecked ] = useState([]);
-
+  
   const handleChecked = (value) => {
-    //  if (checked?.length > 0) {
-    //   setChecked([]);
-    //  } else 
-       setChecked([...value])
+     if (checked?.length > 0) {
+      setChecked([]);
+     } else 
+       setChecked([value.concat(checked)])
        setFormData({
          ...formData,
          num: value
        });
-  
     }
   
   return ( 
     <form className="d-flex flex-column mt-2 align-items-center" onSubmit={handleSubmit}>
      
-     {checkBoxInputs?.map((inputs, id) => {
+     {checkBoxInputs?.map((inputs) => {
        return (
-        <div className="col-md-5 mb-2" key={id}>
+        <div className="col-md-5 mb-2" key={inputs.id}>
           <input 
               type='checkbox'  
               className='mx-3 checkbox-round'
+              // checked={checked?.filter(item => item.num === inputs.num)}
               checked={checked[0] === inputs?.num}
               onChange={(e) => {
                 handleChecked(inputs?.num

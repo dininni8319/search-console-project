@@ -57,7 +57,6 @@ const GoogleAuth = () => {
       .then(data => {
 
         if (data.success) {
-
           setAnalytic({
             ...analytics,
             data
