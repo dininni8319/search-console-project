@@ -120,7 +120,6 @@ class SearchConsoleAnalyticsAction
     $newSites = array_diff($sites, $newProjects);
 
     return $newSites;
-  }
-  
+  } 
 }
 
