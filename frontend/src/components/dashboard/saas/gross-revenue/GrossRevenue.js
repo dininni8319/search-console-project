@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Card, Col, Form, Row, Table, Button } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
 import GrossRevenueChart from './GrossRevenueChart';
 import FalconLink from 'components/common/FalconLink';
 

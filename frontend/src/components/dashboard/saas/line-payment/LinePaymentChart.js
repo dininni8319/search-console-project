@@ -57,7 +57,7 @@ const getOption = (data, isDark, lenArr) => ({
       fontWeight: 100,
       fontSize: 8,
       margin: 2,
-      interval: 5,
+      interval: lenArr.length > 120 ? 20 : 10 ,
       formatter: value => dayjs(value).format('MMM DD')
     }
   },
@@ -120,7 +120,7 @@ const getOption = (data, isDark, lenArr) => ({
     }
   ],
    grid: {
-    containLabel: lenArr.length > 120? false : true,
+    containLabel: true,
     right: '5px',
     left: 0,
     bottom: 0,
@@ -134,7 +134,7 @@ const LinePaymentChart = forwardRef(({ analytics,  style }, ref) => {
   } = useContext(AppContext);
 
   const lenArr = turnObjIntoArray(analytics?.data?.data, 'keys')
-  console.log(lenArr);
+  console.log(lenArr.length);
   return (
     <ReactEChartsCore
       echarts={echarts}

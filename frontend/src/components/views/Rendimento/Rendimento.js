@@ -1,5 +1,4 @@
 import { useState,useEffect, useContext, useReducer, useCallback } from 'react';
-// import Flex from 'components/common/Flex';
 import { ConfigContext } from "context/Config/index";
 import { AuthContext } from "context/Auth/index";
 import useApiRequest from '../../../store/useApiRequest';
@@ -8,7 +7,6 @@ import MainLayout from 'layouts/MainLayout';
 import { useNavigate } from "react-router";
 import { getUrl } from "../../../utils";
 import Modal from '../../UI/Modal/Modal';
-import ReactEChartsCore from 'echarts-for-react/lib/core';
 import * as echarts from 'echarts/core';
 import { LineChart } from 'echarts/charts';
 import {

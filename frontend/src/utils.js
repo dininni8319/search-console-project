@@ -1,4 +1,4 @@
-import { getColor, getPastDates, rgbaColor } from 'helpers/utils';
+import { getColor, rgbaColor } from 'helpers/utils';
 import dayjs from 'dayjs';
 import { tooltipFormatter } from 'helpers/echart-utils';
 
@@ -45,7 +45,7 @@ export function turnObjIntoArray(data, allowData) {
   return arr;
 }
 
-export const getOptions = data => ({
+export const getOptions = (data, lenArr) => ({
   color: [getColor('primary'), getColor('success'), getColor('info'), getColor('danger')],
   tooltip: {
     trigger: 'axis',
@@ -84,9 +84,9 @@ export const getOptions = data => ({
       color: getColor('white-600'),
       formatter: value => dayjs(value).format('MMM DD'),
       align: 'left',
-      fontSize: 16,
+      fontSize: 10,
       padding: [0, 0, 0, 5],
-      interval: 5
+      interval: lenArr.length > 120 ? 20 : 10,
     }
   },
   yAxis: {
@@ -168,12 +168,18 @@ export const getOptions = data => ({
       symbolSize: 2
     },
   ],
-  grid: { right: 15, left: 15, bottom: '15%', top: 0 }
+  grid: { 
+    containLabel: true,
+    right: 15, 
+    left: 15, 
+    bottom: '15%', 
+    top: 0 
+  }
   // grid: {
-  //   containLabel: true,
   //   right: '5px',
   //   left: 0,
   //   bottom: 0,
   //   top: 0
   // }
 });
+

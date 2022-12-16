@@ -38,12 +38,6 @@ export const pagesRoutes = {
       to: '/landing_page',
       active: true
     },
-    // {
-    //   name: 'Rendimento',
-    //   icon: 'flag',
-    //   to: '/rendimento',
-    //   active: true
-    // },
     {
       name: 'Landing',
       icon: 'globe',
@@ -76,99 +70,6 @@ export const pagesRoutes = {
             },
           ]
         },
-        // {
-        //   name: 'Card',
-        //   active: true,
-        //   children: [
-        //     {
-        //       name: 'Login',
-        //       to: '/authentication/card/login',
-        //       active: true
-        //     },
-        //     {
-        //       name: 'Logout',
-        //       to: '/authentication/card/logout',
-        //       active: true
-        //     },
-        //     {
-        //       name: 'Register',
-        //       to: '/authentication/card/register',
-        //       active: true
-        //     },
-        //     {
-        //       name: 'Forgot password',
-        //       to: '/authentication/card/forgot-password',
-        //       active: true
-        //     },
-        //     {
-        //       name: 'Confirm mail',
-        //       to: '/authentication/card/confirm-mail',
-        //       active: true
-        //     },
-        //     {
-        //       name: 'Reset password',
-        //       to: '/authentication/card/reset-password',
-        //       active: true
-        //     },
-        //     {
-        //       name: 'Lock screen',
-        //       to: '/authentication/card/lock-screen',
-        //       active: true
-        //     }
-        //   ]
-        // },
-        // {
-        //   name: 'Split',
-
-        //   active: true,
-        //   children: [
-        //     {
-        //       name: 'Login',
-        //       to: '/authentication/split/login',
-        //       active: true
-        //     },
-        //     {
-        //       name: 'Logout',
-        //       to: '/authentication/split/logout',
-        //       active: true
-        //     },
-        //     {
-        //       name: 'Register',
-        //       to: '/authentication/split/register',
-        //       active: true
-        //     },
-        //     {
-        //       name: 'Forgot password',
-        //       to: '/authentication/split/forgot-password',
-        //       active: true
-        //     },
-        //     {
-        //       name: 'Confirm mail',
-        //       to: '/authentication/split/confirm-mail',
-        //       active: true
-        //     },
-        //     {
-        //       name: 'Reset password',
-        //       to: '/authentication/split/reset-password',
-        //       active: true
-        //     },
-        //     {
-        //       name: 'Lock screen',
-        //       to: '/authentication/split/lock-screen',
-        //       active: true
-        //     }
-        //   ]
-        // },
-        // {
-        //   name: 'Wizard',
-        //   to: '/authentication/wizard',
-        //   active: true
-        // },
-        // {
-        //   name: 'Modal',
-        //   to: '/authentication-modal',
-        //   active: true
-        // }
       ]
     },
   

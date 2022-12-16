@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import is from 'is_js';
-import MainLayout from './MainLayout';
 import SettingsToggle from 'components/settings-panel/SettingsToggle';
 import SettingsPanel from 'components/settings-panel/SettingsPanel';
 import ErrorLayout from './ErrorLayout';

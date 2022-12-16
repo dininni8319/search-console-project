@@ -13,7 +13,7 @@ const NavbarTop = ({ data, handleChange }) => {
     config: { showBurgerMenu, navbarPosition, navbarCollapsed },
     setConfig
   } = useContext(AppContext);
-
+  let location = window.location.toString().includes("analytics_page");
   const { pathname } = useLocation();
   const isChat = pathname.includes('chat');
 
@@ -92,10 +92,10 @@ const NavbarTop = ({ data, handleChange }) => {
         </Nav>
       )}
       <div className='d-flex flex-sm-column flex-md-row alig-items-md-center justify-content-between w-100'>
-        <FormSelectComponent 
+        { location ? <FormSelectComponent 
           handleChange={handleChange}
           data={data}
-        />
+        />: <div></div>}
         <TopNavRightSideNavItem />
       </div>
     </Navbar>
