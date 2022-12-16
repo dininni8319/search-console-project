@@ -78,7 +78,7 @@ class SearchConsoleAnalyticsAction
       foreach ($rows as $key => $value) {
         $performance['clicks'] += $value['clicks'];
         $performance['impressions'] += $value['impressions'];
-        $performance['position'] += $value['position'];
+        $performance['position'] += $value['position']; 
         $performance['ctr'] += $value['ctr'];
       }
   
