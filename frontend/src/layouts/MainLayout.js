@@ -24,7 +24,6 @@ const MainLayout = ({ children, data, handleChange, isOpen/* handleSubmit */ }) 
     }, 0);
   }, []);
 
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -32,11 +31,14 @@ const MainLayout = ({ children, data, handleChange, isOpen/* handleSubmit */ }) 
   return (
     <div className='container-fluid'>
      {!isOpen && <NavbarVertical 
+          /* data={data} 
+          handleChange={handleChange} */
+        />}
+        <div className={classNames('content', { 'pb-0': isKanban })}>
+        {!isOpen &&  <NavbarTop 
           data={data} 
           handleChange={handleChange}
         />}
-        <div className={classNames('content', { 'pb-0': isKanban })}>
-        {!isOpen &&  <NavbarTop />}
           {/*------ Main Routes ------*/}
           
           {children}

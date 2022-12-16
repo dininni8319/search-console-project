@@ -10,10 +10,10 @@
 
 .modal {
   position: fixed;
-  top: 5vh;
-  left: 35%;
-  width: 80%;
-  min-height: 550px;
+  top: 5%;
+  left: 30%;
+  width: 40%;
+  height: 600px;
   z-index: 1000;
   overflow: hidden;
   border: 1px solid white;
@@ -22,9 +22,9 @@
   /* backdrop-filter: blur(5px); */
 }
 
-@media (min-width: 750px) {
+@media (max-width: 750px) {
   .modal {
-    left: calc(50% -20rem);
-    width: 40rem;
+    width: 100%;
+    left: 0;
   }
 }

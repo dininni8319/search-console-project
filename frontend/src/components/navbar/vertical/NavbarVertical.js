@@ -11,9 +11,9 @@ import ToggleButton from './ToggleButton';
 import routes from 'routes/routes';
 import { capitalize } from 'helpers/utils';
 import bgNavbar from 'assets/img/generic/bg-navbar.png';
-import { getUrl } from "../../../utils";
+import FormSelectComponent from '../../UI/FormSelectComponent';
 
-const NavbarVertical = ({ data, handleChange, /* handleSubmit */ }) => {
+const NavbarVertical = (/* { data, handleChange } */) => {
  
   const {
     config: {
@@ -87,28 +87,10 @@ const NavbarVertical = ({ data, handleChange, /* handleSubmit */ }) => {
               : 'none'
         }}
       >
-        <div className="mb-3">
-            <select 
-              className="form-select js-choice" 
-              id="organizerSingle2" size="1" 
-              required="required" 
-              name="project" 
-              data-options='{"removeItemButton":true,"placeholder":true}'
-              required
-              onChange={handleChange}
-            >
-              <option value="">Seleziona una proprietà.</option>
-              {data?.map((site, id) => {
-                return <option 
-                          key={id} 
-                          value={site}
-                        >{getUrl(site)}
-                        </option>
-              })}
-            </select>
-          </div>
-        
-
+        {/* <FormSelectComponent 
+          handleChange={handleChange}
+          data={data}
+        /> */}
         <div className="navbar-vertical-content scrollbar">
           <Nav className="flex-column" as="ul">
             {routes.map(route => (

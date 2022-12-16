@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CartNotification from 'components/navbar/top/CartNotification';
 import NotificationDropdown from 'components/navbar/top/NotificationDropdown';
 import ProfileDropdown from 'components/navbar/top/ProfileDropdown';
 import AppContext from 'context/Context';
@@ -15,7 +14,7 @@ const TopNavRightSideNavItem = () => {
   return (
     <Nav
       navbar
-      className="navbar-nav-icons ms-auto flex-row align-items-center"
+      className="navbar-nav-icons flex-row align-items-center"
       as="ul"
     >
       <Nav.Item as={'li'}>
@@ -41,8 +40,6 @@ const TopNavRightSideNavItem = () => {
           </OverlayTrigger>
         </Nav.Link>
       </Nav.Item>
-
-      <CartNotification />
       <NotificationDropdown />
       <NineDotMenu />
       <ProfileDropdown />

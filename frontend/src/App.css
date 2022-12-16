@@ -35,7 +35,8 @@ input, select, button {
 }
 
 .date-input {
-   padding: 10px 5px;
+   padding: 10px 20px;
+   margin-left: 5px;
    border: none;
    border-bottom: 1px solid gray;
 }
@@ -44,6 +45,16 @@ input, select, button {
     .img-landing-page {
         width: 90%;
         height: 90%;
+    }
+
+    .date-input { 
+        width: 100%;
+        margin-top: 5px;
+    }
+    
+    .modal-title {
+       font-size: large;
+       text-align: center;
     }
 }
 

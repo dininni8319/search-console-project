@@ -46,8 +46,8 @@ const Overlay = (props) => {
 
   return (
     <div className={classes.modal}>
-      <div className="text-center">
-        <h3 className="fx-bold"> {props.title}</h3>
+      <div className="text-md-center">
+        <h3 className="fx-md-bold modal-title"> {props.title}</h3>
       </div>
        <FormModal 
           handleSubmit={handleSubmit}

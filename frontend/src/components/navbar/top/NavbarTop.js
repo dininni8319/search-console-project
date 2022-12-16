@@ -3,13 +3,12 @@ import { Navbar, Nav } from 'react-bootstrap';
 import classNames from 'classnames';
 import AppContext from 'context/Context';
 import Logo from 'components/common/Logo';
-import SearchBox from './SearchBox';
 import { navbarBreakPoint, topNavbarBreakpoint } from 'config';
-import autoCompleteInitialItem from 'data/autocomplete/autocomplete';
 import TopNavRightSideNavItem from './TopNavRightSideNavItem';
 import { useLocation } from 'react-router';
+import FormSelectComponent from '../../UI/FormSelectComponent';
 
-const NavbarTop = () => {
+const NavbarTop = ({ data, handleChange }) => {
   const {
     config: { showBurgerMenu, navbarPosition, navbarCollapsed },
     setConfig
@@ -88,12 +87,17 @@ const NavbarTop = () => {
           as="ul"
         >
           <Nav.Item as="li">
-            <SearchBox autoCompleteItem={autoCompleteInitialItem} />
+            {/* <SearchBox autoCompleteItem={autoCompleteInitialItem} /> */}
           </Nav.Item>
         </Nav>
       )}
-
-      <TopNavRightSideNavItem />
+      <div className='d-flex flex-sm-column flex-md-row alig-items-md-center justify-content-between w-100'>
+        <FormSelectComponent 
+          handleChange={handleChange}
+          data={data}
+        />
+        <TopNavRightSideNavItem />
+      </div>
     </Navbar>
   );
 };

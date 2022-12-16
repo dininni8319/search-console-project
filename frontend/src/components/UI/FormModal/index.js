@@ -20,7 +20,7 @@ import { checkBoxInputs } from "../checkBoxInputs";
      
      {checkBoxInputs?.map((inputs) => {
        return (
-        <div className="col-md-5 mb-2" key={inputs.id}>
+        <div className="col-8 col-md-6 mb-1" key={inputs.id}>
           <input 
               type='checkbox'  
               className='mx-3 checkbox-round'
@@ -30,13 +30,13 @@ import { checkBoxInputs } from "../checkBoxInputs";
                 handleChecked(inputs?.num
               )
           }}/>
-        <label className="form-label fs-1 mt-3" htmlFor="userName">{inputs?.description}</label>
+          <label className="form-label fs-md-1 mt-1 mt-md-3 " htmlFor="userName">{inputs?.description}</label>
       </div>
        );
      })}
-    <div className='d-flex justify-content-around my-2'>
-      <div className="col-12 col-md-6">
-          <label className="form-label" htmlFor="userName">Data di inizio</label>
+    <div className='d-md-flex justify-content-around my-3 my-md-2'>
+      <div className="d-flex flex-column col-12 col-md-6">
+          <label className="form-label text-center mt-2" htmlFor="userName">Data di inizio</label>
           <input
             type='date'  
             className='date-input'
@@ -50,8 +50,8 @@ import { checkBoxInputs } from "../checkBoxInputs";
             }}
           />
       </div>
-      <div className="d-flex flex-column col-12 col-md-6">
-        <label className="form-label" htmlFor="userName">Data di fine</label>
+      <div className="col-12 col-md-6 d-flex flex-column">
+        <label className="form-label text-center mt-2" htmlFor="userName">Data di fine</label>
         <input
           type='date'
           className='date-input'
