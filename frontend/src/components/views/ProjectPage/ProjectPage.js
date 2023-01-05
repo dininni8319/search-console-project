@@ -43,7 +43,6 @@ const ProjectPage = () => {
     );
   }, [getAllProjects])
 
-
   return (
     <MainLayout>
       <div className='d-md-flex flex-column align-items-center'>
@@ -58,7 +57,6 @@ const ProjectPage = () => {
               </div>
             )
           })}
-
         </ul>
       </div>
     </MainLayout>
