@@ -77,6 +77,23 @@ class SearchConsoleController extends GoogleController
         }
     }
 
+    public function deleteProperty($id)
+    {
+        $project = Project::find($id);
+        if ($id && $project) {
+            $project->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Il progetto è stato eliminato'
+              ], 200);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Non ho trovato nessun progetto!'
+        ], 404);
+    }
+    
     //needs to be fixed, is not working jet
     public function addProperty(Request $request)
     {

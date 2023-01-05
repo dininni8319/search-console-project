@@ -50,6 +50,7 @@ input, select, button {
     justify-content: space-between;
     align-items: center;
 }
+
 .form-select-custom {
     /* width: 70%; */
     padding: 0.3125rem 3rem 0.3125rem 1rem;
@@ -68,6 +69,11 @@ input, select, button {
     box-shadow: var(--falcon-box-shadow-inset);
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
+.custom-class-icon {
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 765px) {
     .img-landing-page {
         width: 90%;
