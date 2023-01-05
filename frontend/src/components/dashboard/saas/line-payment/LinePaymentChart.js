@@ -57,7 +57,7 @@ const getOption = (data, isDark, lenArr) => ({
       fontWeight: 100,
       fontSize: 8,
       margin: 2,
-      interval: lenArr.length > 120 ? 20 : 10 ,
+      interval: lenArr.length > 180 ? 45  : 5,
       formatter: value => dayjs(value).format('MMM DD')
     }
   },

@@ -5,7 +5,7 @@ export const dashboardRoutes = {
     {
       name: 'Dashboard',
       active: true,
-      icon: 'chart-pie',
+      icon: '',
       children: [
         {
           name: 'Home',
@@ -28,8 +28,14 @@ export const pagesRoutes = {
   children: [
     {
       name: 'Analytics',
-      icon: 'flag',
+      icon: 'chart-pie',
       to: '/analytics_page',
+      active: true
+    },
+    {
+      name: 'Progetti',
+      icon: 'home',
+      to: '/progetti',
       active: true
     },
     {
@@ -72,30 +78,6 @@ export const pagesRoutes = {
         },
       ]
     },
-  
-    {
-      name: 'Faq',
-      icon: 'question-circle',
-      active: true,
-      children: [
-        {
-          name: 'Faq basic',
-          to: '/faq/faq-basic',
-          active: true
-        },
-        {
-          name: 'Faq alt',
-          to: '/faq/faq-alt',
-          active: true
-        },
-        {
-          name: 'Faq accordion',
-          to: '/faq/faq-accordion',
-          active: true
-        }
-      ]
-    },
-   
   ]
 };
 

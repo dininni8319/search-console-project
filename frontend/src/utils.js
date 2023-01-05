@@ -86,7 +86,7 @@ export const getOptions = (data, lenArr) => ({
       align: 'left',
       fontSize: 10,
       padding: [0, 0, 0, 5],
-      interval: lenArr.length > 120 ? 20 : 10,
+      interval: lenArr.length > 180 ? 40  : 5,
     }
   },
   yAxis: {
