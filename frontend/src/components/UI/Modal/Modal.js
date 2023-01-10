@@ -13,13 +13,13 @@ const Backdrop = (props) => {
 const Overlay = (props) => {
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     num:'',
     start: '',
     end:''
   });
-  
-  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     formData.site = props?.site;
@@ -50,6 +50,7 @@ const Overlay = (props) => {
         <h3 className="fx-md-bold modal-title"> {props.title}</h3>
       </div>
        <FormModal 
+          handleChange={props.handleChange}
           handleSubmit={handleSubmit}
           formData={formData}
           setFormData={setFormData}

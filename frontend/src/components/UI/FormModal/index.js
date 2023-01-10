@@ -1,9 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect, useContext, useCallback, useReducer } from "react";
 import { checkBoxInputs } from "../checkBoxInputs";
+import { ConfigContext } from "context/Config/index";
+import { AuthContext } from "context/Auth/index";
+import useApiRequest from '../../../store/useApiRequest';
+import authReducer, { initialState } from '../../../store/apiReducer';
+import FormSelectComponent from '../FormSelectComponent';
 
-  const FormModal = ({ handleSubmit, formData, setFormData , closeModal}) => {
+const FormModal = ({ handleChange, handleSubmit, formData, setFormData , closeModal}) => {
   const [ checked, setChecked ] = useState([]);
-  
+  const [state, dispatch] = useReducer(authReducer, initialState);
+  const { api_urls } = useContext(ConfigContext);
+  const { user } = useContext(AuthContext);
+
+  console.log(state, 'authreducer');
   const handleChecked = (value) => {
      if (checked?.length > 0) {
       setChecked([]);
@@ -15,9 +24,30 @@ import { checkBoxInputs } from "../checkBoxInputs";
        });
     }
   
+  const params = {
+    method: "GET",
+    headers: { Authorization: `Bearer ${user?.token}`},
+  }
+  
+  const handleDispatch = useCallback((action) => {
+    dispatch(action);
+  },[])
+
+  const { makeRequest: getAllProjects } = useApiRequest(handleDispatch);
+  
+  useEffect(() => {
+    getAllProjects(
+      `${api_urls.backend}/search/console/all_projects`, 
+      params
+    );
+  }, [getAllProjects]);
+
   return ( 
     <form className="d-flex flex-column mt-2 align-items-center" onSubmit={handleSubmit}>
-     
+     <FormSelectComponent 
+          handleChange={handleChange}
+          data={state?.data}
+      />
      {checkBoxInputs?.map((inputs) => {
        return (
         <div className="col-8 col-md-6 mb-1" key={inputs.id}>

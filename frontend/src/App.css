@@ -74,6 +74,7 @@ input, select, button {
     cursor: pointer;
 }
 
+
 @media only screen and (max-width: 765px) {
     .img-landing-page {
         width: 90%;

@@ -19,7 +19,7 @@
   border: 1px solid white;
   padding: 40px;
   background-color: white;
-  /* backdrop-filter: blur(5px); */
+  overflow-y: scroll;
 }
 
 @media (max-width: 750px) {

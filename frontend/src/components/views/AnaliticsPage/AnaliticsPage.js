@@ -25,6 +25,9 @@ const GoogleAuth = () => {
   const { user } = useContext(AuthContext);
   const [state, dispatch] = useReducer(authReducer, initialState);
   const [isOpen, setIsOpen] = useState(false);
+  const [ analytics, setAnalytic ] = useState({});
+  const [ formData, setFormData ] = useState('');
+
   const params = {
     method: "GET",
     headers: { Authorization: `Bearer ${user?.token}`},
@@ -34,8 +37,6 @@ const GoogleAuth = () => {
     setIsOpen(false)
   }
 
-  const [ analytics, setAnalytic ] = useState({});
-  const [ formData, setFormData ] = useState('');
   const site = getUrl(formData);
   
   const handleChange = (e) => {
@@ -104,6 +105,7 @@ const GoogleAuth = () => {
         />
      </MainLayout>
      {isOpen && <Modal 
+        handleChange={handleChange}
         closeModal={closeModal}
         title="Customizza la tua Ricerca"
         message="sel"

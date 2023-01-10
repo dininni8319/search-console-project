@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext,useReducer, useCallback } from "react";
+import { Link } from 'react-router-dom';
 import MainLayout from 'layouts/MainLayout';
 import { ConfigContext } from "context/Config/index";
 import { AuthContext } from "context/Auth/index";
@@ -7,6 +8,7 @@ import authReducer, { initialState } from '../../../store/apiReducer';
 import { getUrl } from "../../../utils";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { statsData } from "data/dashboard/saas";
 
 const ProjectPage = () => {
   const { api_urls } = useContext(ConfigContext);
@@ -25,35 +27,34 @@ const ProjectPage = () => {
 
   const { makeRequest: getAllProjects } = useApiRequest(handleDispatch);
   
+  useEffect(() => {
+    getAllProjects(
+      `${api_urls.backend}/search/console/all_projects`, 
+      params
+    );
+  }, [getAllProjects]);
+
   const handleDelete = async (site) => {
     try {
-      const response = fetch(
+      const response = await fetch(
         `${api_urls.backend}/search/console/delete/${site.id}`,{
           method:'DELETE',
           headers: { Authorization: `Bearer ${user?.token}`},
-      })
-
-      const data = await(await response.json());
-  
-      console.log(data, 'testing the delete');
+        })
+        
+      const data = await response.json();
       if (data.success) {
-        getAllProjects(
-          `${api_urls.backend}/search/console/all_projects`, 
-          params
-        );
+        let newSites = state.data.filter(project => project.id !== site.id)
+    
+        dispatch({type: 'SUCCESS', data: newSites})
+      } else {
+        alert('error while fetching!');
       }
     } catch (error) {
       console.log(error);
     }
   }
 
-  const { makeRequest: deleteProperty } = useApiRequest(handleDelete);
-  useEffect(() => {
-    getAllProjects(
-      `${api_urls.backend}/search/console/all_projects`, 
-      params
-    );
-  }, [getAllProjects])
 
   return (
     <MainLayout>
@@ -69,6 +70,9 @@ const ProjectPage = () => {
               </div>
             )
           })}
+          <div className='text-center mt-3'>
+           {state.data.length === 0 && <Link to='/landing_page'>Crea un nuovo progetto!</Link>}
+          </div>
         </ul>
       </div>
     </MainLayout>

@@ -11,7 +11,6 @@ const useApiRequest = (handleDispatch) => {
     
       const { data } = await response.json()
   
-      
       let sitesToArray = Object.values(data)
         
       handleDispatch({ type: SUCCESS, data: sitesToArray })
