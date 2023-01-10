@@ -19,23 +19,35 @@ const ProjectPage = () => {
     headers: { Authorization: `Bearer ${user?.token}`},
   }
   
-  const handleSite = (site) => {
-    setSite(site);
-  }
   const handleDispatch = useCallback((action) => {
     dispatch(action);
   },[])
 
   const { makeRequest: getAllProjects } = useApiRequest(handleDispatch);
-  const { makeRequest: deleteProperty } = useApiRequest(handleDelete);
   
-  const handleDelete = ( ) => {
-    deleteProperty(
-      `${api_urls.backend}/search/console/delete/${site}`, 
-      params
-    );
+  const handleDelete = async (site) => {
+    try {
+      const response = fetch(
+        `${api_urls.backend}/search/console/delete/${site.id}`,{
+          method:'DELETE',
+          headers: { Authorization: `Bearer ${user?.token}`},
+      })
+
+      const data = await(await response.json());
+  
+      console.log(data, 'testing the delete');
+      if (data.success) {
+        getAllProjects(
+          `${api_urls.backend}/search/console/all_projects`, 
+          params
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
+  const { makeRequest: deleteProperty } = useApiRequest(handleDelete);
   useEffect(() => {
     getAllProjects(
       `${api_urls.backend}/search/console/all_projects`, 
@@ -51,7 +63,7 @@ const ProjectPage = () => {
           {state?.data?.map(site => {
             return (
               <div className='bg-white'>
-                <li className='p-2 px-3 mt-2 shadow'>{getUrl(site)}
+                <li className='p-2 px-3 mt-2 shadow'>{getUrl(site.project)}
                   <FontAwesomeIcon icon={faTrashAlt} className={`fa-1x float-end text-danger custom-class-icon`} onClick={() => handleDelete(site)} />
                 </li>
               </div>

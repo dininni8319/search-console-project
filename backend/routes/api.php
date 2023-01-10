@@ -49,6 +49,7 @@ Route::group(['middleware' => 'CORS'],function ($router){
     Route::post('/google/search/console/analytics', [SearchConsoleController::class, 'getSearchConsoleData']);
     //not working jet
     Route::post('/search/console/addProperty', [SearchConsoleController::class, 'addProperty']);
+    Route::delete('/search/console/delete/{id}', [ProjectController::class, 'deleteProperty']);
     
     //project
     Route::post('/search/console/new_project', [ProjectController::class, 'storeProject']);

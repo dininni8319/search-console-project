@@ -91,9 +91,7 @@ class SearchConsoleAnalyticsAction
         'count' => $count,
       ]);
       return $data;
-
     }
-
   }
 
   public function handleSites($client){
@@ -114,7 +112,7 @@ class SearchConsoleAnalyticsAction
     $newProjects = [];
 
     foreach ($projects as $key => $value) {
-      array_push( $newProjects, $value['project']);
+      array_push($newProjects, $value['project']);
     }
 
     $newSites = array_diff($sites, $newProjects);

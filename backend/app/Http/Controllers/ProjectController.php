@@ -56,7 +56,8 @@ class ProjectController extends Controller
             $newProjects = [];
 
             foreach ($projects as $key => $value) {
-                array_push($newProjects, $value['project']);
+                // array_push($newProjects, $value['project']);
+                array_push($newProjects, $value);
             }
 
             if ($projects) {
@@ -71,5 +72,24 @@ class ProjectController extends Controller
                 'message' => 'Non ho trovato nessun progetto!'
           ],404);
         } 
+    }
+
+    public function deleteProperty($id)
+    {
+        $userId = auth()->guard('api')->user()->id;
+        $project = Project::where('user_id', $userId)->find($id);
+
+        if ($id && $project) {
+            $project->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Il progetto è stato eliminato'
+              ], 200);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Non ho trovato nessun progetto!'
+        ], 404);
     }
 }
