@@ -14,7 +14,7 @@ const TopNavRightSideNavItem = () => {
   return (
     <Nav
       navbar
-      className="navbar-nav-icons flex-row align-items-center"
+      className="navbar-nav-icons flex-row align-items-center pe-2"
       as="ul"
     >
       <Nav.Item as={'li'}>

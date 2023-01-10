@@ -118,6 +118,7 @@ const NavbarVertical = (/* { data, handleChange } */) => {
           </>
         </div>
       </Navbar.Collapse>
+
     </Navbar>
   );
 };

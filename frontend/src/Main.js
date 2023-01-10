@@ -8,6 +8,7 @@ import useToggleStyle from './hooks/useToggleStyle';
 import { AuthProvider } from "context/Auth/index";
 import { ConfigProvider } from "context/Config/index";
 import { GoogleProvider } from "context/Google/index";
+// import { LanguageProvider } from 'context/Language/index';
 
 const Main = props => {
   const configState = {
@@ -69,13 +70,15 @@ const Main = props => {
 
   return (
     <AppContext.Provider value={{ config, setConfig, configDispatch }}>
-      <ConfigProvider> 
-        <AuthProvider>
-          <GoogleProvider>
-            {props.children}
-          </GoogleProvider>
-        </AuthProvider>
-      </ConfigProvider>
+        <ConfigProvider> 
+          <AuthProvider>
+            <GoogleProvider>
+             {/* <LanguageProvider> */}
+              {props.children}
+             {/* </LanguageProvider> */}
+            </GoogleProvider>
+          </AuthProvider>
+        </ConfigProvider>
     </AppContext.Provider>
   );
 };

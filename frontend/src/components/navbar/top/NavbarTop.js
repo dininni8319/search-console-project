@@ -7,7 +7,11 @@ import { navbarBreakPoint, topNavbarBreakpoint } from 'config';
 import TopNavRightSideNavItem from './TopNavRightSideNavItem';
 import { useLocation } from 'react-router';
 import FormSelectComponent from '../../UI/FormSelectComponent';
+import {Dropdown} from 'react-bootstrap';
+import { loadLanguages } from 'i18next';
+import i18next from 'i18next';
 
+import GlobeIcon from '../Globe'
 const NavbarTop = ({ data, handleChange }) => {
   const {
     config: { showBurgerMenu, navbarPosition, navbarCollapsed },
@@ -17,6 +21,16 @@ const NavbarTop = ({ data, handleChange }) => {
   const { pathname } = useLocation();
   const isChat = pathname.includes('chat');
 
+  const languages = [
+    { code: 'it',
+      name: 'italian',
+      country_code: 'it'
+    },
+    { code: 'en',
+      name: 'english',
+      country_code: 'gb'
+    },
+  ]
   const [showDropShadow, setShowDropShadow] = useState(false);
 
   const handleBurgerMenu = () => {
@@ -91,12 +105,38 @@ const NavbarTop = ({ data, handleChange }) => {
           </Nav.Item>
         </Nav>
       )}
+    
       <div className='d-flex flex-sm-column flex-md-row alig-items-md-center justify-content-between w-100'>
         { location ? <FormSelectComponent 
           handleChange={handleChange}
           data={data}
         />: <div></div>}
-        <TopNavRightSideNavItem />
+        <div className='d-flex align-items-center'>
+
+          <TopNavRightSideNavItem />
+          <Dropdown>
+            <Dropdown.Toggle variant="transparent" id="dropdown-basic" /* className='btn-none-custom' */>
+            <GlobeIcon />
+
+            </Dropdown.Toggle>
+            <Dropdown.Menu className='btn-link'>
+              { languages?.map(({code, name, country_code}) => {
+                return (
+                  <Dropdown.Item key={country_code}>
+                    <button 
+                      className='btn btn-link'
+                      onClick={() => i18next.changeLanguage(code)}
+                    >
+                      <span className='text-capitalize'>
+                        {name}
+                      </span>
+                    </button>
+                  </Dropdown.Item>
+                )
+              })}
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
       </div>
     </Navbar>
   );

@@ -3,6 +3,7 @@ import { useSearchParams  } from 'react-router-dom';
 import Flex from 'components/common/Flex';
 import { ConfigContext } from "context/Config/index";
 import { AuthContext } from "context/Auth/index";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 const LandingPage = () => {
@@ -10,7 +11,6 @@ const LandingPage = () => {
   const { login } = useContext(AuthContext);
   const { api_urls } = useContext(ConfigContext);
   const [searchParams, setSearchParams ] = useSearchParams();
-
   let code = searchParams.get("code");
   
   useEffect(() => {
