@@ -8,9 +8,10 @@ import authReducer, { initialState } from '../../../store/apiReducer';
 import { getUrl } from "../../../utils";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { statsData } from "data/dashboard/saas";
+import { useTranslation } from "react-i18next";
 
 const ProjectPage = () => {
+  const { t } = useTranslation();
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
   const [state, dispatch] = useReducer(authReducer, initialState);
@@ -59,7 +60,7 @@ const ProjectPage = () => {
   return (
     <MainLayout>
       <div className='d-md-flex flex-column align-items-center'>
-        <h3>Progetti inseriti</h3>
+        <h3>{t('entered_projects')}</h3>
         <ul className='col-12 col-md-6 col-lg-8 mt-3'>
           {state?.data?.map(site => {
             return (

@@ -1,6 +1,9 @@
 import { getUrl } from "../../../utils";
+import { useTranslation } from "react-i18next";
 
-const FormSelectComponent = ({ handleChange, data}) => {
+const FormSelectComponent = ({ handleChange, data }) => {
+  const { t } = useTranslation();
+
   return ( 
     <div className="my-3">
     <select 
@@ -12,7 +15,7 @@ const FormSelectComponent = ({ handleChange, data}) => {
       required
       onChange={handleChange}
     >
-      <option value="">Seleziona una proprietà.</option>
+      <option value="">{t('select')}</option>
       {data?.map((site, id) => {
         return <option 
                   key={id} 

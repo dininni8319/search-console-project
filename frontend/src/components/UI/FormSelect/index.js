@@ -6,9 +6,10 @@ import useApiRequest from '../../../store/useApiRequest';
 import authReducer, { initialState } from '../../../store/apiReducer';
 import FormHeader from 'components/UI/FormSelect/FormHeader';
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 const FormSelect = () => {
-
+  const { t } = useTranslation();
   const [formData, setFormData ] = useState({project: ''});
   const [state, dispatch] = useReducer(authReducer, initialState);
   const { api_urls } = useContext(ConfigContext);
@@ -67,9 +68,9 @@ const FormSelect = () => {
 
   return (
     <div className='d-flex flex-column align-items-center justify-content-center'> 
-      <FormHeader  title='Select'/>
+      <FormHeader  title={t('Select')}/>
       <form className="needs-validation col-11 col-md-8 mt-3 pt-5 d-flex flex-column bg-white px-3 shadow rounded" onSubmit={handleSubmit}>
-          <label htmlFor="organizerSingle" className='h4 mb-3'>{state.data.length > 0 ?"Seleziona il sito che desideri collegare" : 'Al momento non ci sono progetti!'}</label>
+          <label htmlFor="organizerSingle" className='h4 mb-3'>{state.data.length > 0 ? t('select_property') : t('no_property')}</label>
         <div className="row">
 
           <div className="mb-3 col-12 col-md-9">
@@ -82,14 +83,14 @@ const FormSelect = () => {
               onChange={handleChange}
               required
             >
-              <option value="">Seleziona una proprietà.</option>
+              <option value="">{t('select')}</option>
               {state?.data?.map((site, id) => {
                 return <option key={id} value={site}>{getUrl(site)}</option>
               })}
             </select>
           </div>
           <div className='col-12 col-md-3 py-2 py-md-0'>
-            <button className="btn btn-primary text-small mx-md-2 col-12" type="submit">Collega</button>
+            <button className="btn btn-primary text-small mx-md-2 col-12" type="submit">{t('connect')}</button>
           </div>
         </div>
         {/* {state.data && <span className='text-danger'>{state.data.message}</span>} */}

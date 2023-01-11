@@ -8,29 +8,20 @@ import TopNavRightSideNavItem from './TopNavRightSideNavItem';
 import { useLocation } from 'react-router';
 import FormSelectComponent from '../../UI/FormSelectComponent';
 import {Dropdown} from 'react-bootstrap';
+import { languages } from '../../../data/language';
 import { loadLanguages } from 'i18next';
 import i18next from 'i18next';
 
 import GlobeIcon from '../Globe'
 const NavbarTop = ({ data, handleChange }) => {
   const {
-    config: { showBurgerMenu, navbarPosition, navbarCollapsed },
+    config: { navbarPosition, navbarCollapsed },
     setConfig
   } = useContext(AppContext);
   let location = window.location.toString().includes("analytics_page");
   const { pathname } = useLocation();
   const isChat = pathname.includes('chat');
 
-  const languages = [
-    { code: 'it',
-      name: 'italian',
-      country_code: 'it'
-    },
-    { code: 'en',
-      name: 'english',
-      country_code: 'gb'
-    },
-  ]
   const [showDropShadow, setShowDropShadow] = useState(false);
 
   const handleBurgerMenu = () => {

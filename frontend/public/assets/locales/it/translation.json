@@ -2,5 +2,13 @@
   "welcome_to_react": "Benvenuti a React e react-i18next",
   "welcome_message": "Benvenuti",
   "enter": "Entra",
-  "register": "Registrati"
+  "register": "Registrati",
+  "entered_projects": "Progetti inseriti",
+  "select_property": "Seleziona il sito che desideri collegare",
+  "no_property": "Al momento non ci sono progetti!",
+  "select":"Seleziona una proprietà.",
+  "connect": "collega",
+  "Select": "Seleziona",
+  "search_property": "Ricerca le tue proprietà",
+  "select_date": "Seleziona una data"
 }

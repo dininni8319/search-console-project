@@ -14,7 +14,6 @@ const Welcome = () => {
       </Flex>
       <Flex alignItems="center" justifyContent="center" className='mt-5 pt-5'>
         <img src={welcomeImg} className='img-landing-page' width='40%' height='40%'/>
-      
       </Flex>
     </>
   );
