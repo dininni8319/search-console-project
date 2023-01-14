@@ -4,7 +4,7 @@ export const ConfigContext = createContext();
 
 export function ConfigProvider(props) {
   const api_urls = {
-    backend: process.env.REACT_APP_API_URL,
+    backend:  process.env.REACT_APP_API_URL,
   };
 
   return (
