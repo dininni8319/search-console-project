@@ -33,8 +33,13 @@ prettier: ##prettier
 	@cd frontend && npx prettier --write . &
 	@cd backend && npx prettier --write . 
 
+runProd: ## to clear the cache
+	@echo "run prod"
+	@cd backend && php artisan optimize
+	@cd frontend && npm run build
+
 clearCache: ## to clear the cache
-	@echo "clear cache"
+	@echo "cache clear"
 	@cd backend && php artisan cache:clear && php artisan config:cache && php artisan route:clear
 
 queueWork: #start queues command
