@@ -9,5 +9,6 @@
   "select":"Select a property",
   "connect": "connect",
   "Select": "Select",
-  "search_property": "Research your properties"
+  "search_property": "Research your properties",
+  "projects": "Projects"
 }

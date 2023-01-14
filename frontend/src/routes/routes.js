@@ -1,3 +1,4 @@
+
 export const dashboardRoutes = {
   label: 'Dashboard',
   labelDisable: true,
@@ -33,13 +34,13 @@ export const pagesRoutes = {
       active: true
     },
     {
-      name: 'Progetti',
+      name: 'Projects',
       icon: 'home',
       to: '/progetti',
       active: true
     },
     {
-      name: 'Crea un progetto',
+      name: 'Create a new project',
       icon: 'flag',
       to: '/landing_page',
       active: true
@@ -51,7 +52,7 @@ export const pagesRoutes = {
       active: true
     },
     {
-      name: 'Autenticazione',
+      name: 'Authentication',
       icon: 'lock',
       active: true,
       children: [
