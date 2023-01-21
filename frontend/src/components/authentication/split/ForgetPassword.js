@@ -9,6 +9,7 @@ const ForgetPassword = () => {
       bgProps={{ image: bgImg, position: '50% 76%', overlay: true }}
     >
       <div className="text-center">
+        
         <h4 className="mb-0"> Forgot your password?</h4>
         <small>Enter your email and we'll send you a reset link.</small>
         <ForgetPasswordForm layout="split" />
