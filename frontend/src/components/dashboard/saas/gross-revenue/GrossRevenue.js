@@ -142,7 +142,7 @@ const GrossRevenue = ({ analytics }) => {
             variant="text"
             size="sm"
             className="d-flex align-items-center p-0 shadow-none"
-            onClick={() => handleLegend(event, 'currentMonth')}
+            onClick={(event) => handleLegend(event, 'currentMonth')}
           >
             <FontAwesomeIcon
               icon="circle"
@@ -154,7 +154,7 @@ const GrossRevenue = ({ analytics }) => {
             variant="text"
             size="sm"
             className="d-flex align-items-center p-0 shadow-none ms-2"
-            onClick={() => handleLegend(event, 'prevMonth')}
+            onClick={(event) => handleLegend(event, 'prevMonth')}
           >
             <FontAwesomeIcon icon="circle" className="text-300 fs--2 me-1" />
             <span className="text">{previousMonth}</span>

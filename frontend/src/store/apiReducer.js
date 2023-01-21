@@ -1,3 +1,4 @@
+import React from "react";
 import { LOADING, ERROR, SUCCESS } from './actionTypes';
 
 export const initialState = {

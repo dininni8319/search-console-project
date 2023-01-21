@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import NavbarTop from 'components/navbar/top/NavbarTop';
 import NavbarVertical from 'components/navbar/vertical/NavbarVertical';
 import AppContext from 'context/Context';
@@ -9,13 +9,10 @@ const MainLayout = ({
   children,
   data,
   handleChange,
-  isOpen /* handleSubmit */
+  isOpen
 }) => {
   const { hash, pathname } = useLocation();
   const isKanban = pathname.includes('kanban');
-  const {
-    config: { isFluid, navbarPosition }
-  } = useContext(AppContext);
 
   useEffect(() => {
     setTimeout(() => {
@@ -34,7 +31,7 @@ const MainLayout = ({
   }, [pathname]);
 
   return (
-    <div className="container-fluid">
+    <div className='container-fluid'>
       {!isOpen && (
         <NavbarVertical
         /* data={data} 
