@@ -51,7 +51,6 @@ const getOptions = data => ({
 });
 
 const SaasActiveUser = ({ data, title }) => {
-
   return (
     <Card className="h-100">
       <Background image={bg1} className="bg-card" />
@@ -59,7 +58,9 @@ const SaasActiveUser = ({ data, title }) => {
         <Row className="flex-between-center g-0">
           <Col xs={6} className="d-lg-block flex-between-center">
             <h6 className="mb-2 text-900">{title}</h6>
-            <h4 className="fs-3 fw-normal text-700 mb-0">{data?.clicks ? data?.clicks : '0'}</h4>
+            <h4 className="fs-3 fw-normal text-700 mb-0">
+              {data?.clicks ? data?.clicks : '0'}
+            </h4>
           </Col>
           <Col xs="auto" className="h-100">
             {/* <BasicECharts

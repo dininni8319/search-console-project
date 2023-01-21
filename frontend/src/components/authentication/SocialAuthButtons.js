@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Form, Button, Col, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { GoogleContext } from "context/Google/index";
+import { GoogleContext } from 'context/Google/index';
 
 const SocialAuthButtons = () => {
   const { handleGoogleLogin } = useContext(GoogleContext);
@@ -40,8 +40,7 @@ const SocialAuthButtons = () => {
         </Col>
       </Row>
     </Form.Group>
-  )
-}
-
+  );
+};
 
 export default SocialAuthButtons;

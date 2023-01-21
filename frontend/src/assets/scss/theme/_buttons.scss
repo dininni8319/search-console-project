@@ -73,7 +73,7 @@ $theme-falcon-btn-colors: (
 /*-----------------------------------------------
 |   Outline Buttons
 -----------------------------------------------*/
-[class*='btn-outline-']{
+[class*='btn-outline-'] {
   --#{$prefix}btn-box-shadow: none;
 }
 
@@ -140,10 +140,9 @@ $theme-falcon-btn-colors: (
   }
 }
 
-.btn{
+.btn {
   --#{$prefix}btn-border-width: var(--#{$prefix}border-width);
 }
-.btn-link{
+.btn-link {
   --#{$prefix}btn-active-color: var(--#{$prefix}link-hover-color);
-
 }

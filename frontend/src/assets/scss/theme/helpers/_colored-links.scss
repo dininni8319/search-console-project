@@ -1,9 +1,9 @@
 @each $color, $value in $theme-colors {
-  .link-#{$color}{
+  .link-#{$color} {
     color: var(--#{$prefix}#{$color});
     &:hover,
-    &:focus{
-      color: var(--#{$prefix}colored-link-hover-color-#{$color})
+    &:focus {
+      color: var(--#{$prefix}colored-link-hover-color-#{$color});
     }
   }
 }

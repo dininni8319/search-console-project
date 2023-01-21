@@ -93,7 +93,10 @@
       }
       &--in-range,
       &--in-selecting-range {
-        &:not(.react-datepicker__day--range-start, .react-datepicker__day--range-end) {
+        &:not(
+            .react-datepicker__day--range-start,
+            .react-datepicker__day--range-end
+          ) {
           color: var(--#{$prefix}gray-500);
           background-color: var(--#{$prefix}gray-200);
         }
@@ -133,7 +136,11 @@
         color: #fff !important;
       }
       &:hover {
-        &:not(.react-datepicker__day--selected, .react-datepicker__day--range-start, .react-datepicker__day--range-end) {
+        &:not(
+            .react-datepicker__day--selected,
+            .react-datepicker__day--range-start,
+            .react-datepicker__day--range-end
+          ) {
           background-color: var(--#{$prefix}gray-200) !important;
         }
       }
@@ -146,8 +153,7 @@
     cursor: not-allowed !important;
     opacity: 0.4 !important;
   }
-  li.react-datepicker__time-list-item:hover{
+  li.react-datepicker__time-list-item:hover {
     background-color: var(--#{$prefix}gray-200) !important;
   }
 }
-

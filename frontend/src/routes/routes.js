@@ -1,4 +1,3 @@
-
 export const dashboardRoutes = {
   label: 'Dashboard',
   labelDisable: true,
@@ -18,7 +17,7 @@ export const dashboardRoutes = {
           name: 'Analytics',
           to: '/analytics_page',
           active: true
-        },
+        }
       ]
     }
   ]
@@ -74,15 +73,12 @@ export const pagesRoutes = {
               name: 'Logout',
               to: '/authentication/simple/logout',
               active: true
-            },
+            }
           ]
-        },
+        }
       ]
-    },
+    }
   ]
 };
 
-export default [
-  dashboardRoutes,
-  pagesRoutes,
-];
+export default [dashboardRoutes, pagesRoutes];

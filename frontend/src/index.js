@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import Main from './Main';
 import 'helpers/initFA';
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import HttpApi from 'i18next-http-backend';
 // import 'flag-icon-css/css/flag-icon.min.css'
@@ -19,13 +19,13 @@ i18n
     // or even better, manage them via a UI: https://react.i18next.com/guides/multiple-translation-files#manage-your-translations-with-a-management-gui)
     supportedLngs: ['en', 'fr', 'it'],
     lng: document.querySelector('html').lang, // if you're using a language detector, do not define the lng option
-    fallbackLng: "en",
+    fallbackLng: 'en',
     detection: {
-      order: [ 'cookie', 'htmlTag','localStorage', 'path', 'subdomain'],
-      cache: ['cookie'],
+      order: ['cookie', 'htmlTag', 'localStorage', 'path', 'subdomain'],
+      cache: ['cookie']
     },
     backend: {
-      loadPath: '/assets/locales/{{lng}}/translation.json',
+      loadPath: '/assets/locales/{{lng}}/translation.json'
     },
     react: { useSuspense: false }
   });

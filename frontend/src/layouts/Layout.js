@@ -8,7 +8,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { CloseButton } from 'components/common/Toast';
 import Error404 from 'components/errors/Error404';
 import Error500 from 'components/errors/Error500';
-import LandingPage from "components/views/LandingPage/LandingPage";
+import LandingPage from 'components/views/LandingPage/LandingPage';
 import SplitLogin from 'components/authentication/split/Login';
 import SplitLogout from 'components/authentication/split/Logout';
 import SplitRegistration from 'components/authentication/split/Registration';
@@ -23,28 +23,27 @@ import GoogleAuth from 'components/views/AnaliticsPage/AnaliticsPage';
 import ProjectPage from 'components/views/ProjectPage/ProjectPage';
 // import Rendimento from 'components/views/Rendimento/Rendimento';
 import AuthWithGoogle from 'components/views/AuthWithGoogle/index';
-import { ConfigContext } from "context/Config/index";
+import { ConfigContext } from 'context/Config/index';
 import ProtectedRoute from 'Utilities/ProtectedRoute';
 
 const Layout = () => {
+  const { api_urls } = useContext(ConfigContext);
+  const [url, setUrl] = useState('');
+  const handleGoogleLogin = async () => {
+    try {
+      const response = await await fetch(
+        `${api_urls.backend}/google/login/url`
+      );
 
-    const { api_urls } = useContext(ConfigContext);
-    const [ url , setUrl] = useState('')
-    const handleGoogleLogin = async() => {
-      try {
-        const response = await(await fetch(`${api_urls.backend}/google/login/url`))  
-        
-        if(response) {
-          const url = await response.json();
-          setUrl(url);
-          window.location.replace(url);
-    
-        }
-
-      } catch (error) {
-          console.log(error.message);
+      if (response) {
+        const url = await response.json();
+        setUrl(url);
+        window.location.replace(url);
       }
-    };
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const HTMLClassList = document.getElementsByTagName('html')[0].classList;
   useContext(AppContext);
@@ -63,76 +62,91 @@ const Layout = () => {
 
   return (
     <>
-        <Routes>
-          {/* <Route path="landing" element={<Landing />} /> */}
-          <Route path="/" element={<Welcome />} />
+      <Routes>
+        {/* <Route path="landing" element={<Landing />} /> */}
+        <Route path="/" element={<Welcome />} />
 
-          <Route path="/analytics_page" element={
+        <Route
+          path="/analytics_page"
+          element={
             <ProtectedRoute>
               <GoogleAuth />
             </ProtectedRoute>
-          } />
-          
-        <Route path="/progetti" element={
+          }
+        />
+
+        <Route
+          path="/progetti"
+          element={
             <ProtectedRoute>
               <ProjectPage />
             </ProtectedRoute>
-          } />
-          <Route path="/home" element={
+          }
+        />
+        <Route
+          path="/home"
+          element={
             // <ProtectedRoute>
-              <Home />
+            <Home />
             // </ProtectedRoute>
-          } />
+          }
+        />
 
-          <Route path="/landing_page" element={
+        <Route
+          path="/landing_page"
+          element={
             <ProtectedRoute>
               <LandingPage />
             </ProtectedRoute>
-          } />
-  
-          <Route path="/auth_google" element={
+          }
+        />
+
+        <Route
+          path="/auth_google"
+          element={
             <ProtectedRoute>
               <AuthWithGoogle />
             </ProtectedRoute>
-          } />
-          <Route element={<ErrorLayout />}>
-            <Route path="errors/404" element={<Error404 />} />
-            <Route path="errors/500" element={<Error500 />} />
-          </Route>
-        
-          <Route path="login" element={<SplitLogin />} />
-    
-          <Route path="logout" element={<SplitLogout handleGoogleLogin={handleGoogleLogin} />} />
-          <Route
-            path="register"
-            element={<SplitRegistration />}
-          />
-          <Route
-            path="authentication/split/forgot-password"
-            element={<SplitForgetPassword />}
-          />
-          <Route
-            path="authentication/split/reset-password"
-            element={<SplitPasswordReset />}
-          />
-          <Route
-            path="authentication/split/confirm-mail"
-            element={<SplitConfirmMail />}
-          />
-          <Route
-            path="authentication/split/lock-screen"
-            element={<SplitLockScreen />}
-          /> 
+          }
+        />
+        <Route element={<ErrorLayout />}>
+          <Route path="errors/404" element={<Error404 />} />
+          <Route path="errors/500" element={<Error500 />} />
+        </Route>
 
-          {/* <Navigate to="/errors/404" /> */}
-          <Route path="*" element={<Navigate to="/errors/404" replace />} />
-        </Routes>
-    <SettingsToggle />
-    <SettingsPanel />
-    <ToastContainer
-      closeButton={CloseButton}
-      icon={false}
-      position={toast.POSITION.BOTTOM_LEFT}
+        <Route path="login" element={<SplitLogin />} />
+
+        <Route
+          path="logout"
+          element={<SplitLogout handleGoogleLogin={handleGoogleLogin} />}
+        />
+        <Route path="register" element={<SplitRegistration />} />
+        <Route
+          path="authentication/split/forgot-password"
+          element={<SplitForgetPassword />}
+        />
+        <Route
+          path="authentication/split/reset-password"
+          element={<SplitPasswordReset />}
+        />
+        <Route
+          path="authentication/split/confirm-mail"
+          element={<SplitConfirmMail />}
+        />
+        <Route
+          path="authentication/split/lock-screen"
+          element={<SplitLockScreen />}
+        />
+
+        {/* <Navigate to="/errors/404" /> */}
+        <Route path="*" element={<Navigate to="/errors/404" replace />} />
+      </Routes>
+      <SettingsToggle />
+      <SettingsPanel />
+      <ToastContainer
+        closeButton={CloseButton}
+        icon={false}
+        position={toast.POSITION.BOTTOM_LEFT}
       />
     </>
   );

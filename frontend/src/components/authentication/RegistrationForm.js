@@ -1,13 +1,13 @@
 import React, { useState, useContext, useReducer } from 'react';
-import { useNavigate } from "react-router";
+import { useNavigate } from 'react-router';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import Divider from 'components/common/Divider';
 import SocialAuthButtons from './SocialAuthButtons';
-import { ConfigContext } from "context/Config/index";
-import { AuthContext } from "context/Auth/index";
+import { ConfigContext } from 'context/Config/index';
+import { AuthContext } from 'context/Auth/index';
 
 const initialState = {
   name: '',
@@ -15,29 +15,28 @@ const initialState = {
   password: '',
   password_confirmation: '',
   isAccepted: false
-}
+};
 
 const reducer = (state, action) => {
-  return {...state, [action.input]: action.value}
-}
+  return { ...state, [action.input]: action.value };
+};
 
 const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
-  
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const { api_urls } = useContext(ConfigContext);
   // State
-  
-  const handleChange = (e) => {
+
+  const handleChange = e => {
     const { name, value, checked } = e.target;
-    const action  = {
+    const action = {
       input: name,
-      value: name === 'isAccepted'? checked : value,
-    }
-    dispatch(action)
-  }
+      value: name === 'isAccepted' ? checked : value
+    };
+    dispatch(action);
+  };
 
   const [formData, setFormData] = useState({
     name: '',
@@ -47,52 +46,51 @@ const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
     isAccepted: false
   });
 
-  const handleRegister = (event) => {
+  const handleRegister = event => {
     event.preventDefault();
 
     if (formData.password === formData.password_confirmation) {
-
       fetch(`${api_urls.backend}/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
       })
-        .then((response) => {
+        .then(response => {
           if (response.ok) {
-            navigate("/auth_google");
+            navigate('/auth_google');
             return response.json();
           } else {
-            alert("ops..");
+            alert('ops..');
           }
         })
         .then(() => {
           fetch(`${api_urls.backend}/login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               email: formData.email,
-              password: formData.password,
-            }),
+              password: formData.password
+            })
           })
-            .then((response) => response.json())
-            .then((data) => {
+            .then(response => response.json())
+            .then(data => {
               const token = data.token;
 
               fetch(`${api_urls.backend}/view-profile`, {
-                method: "GET",
+                method: 'GET',
                 headers: {
-                  Authorization: `Bearer ${token}`,
-                },
+                  Authorization: `Bearer ${token}`
+                }
               })
-                .then((response) => response.json())
-                .then((data) => {
+                .then(response => response.json())
+                .then(data => {
                   login(data.data.name, token, data.data.id);
-                  navigate("/auth_google"); //object history;
+                  navigate('/auth_google'); //object history;
                 });
             });
         });
     } else {
-      alert("the passwords are not the same");
+      alert('the passwords are not the same');
     }
   };
 
@@ -170,7 +168,6 @@ const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
                 isAccepted: e.target.checked
               })
             }
-           
           />
 
           <Form.Check.Label className="form-label">
@@ -197,7 +194,7 @@ const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
       </Form.Group>
       <Divider>or register with</Divider>
 
-      <SocialAuthButtons handleGoogleLogin={handleGoogleLogin}/>
+      <SocialAuthButtons handleGoogleLogin={handleGoogleLogin} />
     </Form>
   );
 };

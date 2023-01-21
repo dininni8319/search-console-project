@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import editing from 'assets/img/icons/spot-illustrations/21.png';
-import { GoogleContext } from "context/Google/index";
+import { GoogleContext } from 'context/Google/index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GoogleIcon from 'assets/img/icons/icons8-google.png';
 
@@ -25,10 +25,15 @@ const Starter = () => {
               onClick={handleGoogleLogin}
               className="bg-primary"
             >
-              <span className='bg-white p-2 ms-0'>
-                <img src={GoogleIcon} width='40px' height='40px' className='py-1'/>
+              <span className="bg-white p-2 ms-0">
+                <img
+                  src={GoogleIcon}
+                  width="40px"
+                  height="40px"
+                  className="py-1"
+                />
               </span>
-              <span className='ps-2 text-white'>Entra con google</span>
+              <span className="ps-2 text-white">Entra con google</span>
             </Button>
           </Col>
         </Row>

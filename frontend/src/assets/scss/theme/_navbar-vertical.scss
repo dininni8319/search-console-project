@@ -118,7 +118,9 @@
     }
     .navbar-collapse,
     .navbar-vertical-content {
-      max-height: calc(100vh - #{$top-nav-height} - #{map-get($spacers, 3)}) !important;
+      max-height: calc(
+        100vh - #{$top-nav-height} - #{map-get($spacers, 3)}
+      ) !important;
     }
   }
   @include navbar-vertical-variant(
@@ -180,7 +182,10 @@
 }
 
 @include navbar-vertical-scrollbar(false, $navbar-vertical-scrollbar-color);
-@include navbar-vertical-scrollbar('inverted', $navbar-inverted-scrollbar-color);
+@include navbar-vertical-scrollbar(
+  'inverted',
+  $navbar-inverted-scrollbar-color
+);
 @include navbar-vertical-scrollbar('card', $navbar-card-scrollbar-color);
 @include navbar-vertical-scrollbar('vibrant', $navbar-vibrant-scrollbar-color);
 
@@ -294,7 +299,8 @@
         + .content {
           margin-left: $navbar-vertical-collapsed-width;
           .navbar-top {
-            padding-left: $navbar-vertical-width - $navbar-vertical-collapsed-width + 4;
+            padding-left: $navbar-vertical-width -
+              $navbar-vertical-collapsed-width + 4;
           }
         }
 

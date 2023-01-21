@@ -160,13 +160,12 @@ $utilities: map_merge(
         y-0: 0
       )
     ),
-    
     'border-color': (
       responsive: true,
       property: border-color,
       class: border,
-         local-vars: (
-        "border-opacity": 1
+      local-vars: (
+        'border-opacity': 1
       ),
       values: null
     ),
@@ -174,8 +173,8 @@ $utilities: map_merge(
       responsive: true,
       property: border-color,
       class: border,
-         local-vars: (
-        "border-opacity": 1
+      local-vars: (
+        'border-opacity': 1
       ),
       values: $utilities-border-colors
     ),

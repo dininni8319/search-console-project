@@ -15,7 +15,11 @@ const Registration = ({ handleGoogleLogin }) => {
           <Link to="/login">Login</Link>
         </p>
       </Flex>
-      <RegistrationForm layout="split" hasLabel handleGoogleLogin={handleGoogleLogin}/>
+      <RegistrationForm
+        layout="split"
+        hasLabel
+        handleGoogleLogin={handleGoogleLogin}
+      />
     </AuthSplitLayout>
   );
 };

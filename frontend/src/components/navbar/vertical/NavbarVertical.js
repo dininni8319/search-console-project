@@ -14,7 +14,6 @@ import bgNavbar from 'assets/img/generic/bg-navbar.png';
 import FormSelectComponent from '../../UI/FormSelectComponent';
 
 const NavbarVertical = (/* { data, handleChange } */) => {
- 
   const {
     config: {
       navbarPosition,
@@ -109,16 +108,13 @@ const NavbarVertical = (/* { data, handleChange } */) => {
                 <div className="navbar-vertical-divider">
                   <hr className="navbar-vertical-hr my-2" />
                 </div>
-                <Nav navbar>
-                  {/* <NavbarTopDropDownMenus /> */}
-                </Nav>
+                <Nav navbar>{/* <NavbarTopDropDownMenus /> */}</Nav>
               </div>
             )}
             {/* <PurchaseCard /> */}
           </>
         </div>
       </Navbar.Collapse>
-
     </Navbar>
   );
 };

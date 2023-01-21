@@ -5,11 +5,11 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import SocialAuthButtons from './SocialAuthButtons';
-import { ConfigContext } from "context/Config/index";
-import { useNavigate } from "react-router";
-import { AuthContext } from "context/Auth/index";
+import { ConfigContext } from 'context/Config/index';
+import { useNavigate } from 'react-router';
+import { AuthContext } from 'context/Auth/index';
 
-const LoginForm = ({ hasLabel, layout}) => {
+const LoginForm = ({ hasLabel, layout }) => {
   // State
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
@@ -20,38 +20,40 @@ const LoginForm = ({ hasLabel, layout}) => {
     remember: false
   });
 
-  const handleLogin = (event) => {
+  const handleLogin = event => {
     event.preventDefault();
-    
+
     toast.success(`Logged in as ${formData.email}`, {
       theme: 'colored'
     });
 
     fetch(`${api_urls.backend}/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: formData.email, password: formData.password }),
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: formData.email,
+        password: formData.password
+      })
     })
-      .then((response) => response.json())
-      .then((data) => {
+      .then(response => response.json())
+      .then(data => {
         const token = data.token;
 
         if (token) {
           fetch(`${api_urls.backend}/view-profile`, {
-            method: "GET",
+            method: 'GET',
             headers: {
-              Authorization: `Bearer ${token}`,
-            },
+              Authorization: `Bearer ${token}`
+            }
           })
-            .then((response) => response.json())
-            .then((data) => {
-              
-              let username = `${data.data.name}`
+            .then(response => response.json())
+            .then(data => {
+              let username = `${data.data.name}`;
               login(username, token, data.data.id);
-              navigate("/auth_google"); 
+              navigate('/auth_google');
             });
         } else {
-          navigate('/login')
+          navigate('/login');
         }
       });
   };

@@ -9,19 +9,18 @@
 //     }
 // }
 
-
 .simplebar-scrollbar {
-  &::before{
+  &::before {
     background-color: var(--#{$prefix}gray-400);
   }
   &::-webkit-scrollbar {
-	display: none;
-}
+    display: none;
+  }
 }
 .simplebar-scrollbar.simplebar-visible {
-	&:before {
-		opacity:.55
-	}
+  &:before {
+    opacity: 0.55;
+  }
 }
 
 .scrollbar-overlay {
@@ -35,7 +34,7 @@
 //     .navbar-vibrant{
 //      .scrollbar{
 //         @include chrome-scrollbar(rgba($white, 0.4));
-//       } 
+//       }
 //     }
 //   }
 //   &.safari{
@@ -45,7 +44,7 @@
 //     .navbar-vibrant{
 //      .scrollbar{
 //         @include chrome-scrollbar(rgba($white, 0.4));
-//       } 
+//       }
 //     }
 //   }
 //   &.firefox{
@@ -55,27 +54,27 @@
 //     .navbar-vibrant{
 //      .scrollbar{
 //         @include firefox-scrollbar(rgba($white, 0.4));
-//       } 
+//       }
 //     }
 //   }
 // }
-.scrollbar{
+.scrollbar {
   @include chrome-scrollbar;
 }
-.navbar-vibrant{
- .scrollbar{
+.navbar-vibrant {
+  .scrollbar {
     @include chrome-scrollbar(rgba($white, 0.4));
-  } 
+  }
 }
 
-.firefox{
-  .scrollbar{
+.firefox {
+  .scrollbar {
     @include firefox-scrollbar;
   }
-  .navbar-vibrant{
-    .scrollbar{
+  .navbar-vibrant {
+    .scrollbar {
       @include firefox-scrollbar(rgba($white, 0.4));
-    } 
+    }
   }
 }
 

@@ -6,10 +6,10 @@ import LinePaymentChart from './LinePaymentChart';
 
 const LinePayment = ({ analytics, isOpen, setIsOpen }) => {
   const chartRef = useRef(null);
-  const handleClick = (event) => {
-     event.preventDefault();
-     setIsOpen(true)
-  }
+  const handleClick = event => {
+    event.preventDefault();
+    setIsOpen(true);
+  };
   return (
     <Card className="rounded-3 overflow-hidden shadow-none h-90">
       <Card.Body
@@ -26,7 +26,13 @@ const LinePayment = ({ analytics, isOpen, setIsOpen }) => {
             </p>
           </Col>
           <Col xs="auto" className="d-sm-block">
-          <button type='button' className='btn btn-warning text-white' onClick={(e) => handleClick(e)}>Seleziona una data</button>
+            <button
+              type="button"
+              className="btn btn-warning text-white"
+              onClick={e => handleClick(e)}
+            >
+              Seleziona una data
+            </button>
           </Col>
         </Row>
         <LinePaymentChart

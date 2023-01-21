@@ -5,7 +5,12 @@ import NavbarVertical from 'components/navbar/vertical/NavbarVertical';
 import AppContext from 'context/Context';
 import classNames from 'classnames';
 
-const MainLayout = ({ children, data, handleChange, isOpen/* handleSubmit */ }) => {
+const MainLayout = ({
+  children,
+  data,
+  handleChange,
+  isOpen /* handleSubmit */
+}) => {
   const { hash, pathname } = useLocation();
   const isKanban = pathname.includes('kanban');
   const {
@@ -29,22 +34,19 @@ const MainLayout = ({ children, data, handleChange, isOpen/* handleSubmit */ }) 
   }, [pathname]);
 
   return (
-    <div className='container-fluid'>
-     {!isOpen && <NavbarVertical 
-          /* data={data} 
+    <div className="container-fluid">
+      {!isOpen && (
+        <NavbarVertical
+        /* data={data} 
           handleChange={handleChange} */
-        />}
-        <div className={classNames('content', { 'pb-0': isKanban })}>
-        {!isOpen &&  <NavbarTop 
-          data={data} 
-          handleChange={handleChange}
-        />}
-          {/*------ Main Routes ------*/}
-          
-          {children}
-        </div>
-       
+        />
+      )}
+      <div className={classNames('content', { 'pb-0': isKanban })}>
+        {!isOpen && <NavbarTop data={data} handleChange={handleChange} />}
+        {/*------ Main Routes ------*/}
 
+        {children}
+      </div>
     </div>
   );
 };

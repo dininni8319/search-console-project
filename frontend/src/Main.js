@@ -5,9 +5,9 @@ import { settings } from './config';
 import { getColor, getItemFromStore } from 'helpers/utils';
 import { configReducer } from './reducers/configReducer';
 import useToggleStyle from './hooks/useToggleStyle';
-import { AuthProvider } from "context/Auth/index";
-import { ConfigProvider } from "context/Config/index";
-import { GoogleProvider } from "context/Google/index";
+import { AuthProvider } from 'context/Auth/index';
+import { ConfigProvider } from 'context/Config/index';
+import { GoogleProvider } from 'context/Google/index';
 // import { LanguageProvider } from 'context/Language/index';
 
 const Main = props => {
@@ -70,15 +70,15 @@ const Main = props => {
 
   return (
     <AppContext.Provider value={{ config, setConfig, configDispatch }}>
-        <ConfigProvider> 
-          <AuthProvider>
-            <GoogleProvider>
-             {/* <LanguageProvider> */}
-              {props.children}
-             {/* </LanguageProvider> */}
-            </GoogleProvider>
-          </AuthProvider>
-        </ConfigProvider>
+      <ConfigProvider>
+        <AuthProvider>
+          <GoogleProvider>
+            {/* <LanguageProvider> */}
+            {props.children}
+            {/* </LanguageProvider> */}
+          </GoogleProvider>
+        </AuthProvider>
+      </ConfigProvider>
     </AppContext.Provider>
   );
 };

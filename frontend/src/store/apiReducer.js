@@ -4,37 +4,36 @@ export const initialState = {
   isLoading: false,
   status: '',
   error: '',
-  data: [],
+  data: []
 };
 
-const apiReducer = ( state, action ) => {
- 
+const apiReducer = (state, action) => {
   switch (action.type) {
     case LOADING:
       return {
         ...state,
         isLoading: true,
-        status: LOADING,
-      }
+        status: LOADING
+      };
     case SUCCESS:
       return {
         ...state,
         status: SUCCESS,
         isLoading: false,
-        data: action.data,
-      }
+        data: action.data
+      };
 
-    case ERROR: 
+    case ERROR:
       return {
         ...state,
         status: ERROR,
         isLoading: false,
-        error: action.error,  
-      }
+        error: action.error
+      };
 
     default:
-     return state;
+      return state;
   }
-}
+};
 
 export default apiReducer;

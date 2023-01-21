@@ -16,6 +16,6 @@
 
 @each $color, $value in $theme-colors {
   .badge-soft-#{$color} {
-    @include badge-soft-variant($color)
+    @include badge-soft-variant($color);
   }
 }

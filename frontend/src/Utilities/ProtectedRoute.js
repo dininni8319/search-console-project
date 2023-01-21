@@ -1,6 +1,6 @@
-import { useContext } from "react";
-import { Navigate } from "react-router-dom";
-import { AuthContext } from "context/Auth/index";
+import { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+import { AuthContext } from 'context/Auth/index';
 
 // middleware for the protected route
 const ProtectedRoute = ({ children }) => {

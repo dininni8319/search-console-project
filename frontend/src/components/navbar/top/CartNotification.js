@@ -13,16 +13,9 @@ const CartNotification = () => {
 
   return (
     <Nav.Item as="li" className="d-none d-sm-block">
-      <Nav.Link
-        as={Link}
-        to="/e-commerce/shopping-cart"
-        
-      >
-        
-          <span className="notification-indicator-number">
-            
-          </span>
-      
+      <Nav.Link as={Link} to="/e-commerce/shopping-cart">
+        <span className="notification-indicator-number"></span>
+
         <FontAwesomeIcon
           icon="shopping-cart"
           transform="shrink-7"

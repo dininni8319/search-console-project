@@ -7,18 +7,18 @@ import { navbarBreakPoint, topNavbarBreakpoint } from 'config';
 import TopNavRightSideNavItem from './TopNavRightSideNavItem';
 import { useLocation } from 'react-router';
 import FormSelectComponent from '../../UI/FormSelectComponent';
-import {Dropdown} from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { languages } from '../../../data/language';
 import { loadLanguages } from 'i18next';
 import i18next from 'i18next';
 
-import GlobeIcon from '../Globe'
+import GlobeIcon from '../Globe';
 const NavbarTop = ({ data, handleChange }) => {
   const {
     config: { navbarPosition, navbarCollapsed },
     setConfig
   } = useContext(AppContext);
-  let location = window.location.toString().includes("analytics_page");
+  let location = window.location.toString().includes('analytics_page');
   const { pathname } = useLocation();
   const isChat = pathname.includes('chat');
 
@@ -82,8 +82,7 @@ const NavbarTop = ({ data, handleChange }) => {
           in={navbarCollapsed}
           className="scrollbar pb-3 pb-lg-0"
         >
-          <Nav navbar>
-          </Nav>
+          <Nav navbar></Nav>
         </Navbar.Collapse>
       ) : (
         <Nav
@@ -96,34 +95,34 @@ const NavbarTop = ({ data, handleChange }) => {
           </Nav.Item>
         </Nav>
       )}
-    
-      <div className='d-flex flex-sm-column flex-md-row alig-items-md-center justify-content-between w-100'>
-        { location ? <FormSelectComponent 
-          handleChange={handleChange}
-          data={data}
-        />: <div></div>}
-        <div className='d-flex align-items-center'>
 
+      <div className="d-flex flex-sm-column flex-md-row alig-items-md-center justify-content-between w-100">
+        {location ? (
+          <FormSelectComponent handleChange={handleChange} data={data} />
+        ) : (
+          <div></div>
+        )}
+        <div className="d-flex align-items-center">
           <TopNavRightSideNavItem />
           <Dropdown>
-            <Dropdown.Toggle variant="transparent" id="dropdown-basic" /* className='btn-none-custom' */>
-            <GlobeIcon />
-
+            <Dropdown.Toggle
+              variant="transparent"
+              id="dropdown-basic" /* className='btn-none-custom' */
+            >
+              <GlobeIcon />
             </Dropdown.Toggle>
-            <Dropdown.Menu className='btn-link'>
-              { languages?.map(({code, name, country_code}) => {
+            <Dropdown.Menu className="btn-link">
+              {languages?.map(({ code, name, country_code }) => {
                 return (
                   <Dropdown.Item key={country_code}>
-                    <button 
-                      className='btn btn-link'
+                    <button
+                      className="btn btn-link"
                       onClick={() => i18next.changeLanguage(code)}
                     >
-                      <span className='text-capitalize'>
-                        {name}
-                      </span>
+                      <span className="text-capitalize">{name}</span>
                     </button>
                   </Dropdown.Item>
-                )
+                );
               })}
             </Dropdown.Menu>
           </Dropdown>

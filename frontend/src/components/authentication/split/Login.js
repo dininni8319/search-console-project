@@ -6,7 +6,6 @@ import bgImg from 'assets/img/generic/14.jpg';
 import Flex from 'components/common/Flex';
 
 const Login = ({ handleGoogleLogin }) => {
-
   return (
     <AuthSplitLayout bgProps={{ image: bgImg, position: '50% 20%' }}>
       <Flex alignItems="center" justifyContent="between">
@@ -16,7 +15,11 @@ const Login = ({ handleGoogleLogin }) => {
           <Link to="/register">Create account</Link>
         </p>
       </Flex>
-      <LoginForm layout="split" hasLabel handleGoogleLogin={handleGoogleLogin}/>
+      <LoginForm
+        layout="split"
+        hasLabel
+        handleGoogleLogin={handleGoogleLogin}
+      />
     </AuthSplitLayout>
   );
 };

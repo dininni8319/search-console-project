@@ -1,10 +1,10 @@
-import { useState, useContext, createContext } from "react";
-import { ConfigContext, configContext } from "../Config";
+import { useState, useContext, createContext } from 'react';
+import { ConfigContext, configContext } from '../Config';
 
 export const AuthContext = createContext();
 
 export function AuthProvider(props) {
-  const initialUser = localStorage.getItem("user");
+  const initialUser = localStorage.getItem('user');
 
   let { api_urls } = useContext(ConfigContext);
 
@@ -14,20 +14,20 @@ export function AuthProvider(props) {
     const obj = {
       username: username,
       token: token,
-      id: id,
+      id: id
     };
     setUser(obj);
-    localStorage.setItem("user", JSON.stringify(obj));
+    localStorage.setItem('user', JSON.stringify(obj));
   };
 
   const logout = () => {
     fetch(`${api_urls.backend}/api/users/logout`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
+        Authorization: `Bearer ${user.token}`
+      }
     }).then(() => {
-      localStorage.removeItem("user");
+      localStorage.removeItem('user');
       setUser(null);
     });
   };

@@ -5,7 +5,7 @@ import { tooltipFormatter } from 'helpers/echart-utils';
 export function getUrl(site) {
   const reg = /^https?:\/\/|\/+$/g;
 
-  return (site).replace(reg, '');
+  return site.replace(reg, '');
 }
 
 export function perCent(num) {
@@ -19,34 +19,36 @@ export function turnObjIntoArray(data, allowData) {
     const el = data[i];
 
     const filtered = Object.keys(el)
-    .filter(key => allowed.includes(key))
-    .reduce((arr, key) => {
-       
-     if (allowed[0] === 'keys') {
-         arr = el[key].concat(arr);
+      .filter(key => allowed.includes(key))
+      .reduce((arr, key) => {
+        if (allowed[0] === 'keys') {
+          arr = el[key].concat(arr);
         } else if (allowed[0] === 'ctr') {
-        let ctr = perCent(el[key]);
+          let ctr = perCent(el[key]);
 
-        arr = [ctr].concat(arr);
-        
-      } else if (allowed[0] === 'position') {
-        let position = (el[key]).toFixed(2);
+          arr = [ctr].concat(arr);
+        } else if (allowed[0] === 'position') {
+          let position = el[key].toFixed(2);
 
-        arr = [position].concat(arr);
-        
-      } else {
-        arr = [el[key]].concat(arr);
-     }
-      return arr;
-    }, []);
+          arr = [position].concat(arr);
+        } else {
+          arr = [el[key]].concat(arr);
+        }
+        return arr;
+      }, []);
     arr = arr.concat(filtered);
   }
-  
+
   return arr;
 }
 
 export const getOptions = (data, lenArr) => ({
-  color: [getColor('primary'), getColor('success'), getColor('info'), getColor('danger')],
+  color: [
+    getColor('primary'),
+    getColor('success'),
+    getColor('info'),
+    getColor('danger')
+  ],
   tooltip: {
     trigger: 'axis',
     padding: [7, 10],
@@ -59,7 +61,9 @@ export const getOptions = (data, lenArr) => ({
   },
   xAxis: {
     type: 'category',
-    data: turnObjIntoArray(data?.data, 'keys').map(date => dayjs(date).format('DD MMM, YYYY')),
+    data: turnObjIntoArray(data?.data, 'keys').map(date =>
+      dayjs(date).format('DD MMM, YYYY')
+    ),
     boundaryGap: false,
     silent: true,
     axisPointer: {
@@ -86,7 +90,7 @@ export const getOptions = (data, lenArr) => ({
       align: 'left',
       fontSize: 10,
       padding: [0, 0, 0, 5],
-      interval: lenArr.length > 180 ? 40  : 5,
+      interval: lenArr.length > 180 ? 40 : 5
     }
   },
   yAxis: {
@@ -100,7 +104,7 @@ export const getOptions = (data, lenArr) => ({
     },
     axisLabel: {
       show: false,
-      color: getColor('gray-600'),
+      color: getColor('gray-600')
       // formatter: value => `${Math.round((value / 1000) * 10) / 10}k`
     },
     axisTick: { show: false },
@@ -166,14 +170,14 @@ export const getOptions = (data, lenArr) => ({
         color: '#f15bb5'
       },
       symbolSize: 2
-    },
+    }
   ],
-  grid: { 
+  grid: {
     containLabel: true,
-    right: 15, 
-    left: 15, 
-    bottom: '15%', 
-    top: 0 
+    right: 15,
+    left: 15,
+    bottom: '15%',
+    top: 0
   }
   // grid: {
   //   right: '5px',
@@ -182,4 +186,3 @@ export const getOptions = (data, lenArr) => ({
   //   top: 0
   // }
 });
-

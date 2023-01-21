@@ -5,28 +5,26 @@ import SaasActiveUser from './SaasActiveUser';
 import SaasRevenue from './SaasRevenue';
 import SaasConversion from './SaasConversion';
 import DepositeStatus from './DepositeStatus';
-import StatisticsCards from './stats-cards/StatisticsCards'
+import StatisticsCards from './stats-cards/StatisticsCards';
 import GrossRevenue from './gross-revenue/GrossRevenue';
 import DoMoreCard from './DoMoreCard';
 
 const Saas = ({ analytics, isOpen, setIsOpen }) => {
-
   return (
     <>
       <Row className="g-2">
         <Col xxl={9}>
-          <LinePayment 
+          <LinePayment
             analytics={analytics}
-            isOpen={isOpen} 
+            isOpen={isOpen}
             setIsOpen={setIsOpen}
           />
         </Col>
         <Col>
           <Row className="g-2">
             <Col xxl={12}>
-            <StatisticsCards data={analytics?.data}/>
+              <StatisticsCards data={analytics?.data} />
             </Col>
-    
           </Row>
         </Col>
       </Row>
@@ -35,19 +33,33 @@ const Saas = ({ analytics, isOpen, setIsOpen }) => {
           <DepositeStatus />
           <Row className="g-2">
             <Col md xxl={3}>
-                <SaasActiveUser data={analytics?.data?.performance} title='Click Totali' />
+              <SaasActiveUser
+                data={analytics?.data?.performance}
+                title="Click Totali"
+              />
             </Col>
             <Col xxl={3}>
-              <SaasRevenue data={analytics?.data?.performance} title="Impressions"/>
+              <SaasRevenue
+                data={analytics?.data?.performance}
+                title="Impressions"
+              />
             </Col>
             <Col xxl={3}>
-              <SaasConversion data={analytics?.data?.performance?.position} title='Posizione Media' color='text-primary'/>
+              <SaasConversion
+                data={analytics?.data?.performance?.position}
+                title="Posizione Media"
+                color="text-primary"
+              />
             </Col>
             <Col xxl={3}>
-              <SaasConversion data={analytics?.data?.performance?.ctr} title='CTR Media' color='text-danger'/>
+              <SaasConversion
+                data={analytics?.data?.performance?.ctr}
+                title="CTR Media"
+                color="text-danger"
+              />
             </Col>
             <Col lg={12}>
-              <GrossRevenue analytics={analytics} />            
+              <GrossRevenue analytics={analytics} />
             </Col>
           </Row>
         </Col>
@@ -61,8 +73,6 @@ const Saas = ({ analytics, isOpen, setIsOpen }) => {
       </Row>
       {/* <TransactionSummary data={transactionSummary} /> */}
     </>
-
-  
   );
 };
 

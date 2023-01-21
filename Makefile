@@ -35,7 +35,7 @@ prettier: ##prettier
 
 runProd: ## to clear the cache
 	@echo "run prod"
-	@cd backend && php artisan optimize
+	@cd backend && php artisan optimize:clear
 	@cd frontend && npm run build
 
 clearCache: ## to clear the cache

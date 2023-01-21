@@ -9,7 +9,7 @@ import {
 import dayjs from 'dayjs';
 import * as echarts from 'echarts/core';
 import { getColor, getPastDates, rgbaColor } from 'helpers/utils';
-import { getUrl, turnObjIntoArray } from "../../../../utils";
+import { getUrl, turnObjIntoArray } from '../../../../utils';
 import PropTypes from 'prop-types';
 import React, { forwardRef, useContext } from 'react';
 import { tooltipFormatter } from 'helpers/echart-utils';
@@ -17,7 +17,7 @@ import { tooltipFormatter } from 'helpers/echart-utils';
 echarts.use([LineChart, TooltipComponent, GridComponent, LegendComponent]);
 
 const getOption = (data, isDark, lenArr) => ({
-    tooltip: {
+  tooltip: {
     trigger: 'axis',
     padding: [7, 10],
     backgroundColor: getColor('gray-100'),
@@ -28,8 +28,10 @@ const getOption = (data, isDark, lenArr) => ({
     formatter: tooltipFormatter
   },
   xAxis: {
-    type: 'category', /* `${ lenArr.length < 90 ?'DD MMM, YYYY': 'MMM'}` */
-    data: turnObjIntoArray(data?.data, 'keys').map(date => dayjs(date).format('DD MMM, YYYY')),
+    type: 'category' /* `${ lenArr.length < 90 ?'DD MMM, YYYY': 'MMM'}` */,
+    data: turnObjIntoArray(data?.data, 'keys').map(date =>
+      dayjs(date).format('DD MMM, YYYY')
+    ),
     boundaryGap: false,
     silent: true,
     splitLine: { show: false },
@@ -57,7 +59,7 @@ const getOption = (data, isDark, lenArr) => ({
       fontWeight: 100,
       fontSize: 8,
       margin: 2,
-      interval: lenArr.length > 180 ? 45  : 5,
+      interval: lenArr.length > 180 ? 45 : 5,
       formatter: value => dayjs(value).format('MMM DD')
     }
   },
@@ -119,21 +121,21 @@ const getOption = (data, isDark, lenArr) => ({
       }
     }
   ],
-   grid: {
+  grid: {
     containLabel: true,
     right: '5px',
     left: 0,
     bottom: 0,
     top: 0
   }
-})
+});
 
-const LinePaymentChart = forwardRef(({ analytics,  style }, ref) => {
+const LinePaymentChart = forwardRef(({ analytics, style }, ref) => {
   const {
     config: { isDark }
   } = useContext(AppContext);
 
-  const lenArr = turnObjIntoArray(analytics?.data?.data, 'keys')
+  const lenArr = turnObjIntoArray(analytics?.data?.data, 'keys');
   console.log(lenArr.length);
   return (
     <ReactEChartsCore

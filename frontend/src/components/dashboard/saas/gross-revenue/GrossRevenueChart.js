@@ -7,7 +7,7 @@ import {
   TooltipComponent
 } from 'echarts/components';
 import * as echarts from 'echarts/core';
-import { getOptions, turnObjIntoArray } from "../../../../utils";
+import { getOptions, turnObjIntoArray } from '../../../../utils';
 import { getDates } from 'helpers/utils';
 import PropTypes from 'prop-types';
 import React, { forwardRef } from 'react';
@@ -59,7 +59,7 @@ const tooltipFormatter = (params, selectedMonth, previousMonth) => {
 
 const GrossRevenueChart = forwardRef(
   ({ analytics, selectedMonth, previousMonth, ...rest }, ref) => {
-    const lenArr = turnObjIntoArray(analytics?.data?.data, 'keys')
+    const lenArr = turnObjIntoArray(analytics?.data?.data, 'keys');
     console.log('len', lenArr);
     return (
       <ReactEChartsCore

@@ -18,7 +18,7 @@ const SaasRevenue = ({ data, title }) => {
           <Col xs="auto">
             <h4 className="fs-3 fw-normal text-700">
               <CountUp
-                className='text-info'
+                className="text-info"
                 start={0}
                 end={data?.impressions}
                 duration={2.75}
