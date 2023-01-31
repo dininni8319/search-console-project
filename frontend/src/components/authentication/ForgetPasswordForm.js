@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, Form } from 'react-bootstrap';
 
-const ForgetPasswordForm = () => {
+const ForgetPasswordForm = ({ t }) => {
   // State
   const [email, setEmail] = useState('');
 
@@ -32,14 +32,14 @@ const ForgetPasswordForm = () => {
 
       <Form.Group className="mb-3">
         <Button className="w-100" type="submit" disabled={!email}>
-          Send reset link
+          {t('send_link')}
         </Button>
       </Form.Group>
 
-      <Link className="fs--1 text-600" to="#!">
+      {/* <Link className="fs--1 text-600" to="#!">
         I can't recover my account using this page
         <span className="d-inline-block ms-1"> &rarr;</span>
-      </Link>
+      </Link> */}
     </Form>
   );
 };

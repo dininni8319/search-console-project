@@ -25,5 +25,11 @@
   "accept": "Accetto i",
   "termini": "termini",
   "and": "della",
-  "privacy": "privasy"
+  "privacy": "privasy",
+  "enter_email": "Inserisci la tua mail e ti invieremo il link per il reset",
+  "send_link": "Invia il link di reset",
+  "custom_search": "Customizza la tua Ricerca",
+  "delete": "elimina",
+  "cancel": "annulla",
+  "create_project": "Crea un progetto!"
 }

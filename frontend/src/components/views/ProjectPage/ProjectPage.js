@@ -82,7 +82,7 @@ const ProjectPage = () => {
           })}
           <div className="text-center mt-3">
             {state.data.length === 0 && (
-              <Link to="/landing_page">Crea un nuovo progetto!</Link>
+              <Link to="/landing_page">{t('create_project')}</Link>
             )}
           </div>
         </ul>

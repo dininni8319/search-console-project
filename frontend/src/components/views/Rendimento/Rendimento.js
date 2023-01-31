@@ -23,8 +23,10 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import Saas from 'components/dashboard/saas';
+import { useTranslation } from 'react-i18next';
 
 const GoogleAuth = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
@@ -100,10 +102,10 @@ const GoogleAuth = () => {
       {isOpen && (
         <Modal
           closeModal={closeModal}
-          title="Customizza la tua Ricerca"
+          title={t('custom_search')} 
           message="sel"
-          confirmMessage="Elimina"
-          declineMessage="Annulla"
+          confirmMessage={t("delete")}
+          declineMessage={t("cancel")}
           site={site}
           setAnalytic={setAnalytic}
           analytics={analytics}

@@ -24,5 +24,11 @@
   "accept": "I accept the",
   "termini": "terms",
   "and": "and",
-  "privacy": "privasy polisy"
+  "privacy": "privasy polisy",
+  "enter_email": "Enter your email and we'll send you a reset link.",
+  "send_link": "Send reset link",
+  "custom_search": "Customize your search",
+  "delete": "delete",
+  "cancel": "cancel",
+  "create_project": "Create a project!"
 }
