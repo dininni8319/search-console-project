@@ -5,6 +5,7 @@ import Flex from 'components/common/Flex';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GrossRevenueChart from './GrossRevenueChart';
 import FalconLink from 'components/common/FalconLink';
+import { useTranslation } from 'react-i18next';
 
 const months = [
   'Jan',
@@ -24,7 +25,7 @@ const months = [
 let grossTableRows = [
   {
     id: 1,
-    title: 'Click Totali',
+    title: 'Clicks',
     revenue: 0,
     marketValue: {
       up: false,
@@ -42,7 +43,7 @@ let grossTableRows = [
   },
   {
     id: 2,
-    title: 'CTR Media',
+    title: 'CTR',
     revenue: 0,
     marketValue: {
       up: true,
@@ -51,7 +52,7 @@ let grossTableRows = [
   },
   {
     id: 3,
-    title: 'Posizione Media',
+    title: 'Position',
     revenue: 0,
     marketValue: {
       up: false,
@@ -61,6 +62,7 @@ let grossTableRows = [
 ];
 
 const GrossRevenue = ({ analytics }) => {
+  const { t } = useTranslation(); 
   const [selectedMonth, setSelectedMonth] = useState(months[0]);
   const [previousMonth, setPreviousMonth] = useState(months[11]);
   const chartRef = useRef(null);
@@ -94,7 +96,7 @@ const GrossRevenue = ({ analytics }) => {
       <Card.Header>
         <Row className="justify-content-between gx-0">
           <Col xs="auto">
-            <h1 className="fs-0 text-900">Performance degl'ultimi tre mesi</h1>
+            <h1 className="fs-0 text-900">{t('performace')}</h1>
           </Col>
           <Col xs="auto">
             <Form.Select

@@ -11,6 +11,7 @@ import { AuthContext } from 'context/Auth/index';
 import useApiRequest from '../../../store/useApiRequest';
 import authReducer, { initialState } from '../../../store/apiReducer';
 import FormSelectComponent from '../FormSelectComponent';
+import { useTranslation } from 'react-i18next';
 
 const FormModal = ({
   handleChange,
@@ -23,8 +24,7 @@ const FormModal = ({
   const [state, dispatch] = useReducer(authReducer, initialState);
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
-
-  console.log(state, 'authreducer');
+  const { t } = useTranslation();
   const handleChecked = value => {
     if (checked?.length > 0) {
       setChecked([]);
@@ -80,7 +80,7 @@ const FormModal = ({
       <div className="d-md-flex justify-content-around my-3 my-md-2">
         <div className="d-flex flex-column col-12 col-md-6">
           <label className="form-label text-center mt-2" htmlFor="userName">
-            Data di inizio
+            {t('start_date')}
           </label>
           <input
             type="date"
@@ -97,7 +97,7 @@ const FormModal = ({
         </div>
         <div className="col-12 col-md-6 d-flex flex-column">
           <label className="form-label text-center mt-2" htmlFor="userName">
-            Data di fine
+              {t('end_date')}
           </label>
           <input
             type="date"
@@ -118,13 +118,13 @@ const FormModal = ({
           onClick={closeModal}
           className="btn btn-secondary rounded-0 px-3 fw-bold"
         >
-          Annula
+          {t('cancel')}
         </button>
         <button
           type="submit"
           className="btn btn-secondary rounded-0 px-3 fw-bold"
         >
-          Applica
+          {t('send')}
         </button>
       </div>
     </form>

@@ -31,5 +31,12 @@
   "custom_search": "Customizza la tua Ricerca",
   "delete": "elimina",
   "cancel": "annulla",
-  "create_project": "Crea un progetto!"
+  "create_project": "Crea un progetto!",
+  "total_clicks": "Click totali",
+  "position": "Posizione Media",
+  "ctr": "CTR Media",
+  "performace": "Performance degl'ultimi tre mesi",
+  "send": "applica",
+  "start_date": "Data di inizio",
+  "end_date": "Data di fine"
 }

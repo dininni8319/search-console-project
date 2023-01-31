@@ -30,5 +30,13 @@
   "custom_search": "Customize your search",
   "delete": "delete",
   "cancel": "cancel",
-  "create_project": "Create a project!"
+  "create_project": "Create a project!",
+  "total_clicks": "Total clicks",
+  "select_date": "Select a date",
+  "position": "Average Position",
+  "ctr": "Average CTR",
+  "performace": "Last three months performace",
+  "send": "send",
+  "start_date": "start date",
+  "end_date": "end date"
 }

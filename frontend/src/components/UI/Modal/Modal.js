@@ -5,6 +5,7 @@ import { ConfigContext } from 'context/Config/index';
 import { useNavigate } from 'react-router';
 import { AuthContext } from 'context/Auth/index';
 import FormModal from '../FormModal';
+import { t } from 'i18next';
 
 const Backdrop = props => {
   return <div className={classes.backdrop} onClick={props.closeModal}></div>;
@@ -48,7 +49,7 @@ const Overlay = props => {
   return (
     <div className={classes.modal}>
       <div className="text-md-center">
-        <h3 className="fx-md-bold modal-title"> {props.title}</h3>
+        <h3 className="fx-md-bold modal-title">{t('custom_search')}</h3>
       </div>
       <FormModal
         handleChange={props.handleChange}

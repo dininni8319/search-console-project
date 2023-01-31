@@ -8,8 +8,11 @@ import DepositeStatus from './DepositeStatus';
 import StatisticsCards from './stats-cards/StatisticsCards';
 import GrossRevenue from './gross-revenue/GrossRevenue';
 import DoMoreCard from './DoMoreCard';
+import { useTranslation } from 'react-i18next';
 
 const Saas = ({ analytics, isOpen, setIsOpen }) => {
+
+  const { t } = useTranslation();
   return (
     <>
       <Row className="g-2">
@@ -35,7 +38,7 @@ const Saas = ({ analytics, isOpen, setIsOpen }) => {
             <Col md xxl={3}>
               <SaasActiveUser
                 data={analytics?.data?.performance}
-                title="Click Totali"
+                title={t("total_clicks")}
               />
             </Col>
             <Col xxl={3}>
@@ -47,14 +50,14 @@ const Saas = ({ analytics, isOpen, setIsOpen }) => {
             <Col xxl={3}>
               <SaasConversion
                 data={analytics?.data?.performance?.position}
-                title="Posizione Media"
+                title={t("position")}
                 color="text-primary"
               />
             </Col>
             <Col xxl={3}>
               <SaasConversion
                 data={analytics?.data?.performance?.ctr}
-                title="CTR Media"
+                title={t("ctr")}
                 color="text-danger"
               />
             </Col>

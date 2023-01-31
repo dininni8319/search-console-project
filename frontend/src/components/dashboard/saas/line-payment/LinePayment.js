@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import { Card, Col, Row } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
 import LinePaymentChart from './LinePaymentChart';
+import { useTranslation } from 'react-i18next';
 
 const LinePayment = ({ analytics, isOpen, setIsOpen }) => {
+  const { t } = useTranslation();
+
   const chartRef = useRef(null);
   const handleClick = event => {
     event.preventDefault();
@@ -20,7 +23,7 @@ const LinePayment = ({ analytics, isOpen, setIsOpen }) => {
       >
         <Row className="align-items-center g-0">
           <Col className="light">
-            <h4 className="text-white mb-0">Click Totali</h4>
+            <h4 className="text-white mb-0">{t('total_clicks')}</h4>
             <p className="fs--3 fw-semi-bold text-white">
               {analytics?.data?.performance?.clicks}
             </p>
@@ -31,7 +34,7 @@ const LinePayment = ({ analytics, isOpen, setIsOpen }) => {
               className="btn btn-warning text-white"
               onClick={e => handleClick(e)}
             >
-              Seleziona una data
+              {t('select_date')}
             </button>
           </Col>
         </Row>
