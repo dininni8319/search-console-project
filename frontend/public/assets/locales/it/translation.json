@@ -11,5 +11,19 @@
   "Select": "Seleziona",
   "search_property": "Ricerca le tue proprietà",
   "select_date": "Seleziona una data",
-  "projects": "Progetti"
+  "projects": "Progetti",
+  "login": "Accedi",
+  "name": "Nome",
+  "new_user": "Nuovo Utente?",
+  "create_account": "Crea un account",
+  "email_address": "Indirizzo Email",
+  "remember_me": "Resta collegato",
+  "forgot_password": "Dimenticato la Password?",
+  "or_log": "oppure collegati con",
+  "already_user": "Sei gia un Utente?",
+  "confirm_pass": "Conferma Password",
+  "accept": "Accetto i",
+  "termini": "termini",
+  "and": "della",
+  "privacy": "privasy"
 }

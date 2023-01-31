@@ -10,5 +10,19 @@
   "connect": "connect",
   "Select": "Select",
   "search_property": "Research your properties",
-  "projects": "Projects"
+  "projects": "Projects",
+  "login": "Login",
+  "name": "Name",
+  "create_account": "Create an account",
+  "new_user": "New User?",
+  "email_address": "Email address",
+  "remember_me": "Remember me",
+  "forgot_password": "Forgot Password?",
+  "or_log": "or log in with",
+  "already_user": "Already User?",
+  "confirm_pass": "Confirm Password",
+  "accept": "I accept the",
+  "termini": "terms",
+  "and": "and",
+  "privacy": "privasy polisy"
 }

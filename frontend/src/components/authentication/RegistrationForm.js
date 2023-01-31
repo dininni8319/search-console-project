@@ -8,7 +8,7 @@ import Divider from 'components/common/Divider';
 import SocialAuthButtons from './SocialAuthButtons';
 import { ConfigContext } from 'context/Config/index';
 import { AuthContext } from 'context/Auth/index';
-
+import { useTranslation } from 'react-i18next';
 const initialState = {
   name: '',
   email: '',
@@ -23,7 +23,7 @@ const reducer = (state, action) => {
 
 const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const { api_urls } = useContext(ConfigContext);
@@ -112,7 +112,7 @@ const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
   return (
     <Form onSubmit={handleRegister}>
       <Form.Group className="mb-3">
-        {hasLabel && <Form.Label>Name</Form.Label>}
+        {hasLabel && <Form.Label>{t('name')}</Form.Label>}
         <Form.Control
           placeholder={!hasLabel ? 'Name' : ''}
           value={formData.name}
@@ -123,7 +123,7 @@ const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
       </Form.Group>
 
       <Form.Group className="mb-3">
-        {hasLabel && <Form.Label>Email address</Form.Label>}
+        {hasLabel && <Form.Label>{t('email_address')}</Form.Label>}
         <Form.Control
           placeholder={!hasLabel ? 'Email address' : ''}
           value={formData.email}
@@ -145,9 +145,9 @@ const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
           />
         </Form.Group>
         <Form.Group as={Col} sm={6}>
-          {hasLabel && <Form.Label>Confirm Password</Form.Label>}
+          {hasLabel && <Form.Label>{t('confirm_pass')}</Form.Label>}
           <Form.Control
-            placeholder={!hasLabel ? 'Confirm Password' : ''}
+            placeholder={!hasLabel ? `${t('confirm_pass')}` : ''}
             value={formData.password_confirmation}
             name="password_confirmation"
             onChange={handleFieldChange}
@@ -171,8 +171,8 @@ const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
           />
 
           <Form.Check.Label className="form-label">
-            I accept the <Link to="#!">terms</Link> and{' '}
-            <Link to="#!">privacy policy</Link>
+           {t('accept')}<Link to="#!"> {t('termini')}</Link> {t("and")}{' '}
+            <Link to="#!">{t('privacy')}</Link>
           </Form.Check.Label>
         </Form.Check>
       </Form.Group>
@@ -189,10 +189,10 @@ const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
             !formData.isAccepted
           }
         >
-          Register
+          {t("register")}
         </Button>
       </Form.Group>
-      <Divider>or register with</Divider>
+      <Divider>{t('or_log')}</Divider>
 
       <SocialAuthButtons handleGoogleLogin={handleGoogleLogin} />
     </Form>

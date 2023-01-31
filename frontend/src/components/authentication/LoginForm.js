@@ -8,9 +8,11 @@ import SocialAuthButtons from './SocialAuthButtons';
 import { ConfigContext } from 'context/Config/index';
 import { useNavigate } from 'react-router';
 import { AuthContext } from 'context/Auth/index';
+import { useTranslation } from 'react-i18next';
 
 const LoginForm = ({ hasLabel, layout }) => {
   // State
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const { api_urls } = useContext(ConfigContext);
@@ -68,7 +70,7 @@ const LoginForm = ({ hasLabel, layout }) => {
   return (
     <Form onSubmit={handleLogin}>
       <Form.Group className="mb-3">
-        {hasLabel && <Form.Label>Email address</Form.Label>}
+        {hasLabel && <Form.Label>{t('email_address')}</Form.Label>}
         <Form.Control
           placeholder={!hasLabel ? 'Email address' : ''}
           value={formData.email}
@@ -104,7 +106,7 @@ const LoginForm = ({ hasLabel, layout }) => {
               }
             />
             <Form.Check.Label className="mb-0 text-700">
-              Remember me
+              {t('remember_me')}
             </Form.Check.Label>
           </Form.Check>
         </Col>
@@ -114,7 +116,7 @@ const LoginForm = ({ hasLabel, layout }) => {
             className="fs--1 mb-0"
             to={`/authentication/${layout}/forgot-password`}
           >
-            Forgot Password?
+            {t('forgot_password')}
           </Link>
         </Col>
       </Row>
@@ -126,11 +128,11 @@ const LoginForm = ({ hasLabel, layout }) => {
           className="mt-3 w-100"
           disabled={!formData.email || !formData.password}
         >
-          Log in
+          {t('login')}
         </Button>
       </Form.Group>
 
-      <Divider className="mt-4">or log in with</Divider>
+      <Divider className="mt-4">{t('or_log')}</Divider>
 
       <SocialAuthButtons />
     </Form>
