@@ -9,6 +9,7 @@ import { ConfigContext } from 'context/Config/index';
 import { useNavigate } from 'react-router';
 import { AuthContext } from 'context/Auth/index';
 import { useTranslation } from 'react-i18next';
+// import { spacing } from 'react-select/dist/declarations/src/theme';
 
 const LoginForm = ({ hasLabel, layout }) => {
   // State
@@ -16,6 +17,8 @@ const LoginForm = ({ hasLabel, layout }) => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const { api_urls } = useContext(ConfigContext);
+
+  const [ message, setMessage ] = useState('')
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -50,11 +53,14 @@ const LoginForm = ({ hasLabel, layout }) => {
           })
             .then(response => response.json())
             .then(data => {
+              console.log(data, 'testing the data');
               let username = `${data.data.name}`;
               login(username, token, data.data.id);
               navigate('/auth_google');
+              setMessage(data?.message)
             });
         } else {
+          setMessage(data?.message)
           navigate('/login');
         }
       });
@@ -122,6 +128,7 @@ const LoginForm = ({ hasLabel, layout }) => {
       </Row>
 
       <Form.Group>
+        {message && <span className='text-danger'>{message}</span>}
         <Button
           type="submit"
           color="primary"

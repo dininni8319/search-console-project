@@ -19,8 +19,8 @@ button {
 }
 
 .img-landing-page {
-  width: 40%;
-  height: 40%;
+  width: 50%;
+  height: 50%;
 }
 
 .checkbox-round {
@@ -87,8 +87,7 @@ button {
 
 @media only screen and (max-width: 765px) {
   .img-landing-page {
-    width: 90%;
-    height: 90%;
+    width: 100%;
   }
 
   .date-input {
