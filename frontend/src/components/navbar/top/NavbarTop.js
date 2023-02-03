@@ -15,7 +15,7 @@ import i18next from 'i18next';
 import GlobeIcon from '../Globe';
 const NavbarTop = ({ data, handleChange }) => {
   const {
-    config: { navbarPosition, navbarCollapsed },
+    config: { showBurgerMenu, navbarPosition, navbarCollapsed },
     setConfig
   } = useContext(AppContext);
   let location = window.location.toString().includes('analytics_page');
@@ -26,8 +26,8 @@ const NavbarTop = ({ data, handleChange }) => {
 
   const handleBurgerMenu = () => {
     navbarPosition === 'top' && setConfig('navbarCollapsed', !navbarCollapsed);
-    // (navbarPosition === 'vertical' || navbarPosition === 'combo') &&
-    //   setConfig('showBurgerMenu', !showBurgerMenu);
+    (navbarPosition === 'vertical' || navbarPosition === 'combo') &&
+      setConfig('showBurgerMenu', !showBurgerMenu);
   };
 
   const setDropShadow = () => {
@@ -46,7 +46,7 @@ const NavbarTop = ({ data, handleChange }) => {
 
   return (
     <Navbar
-      className={classNames('navbar-glass  fs--1 navbar-top sticky-kit', {
+      className={classNames('navbar-glass fs--1 navbar-top sticky-kit', {
         // 'navbar-glass-shadow': showDropShadow
         'navbar-glass-shadow': showDropShadow && !isChat
       })}

@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { LOADING, SUCCESS, ERROR } from './actionTypes';
 
-const useApiRequest = handleDispatch => {
+const useApiRequest = (handleDispatch) => {
   const makeRequest = useCallback(async (endpoint, params = {}) => {
     handleDispatch({ type: LOADING });
 

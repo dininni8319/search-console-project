@@ -1,4 +1,4 @@
-import React, { useState, useContext, useReducer } from 'react';
+import { useState, useContext, useReducer } from 'react';
 import { useNavigate } from 'react-router';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,7 @@ import SocialAuthButtons from './SocialAuthButtons';
 import { ConfigContext } from 'context/Config/index';
 import { AuthContext } from 'context/Auth/index';
 import { useTranslation } from 'react-i18next';
+
 const initialState = {
   name: '',
   email: '',
@@ -27,16 +28,7 @@ const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const { api_urls } = useContext(ConfigContext);
-  // State
-
-  const handleChange = e => {
-    const { name, value, checked } = e.target;
-    const action = {
-      input: name,
-      value: name === 'isAccepted' ? checked : value
-    };
-    dispatch(action);
-  };
+  const [ error, setError ] = useState(null);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -48,58 +40,66 @@ const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
 
   const handleRegister = event => {
     event.preventDefault();
-
+    setError(null)
     if (formData.password === formData.password_confirmation) {
       fetch(`${api_urls.backend}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       })
-        .then(response => {
-          if (response.ok) {
-            navigate('/auth_google');
-            return response.json();
-          } else {
-            alert('ops..');
+        .then((response) => response.json())
+        .then((data)  => {
+          if (data) {
+            if (Array.isArray(data.message.email)) {
+              setError(prev => [...data.message.email]);
+            } else {
+              setError(prev => data.message);
+            }
           }
-        })
+       })
         .then(() => {
-          fetch(`${api_urls.backend}/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              email: formData.email,
-              password: formData.password
-            })
-          })
-            .then(response => response.json())
-            .then(data => {
-              const token = data.token;
-
-              fetch(`${api_urls.backend}/view-profile`, {
-                method: 'GET',
-                headers: {
-                  Authorization: `Bearer ${token}`
-                }
+          console.log(error);
+          if (error) {
+            return;
+          } else {
+            fetch(`${api_urls.backend}/login`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                email: error ? null : formData?.email,
+                password: error ? null : formData?.password,
               })
-                .then(response => response.json())
-                .then(data => {
-                  login(data.data.name, token, data.data.id);
-                  navigate('/auth_google'); //object history;
-                });
-            });
+            })
+              .then(response => response.json())
+              .then(data => {
+                const token = data.token;
+  
+                fetch(`${api_urls.backend}/view-profile`, {
+                  method: 'GET',
+                  headers: {
+                    Authorization: `Bearer ${token}`
+                  }
+                })
+                  .then(response => response.json())
+                  .then((data) => {
+                    if (data.success && !error) {
+                      login(data.data.name, token, data.data.id);
+                      navigate('/auth_google'); 
+                    } else {
+                      if (Array.isArray(data.message.email)) {
+                        setError(prev => [...data.message.email])
+                      } else {
+                       setError(prev => data.message)
+                      }
+                    }
+                  });
+              });
+
+          }
         });
     } else {
-      alert('the passwords are not the same');
+      setError('the passwords are not the same');
     }
-  };
-
-  // Handler
-  const handleSubmit = e => {
-    e.preventDefault();
-    toast.success(`Successfully registered as ${formData.name}`, {
-      theme: 'colored'
-    });
   };
 
   const handleFieldChange = e => {
@@ -154,6 +154,9 @@ const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
             type="password"
           />
         </Form.Group>
+        <div className='py-2'>
+          {error && <span className='text-danger text-sm'>{error}</span>}
+        </div>
       </Row>
 
       <Form.Group className="mb-3">

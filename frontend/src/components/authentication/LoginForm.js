@@ -9,9 +9,10 @@ import { ConfigContext } from 'context/Config/index';
 import { useNavigate } from 'react-router';
 import { AuthContext } from 'context/Auth/index';
 import { useTranslation } from 'react-i18next';
+import Flex from 'components/common/Flex';
 
 const LoginForm = ({ hasLabel, layout }) => {
-  // State
+  const [ error, setError ] = useState(null);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
@@ -22,26 +23,24 @@ const LoginForm = ({ hasLabel, layout }) => {
     remember: false
   });
 
+  console.log(formData);
   const handleLogin = event => {
     event.preventDefault();
-
-    toast.success(`Logged in as ${formData.email}`, {
-      theme: 'colored'
-    });
+    setError(null);
 
     fetch(`${api_urls.backend}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email: formData.email,
-        password: formData.password
+        email: error ? null : formData?.email,
+        password: error ? null : formData?.password,
       })
     })
       .then(response => response.json())
       .then(data => {
         const token = data.token;
 
-        if (token) {
+        if (token && !error) {
           fetch(`${api_urls.backend}/view-profile`, {
             method: 'GET',
             headers: {
@@ -51,11 +50,20 @@ const LoginForm = ({ hasLabel, layout }) => {
             .then(response => response.json())
             .then(data => {
               let username = `${data.data.name}`;
+
+              toast.success(`Logged in as ${formData.email}`, {
+                theme: 'colored'
+              });
               login(username, token, data.data.id);
               navigate('/auth_google');
+
             });
         } else {
-          navigate('/login');
+          if (Array.isArray(data.message.password)) {
+            setError(prev => [...data.message.password])
+          } else {
+           setError(prev => data.message)
+          }
         }
       });
   };
@@ -119,6 +127,9 @@ const LoginForm = ({ hasLabel, layout }) => {
             {t('forgot_password')}
           </Link>
         </Col>
+        <Flex justifyContent='center'>
+          {error && <span className='text-danger py-2 text-sm'>{error}</span>}
+        </Flex>
       </Row>
 
       <Form.Group>

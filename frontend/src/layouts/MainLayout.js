@@ -14,6 +14,10 @@ const MainLayout = ({
   const { hash, pathname } = useLocation();
   const isKanban = pathname.includes('kanban');
 
+  const {
+    config: { isFluid, navbarPosition }
+  } = useContext(AppContext);
+
   useEffect(() => {
     setTimeout(() => {
       if (hash) {
@@ -31,13 +35,11 @@ const MainLayout = ({
   }, [pathname]);
 
   return (
-    <div className='container-fluid'>
-      {!isOpen && (
-        <NavbarVertical
-        /* data={data} 
-          handleChange={handleChange} */
-        />
-      )}
+    <div className={isFluid ? 'container-fluid' : 'container'}>
+      {!isOpen && (navbarPosition === 'vertical' || navbarPosition === 'combo') && (
+          <NavbarVertical />
+        )
+      }
       <div className={classNames('content', { 'pb-0': isKanban })}>
         {!isOpen && <NavbarTop data={data} handleChange={handleChange} />}
         {/*------ Main Routes ------*/}
