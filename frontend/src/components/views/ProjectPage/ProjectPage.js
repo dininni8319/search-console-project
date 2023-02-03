@@ -64,7 +64,7 @@ const ProjectPage = () => {
   return (
     <MainLayout>
       <div className="d-md-flex flex-column align-items-center">
-        <h3>{t('entered_projects')}</h3>
+        <h3 className='text-center'>{t('entered_projects')}</h3>
         <ul className="col-12 col-md-6 col-lg-8 mt-3">
           {state?.data?.map(site => {
             return (

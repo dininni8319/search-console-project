@@ -21,7 +21,6 @@ import Welcome from 'components/views/Welcome/Welcome';
 import Home from 'components/views/Home/Home';
 import GoogleAuth from 'components/views/AnaliticsPage/AnaliticsPage';
 import ProjectPage from 'components/views/ProjectPage/ProjectPage';
-// import Rendimento from 'components/views/Rendimento/Rendimento';
 import AuthWithGoogle from 'components/views/AuthWithGoogle/index';
 import { ConfigContext } from 'context/Config/index';
 import ProtectedRoute from 'Utilities/ProtectedRoute';
@@ -63,7 +62,6 @@ const Layout = () => {
   return (
     <>
       <Routes>
-        {/* <Route path="landing" element={<Landing />} /> */}
         <Route path="/" element={<Welcome />} />
 
         <Route

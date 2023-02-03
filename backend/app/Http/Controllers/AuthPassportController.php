@@ -15,7 +15,7 @@ class AuthPassportController extends Controller
         $validator = Validator::make($request->all(),[
             'name' => 'required|string',
             'email' => 'required|string|unique:users',
-            'password' => 'required|min:6|confirmed', 
+            'password' => 'required|min:7|confirmed', 
         ]);
 
         if ($validator->fails()) {
@@ -43,7 +43,7 @@ class AuthPassportController extends Controller
 
         $validator = Validator::make($request->all(),[
             'email' => 'required|string|email',
-            'password' => 'required|min:6', 
+            'password' => 'required|min:7', 
         ]);
 
         if ($validator->fails()) {
@@ -66,7 +66,7 @@ class AuthPassportController extends Controller
                     'message' => $responseMessage,
                     'error' => $responseMessage
                 ], 422);
-            }
+            } 
 
             $accessToken = $user->createToken('authToken')->accessToken; 
             $responseMessage = "Login Successful";
