@@ -16,6 +16,7 @@ class SearchConsoleAnalyticsAction
 
     $dateNow = Carbon::now()->format('Y-m-d');
     if (intval($num) === 7 || intval($num) === 28) {
+      
       $twoWeeksBefore = Carbon::now()->subDays($num)->format('Y-m-d');
 
       $request->setStartDate($dateStart ? $dateStart : $twoWeeksBefore);
@@ -53,6 +54,7 @@ class SearchConsoleAnalyticsAction
         'count' => $count,
       ]);
       return $data;
+
     } else {
       $twoWeeksBefore = Carbon::now()->subMonths($num)->format('Y-m-d');
   

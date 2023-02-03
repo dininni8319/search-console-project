@@ -39,12 +39,7 @@ class GoogleController extends Controller
         
         $client = $this->getClient();
         $client->getAccessToken();
-        
-        /**
-         * Strip slashes from the access token json
-         * if you don't strip mysql's escaping, everything will seem to work
-         * but you will not get a new access token from your refresh token
-         */
+    
         $accessTokenJson = stripslashes($user->google_access_token_json);
 
         $client->setAccessToken(($accessTokenJson));

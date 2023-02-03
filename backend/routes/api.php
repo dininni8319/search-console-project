@@ -4,10 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleController;
-use App\Http\Controllers\AuthPassportController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\AuthPassportController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\SearchConsoleController;
+use App\Http\Controllers\StoreSearchDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +54,9 @@ Route::group(['middleware' => 'CORS'],function ($router){
     
     //project
     Route::post('/search/console/new_project', [ProjectController::class, 'storeProject']);
+    Route::post('/search/console/store_data', [StoreSearchDataController::class, 'storeData']);
     Route::get('/search/console/all_projects', [ProjectController::class, 'getAllProjects']);
+
 });
    
 

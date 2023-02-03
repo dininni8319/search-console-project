@@ -53,7 +53,7 @@ class SearchConsoleController extends GoogleController
             'data' => $rows['rows'],
             'performance' => $rows['performance'],
             'count' => $rows['count'],
-            'message' => 'Questi sono i siti trovati',
+            'message' => 'Questi sono i dati che ho trovato',
           ], 200);  
     }
     
@@ -91,4 +91,3 @@ class SearchConsoleController extends GoogleController
         return response()->json($msg,404);
     }
 }
-
