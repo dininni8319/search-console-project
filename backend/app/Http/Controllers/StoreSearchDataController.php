@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Jobs\ProcessSearchConsoleData;
 use App\Actions\SearchConsoleStoreData;
 
 class StoreSearchDataController extends GoogleController
@@ -15,6 +16,13 @@ class StoreSearchDataController extends GoogleController
     {
       $client = GoogleController::getUserClient();
       $rows = $action->handleStoreData($client, $request->site);
-      dd($rows); 
+      $revArr = array(...$rows);
+    
+   
+      if ($revArr) {
+
+        ProcessSearchConsoleData::dispatch($revArr);
+        
+      }
     }
 }

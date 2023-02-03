@@ -6,10 +6,10 @@ use App\Models\Project;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Analitic extends Model
+class Months extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
         'clicks',
         'position',
