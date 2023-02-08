@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Jobs\ProcessSearchConsoleData;
+use App\Actions\SearchConsoleStoreData;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\GoogleController;
 
-class ProjectController extends Controller
+class ProjectController extends GoogleController
 {
     public function __construct(){
         $this->middleware("auth:api");
     }
 
-    public function storeProject(Request $request)
+    public function storeProject(Request $request, SearchConsoleStoreData $action)
     {
         $userId = auth()->guard('api')->user()->id;
         
@@ -32,6 +35,15 @@ class ProjectController extends Controller
                 'user_id' => $userId,
             ]);
 
+            $client = GoogleController::getUserClient();
+            $url = preg_replace("(^https?://)", "", $request->project);
+            $rows = $action->handleStoreData($client, $url);
+            $revArr = array(...$rows);
+   
+            if ($revArr) {
+                ProcessSearchConsoleData::dispatch($revArr, $project->id); 
+            }
+   
             if ($project) {
                 return response()->json([
                     'success' => true,

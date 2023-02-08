@@ -20,10 +20,12 @@ class ProcessSearchConsoleData implements ShouldQueue
      * @return void
      */
     protected $rows;
+    protected $projectId;
 
-    public function __construct($rows)
+    public function __construct($rows, $projectId)
     {
         $this->rows = $rows; 
+        $this->projectId = $projectId;
     }
 
     /**
@@ -34,7 +36,8 @@ class ProcessSearchConsoleData implements ShouldQueue
     public function handle()
     {
         $rows = $this->rows;
-
+        $projectId = $this->projectId;
+        
         foreach ($rows as $key => $row) {
 
             $storeAnalitycs = Analitic::create([
@@ -43,7 +46,7 @@ class ProcessSearchConsoleData implements ShouldQueue
                 'ctr' => $row->ctr,
                 'impressions' => $row->impressions,
                 'date' => $row->keys[0],
-                'project_id' => 48,
+                'project_id' => $projectId,
             ]);
         }
     }

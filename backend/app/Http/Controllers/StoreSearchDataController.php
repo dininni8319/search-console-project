@@ -9,20 +9,11 @@ use App\Actions\SearchConsoleStoreData;
 class StoreSearchDataController extends GoogleController
 {
     public function __construct(){
-        $this->middleware("auth:api");
+      $this->middleware("auth:api");
     }
     
-    public function storeData(Request $request,SearchConsoleStoreData $action)
+    public function storeData(Request $request)
     {
-      $client = GoogleController::getUserClient();
-      $rows = $action->handleStoreData($client, $request->site);
-      $revArr = array(...$rows);
-    
-   
-      if ($revArr) {
-
-        ProcessSearchConsoleData::dispatch($revArr);
-        
-      }
+      
     }
 }
