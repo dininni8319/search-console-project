@@ -158,6 +158,7 @@ const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
           {error && <span className='text-danger text-sm'>{error}</span>}
         </div>
       </Row>
+     
 
       <Form.Group className="mb-3">
         <Form.Check type="checkbox" id="acceptCheckbox" className="form-check">
@@ -172,7 +173,7 @@ const RegistrationForm = ({ hasLabel, handleGoogleLogin }) => {
               })
             }
           />
-
+           
           <Form.Check.Label className="form-label">
            {t('accept')}<Link to="#!"> {t('termini')}</Link> {t("and")}{' '}
             <Link to="#!">{t('privacy')}</Link>
