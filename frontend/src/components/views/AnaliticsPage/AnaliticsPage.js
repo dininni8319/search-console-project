@@ -58,16 +58,18 @@ const GoogleAuth = () => {
     };
 
     const site = getUrl(formData);
-    fetch(`${api_urls.backend}/search/console/weekly_data/${site}`, paramsGet)
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          setAnalytic({
-            ...analytics,
-            data
-          });
-        }
-      });
+    if (site) {
+      fetch(`${api_urls.backend}/search/console/weekly_data/${site}`, paramsGet)
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            setAnalytic({
+              ...analytics,
+              data
+            });
+          }
+        });
+    }
   }, [formData]);
 
   const handleDispatch = useCallback(action => {
