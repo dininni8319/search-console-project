@@ -108,7 +108,6 @@ const FormSelect = () => {
             </button>
           </div>
         </div>
-        {/* {state.data && <span className='text-danger'>{state.data.message}</span>} */}
       </form>
     </div>
   );
