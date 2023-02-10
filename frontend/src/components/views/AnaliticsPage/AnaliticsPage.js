@@ -58,7 +58,7 @@ const GoogleAuth = () => {
     };
 
     const site = getUrl(formData);
-    if (site) {
+    
       fetch(`${api_urls.backend}/search/console/weekly_data/${site}`, paramsGet)
         .then(response => response.json())
         .then(data => {
@@ -69,7 +69,7 @@ const GoogleAuth = () => {
             });
           }
         });
-    }
+
   }, [formData]);
 
   const handleDispatch = useCallback(action => {
@@ -100,7 +100,11 @@ const GoogleAuth = () => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       >
-        <Saas analytics={analytics} isOpen={isOpen} setIsOpen={setIsOpen} />
+        <Saas 
+          analytics={analytics} 
+          isOpen={isOpen} 
+          setIsOpen={setIsOpen} 
+        />
       </MainLayout>
       {isOpen && (
         <Modal
