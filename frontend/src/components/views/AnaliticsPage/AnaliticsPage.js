@@ -33,6 +33,7 @@ const GoogleAuth = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [analytics, setAnalytic] = useState({});
   const [formData, setFormData] = useState('');
+  console.log(state, 'testing the state data');
 
   const params = {
     method: 'GET',
@@ -58,18 +59,16 @@ const GoogleAuth = () => {
     };
 
     const site = getUrl(formData);
-    
-      fetch(`${api_urls.backend}/search/console/weekly_data/${site}`, paramsGet)
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            setAnalytic({
-              ...analytics,
-              data
-            });
-          }
-        });
-
+    fetch(`${api_urls.backend}/search/console/weekly_data/${site}`, paramsGet)
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          setAnalytic({
+            ...analytics,
+            data
+          });
+        }
+      });
   }, [formData]);
 
   const handleDispatch = useCallback(action => {
@@ -100,11 +99,7 @@ const GoogleAuth = () => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       >
-        <Saas 
-          analytics={analytics} 
-          isOpen={isOpen} 
-          setIsOpen={setIsOpen} 
-        />
+        <Saas analytics={analytics} isOpen={isOpen} setIsOpen={setIsOpen} />
       </MainLayout>
       {isOpen && (
         <Modal

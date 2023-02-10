@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 const FormSelectComponent = ({ handleChange, data }) => {
   const { t } = useTranslation();
+  console.log(data, 'testing the data');
 
   return (
     <div className="my-3">
