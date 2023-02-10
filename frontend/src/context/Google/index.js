@@ -10,7 +10,7 @@ export function GoogleProvider(props) {
 
   const handleGoogleLogin = async () => {
     try {
-      const response = await await fetch(
+      const response = await fetch(
         `${api_urls.backend}/google/login/url`
       );
 

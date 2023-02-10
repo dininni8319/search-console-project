@@ -13,7 +13,7 @@ const Login = ({ handleGoogleLogin }) => {
       <Flex alignItems="center" justifyContent="between">
         <h3>{t('login')}</h3>
         <p className="mb-0 fs--1">
-          <span className="fw-semi-bold">{t('new_user')}</span>
+          <span className="fw-semi-bold px-1">{t('new_user')}</span>
           <Link to="/register">{t('create_account')}</Link>
         </p>
       </Flex>
