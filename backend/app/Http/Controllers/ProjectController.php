@@ -60,15 +60,14 @@ class ProjectController extends GoogleController
     public function getAllProjects()
     {
         $userId = auth()->guard('api')->user()->id;
-
-        if ($userId) {
-           
-            $projects = Project::where('user_id', $userId)->get();
-
-            $newProjects = [];
-
-            foreach ($projects as $key => $value) {
         
+        if ($userId) {
+            
+            $projects = Project::where('user_id', $userId)->get();
+            
+            $newProjects = [];
+            
+            foreach ($projects as $key => $value) {
                 array_push($newProjects, $value);
             }
 

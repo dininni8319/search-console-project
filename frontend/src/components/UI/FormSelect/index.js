@@ -21,7 +21,8 @@ const FormSelect = () => {
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  
+  console.log(state, 'testing the state');
   const params = {
     method: 'GET',
     headers: { Authorization: `Bearer ${user?.token}` }

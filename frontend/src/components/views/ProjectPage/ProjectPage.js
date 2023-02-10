@@ -22,7 +22,7 @@ const ProjectPage = () => {
   const { user } = useContext(AuthContext);
   const [state, dispatch] = useReducer(authReducer, initialState);
   const [site, setSite] = useState(0);
-
+  
   const params = {
     method: 'GET',
     headers: { Authorization: `Bearer ${user?.token}` }

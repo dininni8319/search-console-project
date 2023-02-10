@@ -121,6 +121,5 @@ class SearchConsoleAnalyticsAction
 
     return $newSites;
   }
-  
 }
 
