@@ -4,8 +4,9 @@ import { tooltipFormatter } from 'helpers/echart-utils';
 
 export function getUrl(site) {
   const reg = /^https?:\/\/|\/+$/g;
-
-  return site.replace(reg, '');
+  if(site) {
+    return site?.replace(reg, '');
+  }
 }
 
 export function perCent(num) {
