@@ -70,7 +70,7 @@ const ProjectPage = () => {
             return (
               <div className="bg-white">
                 <li className="p-2 px-3 mt-2 shadow">
-                  {getUrl(site.project)}
+                  {getUrl(site)}
                   <FontAwesomeIcon
                     icon={faTrashAlt}
                     className={`fa-1x float-end text-danger custom-class-icon`}
