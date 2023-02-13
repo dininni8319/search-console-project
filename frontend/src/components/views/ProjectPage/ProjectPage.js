@@ -22,7 +22,7 @@ const ProjectPage = () => {
   const { user } = useContext(AuthContext);
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  console.log(state?.data, 'testing the data');
+  console.log(state, 'testing the data');
   const params = {
     method: 'GET',
     headers: { Authorization: `Bearer ${user?.token}` }
