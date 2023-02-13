@@ -22,7 +22,7 @@ const ProjectPage = () => {
   const { user } = useContext(AuthContext);
   const [state, dispatch] = useReducer(authReducer, initialState);
   const [site, setSite] = useState(0);
-  
+  console.log(state, 'testing rhe sit');
   const params = {
     method: 'GET',
     headers: { Authorization: `Bearer ${user?.token}` }
@@ -39,6 +39,7 @@ const ProjectPage = () => {
   }, [getAllProjects]);
 
   const handleDelete = async site => {
+    
     try {
       const response = await fetch(
         `${api_urls.backend}/search/console/delete/${site.id}`,
@@ -81,9 +82,7 @@ const ProjectPage = () => {
             );
           })}
           <div className="text-center mt-3">
-            {state.data.length === 0 && (
-              <Link to="/landing_page">{t('create_project')}</Link>
-            )}
+            {state.data.length > 0 ? null : <Link to="/landing_page">{t('create_project')}</Link>}
           </div>
         </ul>
       </div>

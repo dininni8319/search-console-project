@@ -60,7 +60,6 @@ const tooltipFormatter = (params, selectedMonth, previousMonth) => {
 const GrossRevenueChart = forwardRef(
   ({ analytics, selectedMonth, previousMonth, ...rest }, ref) => {
     const lenArr = turnObjIntoArray(analytics?.data?.data, 'keys');
-    console.log('len', lenArr);
     return (
       <ReactEChartsCore
         echarts={echarts}
