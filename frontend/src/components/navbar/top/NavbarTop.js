@@ -11,8 +11,8 @@ import { Dropdown } from 'react-bootstrap';
 import { languages } from '../../../data/language';
 import { loadLanguages } from 'i18next';
 import i18next from 'i18next';
-
 import GlobeIcon from '../Globe';
+
 const NavbarTop = ({ data, handleChange }) => {
   const {
     config: { showBurgerMenu, navbarPosition, navbarCollapsed },

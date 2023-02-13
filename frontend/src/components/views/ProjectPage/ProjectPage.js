@@ -37,11 +37,11 @@ const ProjectPage = () => {
     getAllProjects(`${api_urls.backend}/search/console/all_projects`, params);
   }, [getAllProjects]);
 
-  const handleDelete = async (site) => {
-      console.log(site, site.id,'test' );
+  const handleDelete = async (id) => {
+      
       try {
         const response = await fetch(
-          `${api_urls.backend}/search/console/delete/${site.id}`,
+          `${api_urls.backend}/search/console/delete/${id}`,
           {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${user?.token}` }
@@ -50,7 +50,7 @@ const ProjectPage = () => {
   
         const data = await response.json();
         if (data.success) {
-          let newSites = state.data.filter(project => project.id !== site.id);
+          let newSites = state.data.filter(project => project.id !== id);
   
           dispatch({ type: 'SUCCESS', data: newSites });
         } else {
@@ -68,13 +68,13 @@ const ProjectPage = () => {
         <h3 className='text-center'>{t('entered_projects')}</h3>
         <ul className="col-12 col-md-6 col-lg-8 mt-3">
           {state?.data?.map(site => {
-            console.log(site, 'testing the site');
+            console.log(site, 'testing the site for the delete');
             return (
               <div className="bg-white">
                 <li className="p-3 mt-2 shadow">
                   {getUrl(site)}
                   <button
-                    onClick={() => handleDelete(site)}
+                    onClick={() => handleDelete(site.id)}
                     className='btn btn-transparent float-end btn-none-custom'
                   >
                     <FontAwesomeIcon

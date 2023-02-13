@@ -64,18 +64,12 @@ class ProjectController extends GoogleController
         if ($userId) {
             
             $projects = Project::where('user_id', $userId)->get();
-            
-            $newProjects = [];
-            
-            foreach ($projects as $key => $value) {
-                array_push($newProjects, $value);
-            }
 
             if ($projects) {
                 return response()->json([
                     'success' => true,
                     'message' => 'Questi sono i progetti che ho trovato!',
-                    'data' => $newProjects
+                    'data' => $projects
                 ], 200);
             }
             return response()->json([

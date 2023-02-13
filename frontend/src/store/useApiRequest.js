@@ -6,7 +6,7 @@ const useApiRequest = (handleDispatch) => {
     handleDispatch({ type: LOADING });
 
     try {
-      const response = await await fetch(endpoint, params);
+      const response = await fetch(endpoint, params);
 
       const { data } = await response.json();
 

@@ -5,13 +5,11 @@ import {
   useReducer,
   useCallback
 } from 'react';
-// import Flex from 'components/common/Flex';
 import { ConfigContext } from 'context/Config/index';
 import { AuthContext } from 'context/Auth/index';
 import useApiRequest from '../../../store/useApiRequest';
 import authReducer, { initialState } from '../../../store/apiReducer';
 import MainLayout from 'layouts/MainLayout';
-import { useNavigate } from 'react-router';
 import { getUrl } from '../../../utils';
 import Modal from '../../UI/Modal/Modal';
 import * as echarts from 'echarts/core';
@@ -26,7 +24,6 @@ import { CanvasRenderer } from 'echarts/renderers';
 import Saas from 'components/dashboard/saas';
 
 const GoogleAuth = () => {
-  const navigate = useNavigate();
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
   const [state, dispatch] = useReducer(authReducer, initialState);
@@ -45,8 +42,6 @@ const GoogleAuth = () => {
 
   const site = getUrl(formData);
 
-  console.log(site, 'testing the site');
-
   const handleChange = e => {
     setFormData(e.target.value);
   };
@@ -61,7 +56,7 @@ const GoogleAuth = () => {
 
     const site = getUrl(formData);
 
-    fetch(`${api_urls.backend}/search/console/weekly_data/${site?.data?.project}`, paramsGet)
+    fetch(`${api_urls.backend}/search/console/weekly_data/${site}`, paramsGet)
       .then(response => response.json())
       .then(data => {
         if (data.success) {
