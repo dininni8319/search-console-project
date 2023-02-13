@@ -21,6 +21,7 @@ const ProjectPage = () => {
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
   const [state, dispatch] = useReducer(authReducer, initialState);
+
   const params = {
     method: 'GET',
     headers: { Authorization: `Bearer ${user?.token}` }
@@ -37,7 +38,7 @@ const ProjectPage = () => {
   }, [getAllProjects]);
 
   const handleDelete = async (site) => {
-   
+      console.log(site, site.id,'test' );
       try {
         const response = await fetch(
           `${api_urls.backend}/search/console/delete/${site.id}`,
@@ -67,6 +68,7 @@ const ProjectPage = () => {
         <h3 className='text-center'>{t('entered_projects')}</h3>
         <ul className="col-12 col-md-6 col-lg-8 mt-3">
           {state?.data?.map(site => {
+            console.log(site, 'testing the site');
             return (
               <div className="bg-white">
                 <li className="p-3 mt-2 shadow">
