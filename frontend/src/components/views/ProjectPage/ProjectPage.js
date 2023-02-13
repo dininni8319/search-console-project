@@ -22,7 +22,7 @@ const ProjectPage = () => {
   const { user } = useContext(AuthContext);
   const [state, dispatch] = useReducer(authReducer, initialState);
   const [site, setSite] = useState(0);
-  console.log(state, 'testing rhe sit');
+
   const params = {
     method: 'GET',
     headers: { Authorization: `Bearer ${user?.token}` }
@@ -39,26 +39,27 @@ const ProjectPage = () => {
   }, [getAllProjects]);
 
   const handleDelete = async site => {
-    
-    try {
-      const response = await fetch(
-        `${api_urls.backend}/search/console/delete/${site.id}`,
-        {
-          method: 'DELETE',
-          headers: { Authorization: `Bearer ${user?.token}` }
+    if (site.id) {
+      try {
+        const response = await fetch(
+          `${api_urls.backend}/search/console/delete/${site.id}`,
+          {
+            method: 'DELETE',
+            headers: { Authorization: `Bearer ${user?.token}` }
+          }
+        );
+  
+        const data = await response.json();
+        if (data.success) {
+          let newSites = state.data.filter(project => project.id !== site.id);
+  
+          dispatch({ type: 'SUCCESS', data: newSites });
+        } else {
+          alert('error while fetching!');
         }
-      );
-
-      const data = await response.json();
-      if (data.success) {
-        let newSites = state.data.filter(project => project.id !== site.id);
-
-        dispatch({ type: 'SUCCESS', data: newSites });
-      } else {
-        alert('error while fetching!');
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -67,15 +68,15 @@ const ProjectPage = () => {
       <div className="d-md-flex flex-column align-items-center">
         <h3 className='text-center'>{t('entered_projects')}</h3>
         <ul className="col-12 col-md-6 col-lg-8 mt-3">
-          {state?.data?.map(site => {
+          {state?.data?.map(sito => {
             return (
               <div className="bg-white">
                 <li className="p-2 px-3 mt-2 shadow">
-                  {getUrl(site)}
+                  {getUrl(sito)}
                   <FontAwesomeIcon
                     icon={faTrashAlt}
                     className={`fa-1x float-end text-danger custom-class-icon`}
-                    onClick={() => handleDelete(site)}
+                    onClick={() => handleDelete(sito)}
                   />
                 </li>
               </div>
