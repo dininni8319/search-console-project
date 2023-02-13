@@ -40,8 +40,8 @@ const TopNavRightSideNavItem = () => {
           </OverlayTrigger>
         </Nav.Link>
       </Nav.Item>
-      <NotificationDropdown />
-      <NineDotMenu />
+      {/* <NotificationDropdown /> */}
+      {/* <NineDotMenu /> */}
       <ProfileDropdown />
     </Nav>
   );
