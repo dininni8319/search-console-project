@@ -46,6 +46,7 @@ const GoogleAuth = () => {
 
   const site = getUrl(formData);
 
+  console.log(site, 'testing the site');
   const handleChange = e => {
     setFormData(e.target.value);
   };
@@ -59,7 +60,8 @@ const GoogleAuth = () => {
     };
 
     const site = getUrl(formData);
-    fetch(`${api_urls.backend}/search/console/weekly_data/${site}`, paramsGet)
+
+    fetch(`${api_urls.backend}/search/console/weekly_data/${site?.data?.project}`, paramsGet)
       .then(response => response.json())
       .then(data => {
         if (data.success) {

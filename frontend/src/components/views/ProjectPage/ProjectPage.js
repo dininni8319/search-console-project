@@ -21,8 +21,8 @@ const ProjectPage = () => {
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
   const [state, dispatch] = useReducer(authReducer, initialState);
-  const [site, setSite] = useState(0);
 
+  console.log(state?.data, 'testing the data');
   const params = {
     method: 'GET',
     headers: { Authorization: `Bearer ${user?.token}` }
@@ -38,7 +38,7 @@ const ProjectPage = () => {
     getAllProjects(`${api_urls.backend}/search/console/all_projects`, params);
   }, [getAllProjects]);
 
-  const handleDelete = async site => {
+  const handleDelete = async (site) => {
     if (site.id) {
       try {
         const response = await fetch(
@@ -68,16 +68,20 @@ const ProjectPage = () => {
       <div className="d-md-flex flex-column align-items-center">
         <h3 className='text-center'>{t('entered_projects')}</h3>
         <ul className="col-12 col-md-6 col-lg-8 mt-3">
-          {state?.data?.map(sito => {
+          {state?.data?.map(site => {
             return (
               <div className="bg-white">
-                <li className="p-2 px-3 mt-2 shadow">
-                  {getUrl(sito)}
-                  <FontAwesomeIcon
-                    icon={faTrashAlt}
-                    className={`fa-1x float-end text-danger custom-class-icon`}
-                    onClick={() => handleDelete(sito)}
-                  />
+                <li className="p-3 mt-2 shadow">
+                  {getUrl(site)}
+                  <button
+                    onClick={() => handleDelete(site)}
+                    className='btn btn-transparent float-end btn-none-custom'
+                  >
+                    <FontAwesomeIcon
+                      icon={faTrashAlt}
+                      className={`fa-1x text-danger custom-class-icon`}
+                    />
+                  </button>
                 </li>
               </div>
             );
