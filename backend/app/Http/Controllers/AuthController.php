@@ -59,7 +59,7 @@ class AuthController extends GoogleController
         return response()->json([
            'success' => true,
            'token' =>  $token,
-           'user_data' => $userFromGoogle
+           'user_data' => $userFromGoogle,
         ], 201);
     }
 }

@@ -7,17 +7,12 @@ export const dashboardRoutes = {
       active: true,
       icon: '',
       children: [
-        {
-          name: 'Home',
-          to: '/',
-          exact: true,
-          active: true
-        },
-        {
-          name: 'Analytics',
-          to: '/analytics_page',
-          active: true
-        }
+        // {
+        //   name: 'Home',
+        //   to: '/',
+        //   exact: true,
+        //   active: true
+        // },
       ]
     }
   ]
@@ -69,11 +64,11 @@ export const pagesRoutes = {
               to: '/register',
               active: true
             },
-            {
-              name: 'Logout',
-              to: '/authentication/simple/logout',
-              active: true
-            }
+            // {
+            //   name: 'Logout',
+            //   to: '/authentication/simple/logout',
+            //   active: true
+            // }
           ]
         }
       ]

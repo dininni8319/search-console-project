@@ -14,7 +14,8 @@ const Avatar = ({
   className,
   mediaClass,
   isExact,
-  icon
+  icon, 
+  user,
 }) => {
   const classNames = ['avatar', `avatar-${size}`, className].join(' ');
   const mediaClasses = [

@@ -8,7 +8,8 @@ import { useContext } from "react";
 import { AuthContext } from "../../../context/Auth";
 
 const ProfileDropdown = () => {
-  const { logout } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
+ 
   return (
     <Dropdown navbar={true} as="li">
       <Dropdown.Toggle
@@ -17,7 +18,7 @@ const ProfileDropdown = () => {
         to="#!"
         className="pe-0 ps-2 nav-link"
       >
-        <Avatar src={team3} />
+        <Avatar name={user.username}/>
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="dropdown-caret dropdown-menu-card  dropdown-menu-end">

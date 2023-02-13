@@ -51,7 +51,6 @@ const LoginForm = ({ hasLabel, layout }) => {
             .then(response => response.json())
             .then(data => {
               let username = `${data.data.name}`;
-
               toast.success(`Logged in as ${formData.email}`, {
                 theme: 'colored'
               });
