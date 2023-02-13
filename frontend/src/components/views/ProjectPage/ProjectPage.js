@@ -21,8 +21,6 @@ const ProjectPage = () => {
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
   const [state, dispatch] = useReducer(authReducer, initialState);
-
-  console.log(state, 'testing the data');
   const params = {
     method: 'GET',
     headers: { Authorization: `Bearer ${user?.token}` }
@@ -39,7 +37,7 @@ const ProjectPage = () => {
   }, [getAllProjects]);
 
   const handleDelete = async (site) => {
-    if (site.id) {
+   
       try {
         const response = await fetch(
           `${api_urls.backend}/search/console/delete/${site.id}`,
@@ -60,7 +58,7 @@ const ProjectPage = () => {
       } catch (error) {
         console.log(error);
       }
-    }
+  
   };
 
   return (

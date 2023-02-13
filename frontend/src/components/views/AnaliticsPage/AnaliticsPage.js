@@ -33,7 +33,7 @@ const GoogleAuth = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [analytics, setAnalytic] = useState({});
   const [formData, setFormData] = useState('');
-  console.log(state, 'testing the state data');
+  
 
   const params = {
     method: 'GET',
@@ -47,6 +47,7 @@ const GoogleAuth = () => {
   const site = getUrl(formData);
 
   console.log(site, 'testing the site');
+  
   const handleChange = e => {
     setFormData(e.target.value);
   };
