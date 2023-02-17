@@ -14,6 +14,6 @@ class StoreSearchDataController extends GoogleController
     
     public function storeData(Request $request)
     {
-      
+      return;
     }
 }

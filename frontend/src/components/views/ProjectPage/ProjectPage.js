@@ -22,6 +22,7 @@ const ProjectPage = () => {
   const { user } = useContext(AuthContext);
   const [state, dispatch] = useReducer(authReducer, initialState);
 
+  console.log(state.data, 'testing the data');
   const params = {
     method: 'GET',
     headers: { Authorization: `Bearer ${user?.token}` }
@@ -39,7 +40,6 @@ const ProjectPage = () => {
 
   const handleDelete = async (e ,id) => {
       e.preventDefault();
-      console.log(id);
       try {
         const response = await fetch(
           `${api_urls.backend}/search/console/delete/${id}`,
@@ -47,9 +47,10 @@ const ProjectPage = () => {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${user?.token}` }
           }
-        );
-  
+          );
+          
         const data = await response.json();
+          console.log(id);
         if (data.success) {
           let newSites = state.data.filter(project => project.id !== id);
   
@@ -69,12 +70,13 @@ const ProjectPage = () => {
         <h3 className='text-center'>{t('entered_projects')}</h3>
         <ul className="col-12 col-md-6 col-lg-8 mt-3">
           {state?.data?.map(site => {
+            console.log(site, 'testing the site');
             return (
               <div className="bg-white">
                 <li className="p-3 mt-2 shadow">
                   {getUrl(site)}
                   <button
-                    onClick={(e) => handleDelete(e, site.id)}
+                    onClick={(e) => handleDelete(e, site?.id)}
                     className='btn btn-transparent float-end btn-none-custom'
                   >
                     <FontAwesomeIcon

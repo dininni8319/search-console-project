@@ -82,19 +82,21 @@ class ProjectController extends GoogleController
     public function deleteProperty($id)
     {
         $userId = auth()->guard('api')->user()->id;
-        $project = Project::where('user_id', $userId)->find($id);
+        $project = Project::where('user_id', $userId)->find(intval($id));
 
-        if ($id && $project) {
+        //  dd($userId, $project, 'testing the project');
+        if ($id) {
             $project->delete();
 
             return response()->json([
                 'success' => true,
                 'message' => 'Il progetto è stato eliminato'
               ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Non ho trovato nessun progetto!'
+            ], 404);
         }
-        return response()->json([
-            'success' => false,
-            'message' => 'Non ho trovato nessun progetto!'
-        ], 404);
     }
 }
