@@ -38,5 +38,6 @@
   "performace": "Performance degl'ultimi tre mesi",
   "send": "applica",
   "start_date": "Data di inizio",
-  "end_date": "Data di fine"
+  "end_date": "Data di fine",
+  "no_data": "Dati non trovati"
 }
