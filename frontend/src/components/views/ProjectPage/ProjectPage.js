@@ -76,7 +76,7 @@ const ProjectPage = () => {
                   
                   <button
                     onClick={(e) => handleDelete(e, site?.id)}
-                    className='btn-transparent float-end  btn-style-none'
+                    className='btn-transparent float-end btn-style-none'
                   >
                     <FontAwesomeIcon
                       icon={faTrashAlt}
