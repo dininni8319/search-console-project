@@ -56,7 +56,7 @@ const FormSelect = () => {
       .then(resp => resp.json())
       .then(data => {
         if (data.success) {
-          navigate('/analytics_page');
+          navigate('/progetti');
         } else {
           navigate('/home');
         }

@@ -4,18 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
-use App\Jobs\ProcessSearchConsoleData;
-use App\Actions\SearchConsoleStoreData;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\GoogleController;
 
-class ProjectController extends GoogleController
+class ProjectController extends Controller
 {
     public function __construct(){
         $this->middleware("auth:api");
     }
 
-    public function storeProject(Request $request, SearchConsoleStoreData $action)
+    public function storeProject(Request $request)
     {
         $userId = auth()->guard('api')->user()->id;
         
@@ -35,15 +32,6 @@ class ProjectController extends GoogleController
                 'user_id' => $userId,
             ]);
 
-            $client = GoogleController::getUserClient();
-            $url = preg_replace("(^https?://)", "", $request->project);
-            $rows = $action->handleStoreData($client, $url);
-            $revArr = array(...$rows);
-   
-            if ($revArr) {
-                ProcessSearchConsoleData::dispatch($revArr, $project->id); 
-            }
-   
             if ($project) {
                 return response()->json([
                     'success' => true,
@@ -60,16 +48,23 @@ class ProjectController extends GoogleController
     public function getAllProjects()
     {
         $userId = auth()->guard('api')->user()->id;
-        
+
         if ($userId) {
-            
+           
             $projects = Project::where('user_id', $userId)->get();
+
+            $newProjects = [];
+
+            foreach ($projects as $key => $value) {
+        
+                array_push($newProjects, $value);
+            }
 
             if ($projects) {
                 return response()->json([
                     'success' => true,
                     'message' => 'Questi sono i progetti che ho trovato!',
-                    'data' => $projects
+                    'data' => $newProjects
                 ], 200);
             }
             return response()->json([
@@ -82,21 +77,19 @@ class ProjectController extends GoogleController
     public function deleteProperty($id)
     {
         $userId = auth()->guard('api')->user()->id;
-        $project = Project::where('user_id', $userId)->find(intval($id));
+        $project = Project::where('user_id', $userId)->find($id);
 
-        //  dd($userId, $project, 'testing the project');
-        if ($id) {
+        if ($id && $project) {
             $project->delete();
 
             return response()->json([
                 'success' => true,
                 'message' => 'Il progetto è stato eliminato'
               ], 200);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Non ho trovato nessun progetto!'
-            ], 404);
         }
+        return response()->json([
+            'success' => false,
+            'message' => 'Non ho trovato nessun progetto!'
+        ], 404);
     }
 }

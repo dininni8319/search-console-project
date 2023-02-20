@@ -21,8 +21,6 @@ const ProjectPage = () => {
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
   const [state, dispatch] = useReducer(authReducer, initialState);
-
-  console.log(state.data, 'testing the data');
   const params = {
     method: 'GET',
     headers: { Authorization: `Bearer ${user?.token}` }
@@ -50,7 +48,6 @@ const ProjectPage = () => {
           );
           
         const data = await response.json();
-          console.log(id);
         if (data.success) {
           let newSites = state.data.filter(project => project.id !== id);
   
@@ -69,15 +66,17 @@ const ProjectPage = () => {
       <div className="d-md-flex flex-column align-items-center">
         <h3 className='text-center'>{t('entered_projects')}</h3>
         <ul className="col-12 col-md-6 col-lg-8 mt-3">
-          {state?.data?.map(site => {
-            console.log(site, 'testing the site');
+          {state?.data.length ? state?.data?.map(site => {
             return (
               <div className="bg-white">
                 <li className="p-3 mt-2 shadow">
+                  <Link to={`/analytics_page/${getUrl(site)}`}>
                   {getUrl(site)}
+                  </Link>
+                  
                   <button
                     onClick={(e) => handleDelete(e, site?.id)}
-                    className='btn btn-transparent float-end btn-none-custom'
+                    className='btn-transparent float-end  btn-style-none'
                   >
                     <FontAwesomeIcon
                       icon={faTrashAlt}
@@ -87,10 +86,11 @@ const ProjectPage = () => {
                 </li>
               </div>
             );
-          })}
-          <div className="text-center mt-3">
-            {state.data.length > 0 ? null : <Link to="/landing_page">{t('create_project')}</Link>}
-          </div>
+          })
+         :  <div className="text-center mt-3">
+              <Link to="/landing_page">{t('create_project')}</Link>
+            </div>
+        }
         </ul>
       </div>
     </MainLayout>

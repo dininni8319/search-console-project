@@ -22,6 +22,7 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import Saas from 'components/dashboard/saas';
+import { useParams } from 'react-router';
 
 const GoogleAuth = () => {
   const { api_urls } = useContext(ConfigContext);
@@ -30,7 +31,8 @@ const GoogleAuth = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [analytics, setAnalytic] = useState({});
   const [formData, setFormData] = useState('');
-
+  const { slug } = useParams();
+  console.log(slug, site, 'testing the slug');
   const params = {
     method: 'GET',
     headers: { Authorization: `Bearer ${user?.token}` }
@@ -56,7 +58,7 @@ const GoogleAuth = () => {
 
     const site = getUrl(formData);
 
-    fetch(`${api_urls.backend}/search/console/weekly_data/${site}`, paramsGet)
+    fetch(`${api_urls.backend}/search/console/weekly_data/${site ? site : slug}`, paramsGet)
       .then(response => response.json())
       .then(data => {
         if (data.success) {
@@ -66,7 +68,7 @@ const GoogleAuth = () => {
           });
         }
       });
-  }, [formData]);
+  }, [formData, slug]);
 
   const handleDispatch = useCallback(action => {
     dispatch(action);
