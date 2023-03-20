@@ -15,7 +15,7 @@ class SearchConsoleStoreData
     $request->setStartRow(0);
 
     $dateNow = Carbon::now()->format('Y-m-d');
-    $dateStart = Carbon::now()->subMonths(9)->format('Y-m-d');
+    $dateStart = Carbon::now()->subMonths(17)->format('Y-m-d');
 
     $request->setStartDate($dateStart);
     $request->setEndDate($dateNow);
@@ -28,7 +28,6 @@ class SearchConsoleStoreData
     $rows = $query_search->getRows();
     
     return $rows;
-    
   }
 }
 

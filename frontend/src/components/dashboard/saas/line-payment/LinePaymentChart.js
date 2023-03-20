@@ -136,7 +136,7 @@ const LinePaymentChart = forwardRef(({ analytics, style }, ref) => {
   } = useContext(AppContext);
 
   const lenArr = turnObjIntoArray(analytics?.data?.data, 'keys');
-  console.log(lenArr.length);
+
   return (
     <ReactEChartsCore
       echarts={echarts}

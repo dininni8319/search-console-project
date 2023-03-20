@@ -21,7 +21,7 @@ const FormSelect = () => {
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  
   const params = {
     method: 'GET',
     headers: { Authorization: `Bearer ${user?.token}` }
@@ -56,7 +56,7 @@ const FormSelect = () => {
       .then(resp => resp.json())
       .then(data => {
         if (data.success) {
-          navigate('/analytics_page');
+          navigate('/progetti');
         } else {
           navigate('/home');
         }
@@ -108,7 +108,6 @@ const FormSelect = () => {
             </button>
           </div>
         </div>
-        {/* {state.data && <span className='text-danger'>{state.data.message}</span>} */}
       </form>
     </div>
   );

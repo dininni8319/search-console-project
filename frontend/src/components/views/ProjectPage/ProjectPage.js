@@ -21,8 +21,6 @@ const ProjectPage = () => {
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
   const [state, dispatch] = useReducer(authReducer, initialState);
-  const [site, setSite] = useState(0);
-
   const params = {
     method: 'GET',
     headers: { Authorization: `Bearer ${user?.token}` }
@@ -38,27 +36,29 @@ const ProjectPage = () => {
     getAllProjects(`${api_urls.backend}/search/console/all_projects`, params);
   }, [getAllProjects]);
 
-  const handleDelete = async site => {
-    try {
-      const response = await fetch(
-        `${api_urls.backend}/search/console/delete/${site.id}`,
-        {
-          method: 'DELETE',
-          headers: { Authorization: `Bearer ${user?.token}` }
+  const handleDelete = async (e ,id) => {
+      e.preventDefault();
+      try {
+        const response = await fetch(
+          `${api_urls.backend}/search/console/delete/${id}`,
+          {
+            method: 'DELETE',
+            headers: { Authorization: `Bearer ${user?.token}` }
+          }
+          );
+          
+        const data = await response.json();
+        if (data.success) {
+          let newSites = state.data.filter(project => project.id !== id);
+  
+          dispatch({ type: 'SUCCESS', data: newSites });
+        } else {
+          alert('error while fetching!');
         }
-      );
-
-      const data = await response.json();
-      if (data.success) {
-        let newSites = state.data.filter(project => project.id !== site.id);
-
-        dispatch({ type: 'SUCCESS', data: newSites });
-      } else {
-        alert('error while fetching!');
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
+  
   };
 
   return (
@@ -66,25 +66,31 @@ const ProjectPage = () => {
       <div className="d-md-flex flex-column align-items-center">
         <h3 className='text-center'>{t('entered_projects')}</h3>
         <ul className="col-12 col-md-6 col-lg-8 mt-3">
-          {state?.data?.map(site => {
+          {state?.data.length ? state?.data?.map(site => {
             return (
               <div className="bg-white">
-                <li className="p-2 px-3 mt-2 shadow">
-                  {getUrl(site.project)}
-                  <FontAwesomeIcon
-                    icon={faTrashAlt}
-                    className={`fa-1x float-end text-danger custom-class-icon`}
-                    onClick={() => handleDelete(site)}
-                  />
+                <li className="p-3 mt-2 shadow">
+                  <Link to={`/analytics_page/${getUrl(site)}`}>
+                  {getUrl(site)}
+                  </Link>
+                  
+                  <button
+                    onClick={(e) => handleDelete(e, site?.id)}
+                    className='btn-transparent float-end btn-style-none'
+                  >
+                    <FontAwesomeIcon
+                      icon={faTrashAlt}
+                      className={`fa-1x text-danger custom-class-icon`}
+                    />
+                  </button>
                 </li>
               </div>
             );
-          })}
-          <div className="text-center mt-3">
-            {state.data.length === 0 && (
+          })
+         :  <div className="text-center mt-3">
               <Link to="/landing_page">{t('create_project')}</Link>
-            )}
-          </div>
+            </div>
+        }
         </ul>
       </div>
     </MainLayout>

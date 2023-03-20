@@ -11,8 +11,8 @@ import { Dropdown } from 'react-bootstrap';
 import { languages } from '../../../data/language';
 import { loadLanguages } from 'i18next';
 import i18next from 'i18next';
-
 import GlobeIcon from '../Globe';
+
 const NavbarTop = ({ data, handleChange }) => {
   const {
     config: { showBurgerMenu, navbarPosition, navbarCollapsed },
@@ -96,12 +96,12 @@ const NavbarTop = ({ data, handleChange }) => {
         </Nav>
       )}
 
-      <div className="d-flex flex-sm-column flex-md-row alig-items-md-center justify-content-between w-100">
-        {location ? (
+      <div className="d-flex flex-sm-column flex-md-row alig-items-md-center justify-content-end w-100">
+        {/* {location ? (
           <FormSelectComponent handleChange={handleChange} data={data} />
         ) : (
           <div></div>
-        )}
+        )} */}
         <div className="d-flex align-items-center">
           <TopNavRightSideNavItem />
           <Dropdown>
@@ -116,7 +116,7 @@ const NavbarTop = ({ data, handleChange }) => {
                 return (
                   <Dropdown.Item key={country_code}>
                     <button
-                      className="btn btn-link"
+                      className="btn-none btn-transparent btn-style-none"
                       onClick={() => i18next.changeLanguage(code)}
                     >
                       <span className="text-capitalize">{name}</span>

@@ -2,21 +2,25 @@
 
 namespace App\Models;
 
-use App\Models\User;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Project extends Model
+class Analitic extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-      'project',
-      'user_id',
+        'clicks',
+        'position',
+        'ctr',
+        'impressions',
+        'project_id',
+        'date',
     ];
-
-    public function user()
+    
+    public function project()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Project::class);
     }
 }

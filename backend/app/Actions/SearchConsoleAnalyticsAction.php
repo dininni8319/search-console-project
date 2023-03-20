@@ -8,7 +8,7 @@ use \Google\Service\Webmasters;
 
 class SearchConsoleAnalyticsAction 
 {
-  public function handle($client, $site, $dateStart = null, $dateEnd = null, $num = null)
+  public function handle($client, $site, $dateStart = null, $dateEnd = null, $num = 3)
   {
     $service = new Webmasters($client);
     $request = new Webmasters\SearchAnalyticsQueryRequest;
@@ -57,7 +57,7 @@ class SearchConsoleAnalyticsAction
 
     } else {
       $twoWeeksBefore = Carbon::now()->subMonths($num)->format('Y-m-d');
-  
+      
       $request->setStartDate($dateStart ? $dateStart : $twoWeeksBefore);
       $request->setEndDate($dateEnd ? $dateEnd : $dateNow);
       $request->setSearchType('web');
@@ -67,7 +67,7 @@ class SearchConsoleAnalyticsAction
       // $request->setDimensions(array('query','date', 'country','device','page'));
       $query_search = $service->searchanalytics->query('https://'.$site, $request); 
       $rows = $query_search->getRows();
-  
+     
       $performance = [
         "clicks" => 0,
         "impressions" => 0,
@@ -121,6 +121,5 @@ class SearchConsoleAnalyticsAction
 
     return $newSites;
   }
-  
 }
 

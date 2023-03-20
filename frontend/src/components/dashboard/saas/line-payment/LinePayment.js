@@ -5,7 +5,7 @@ import Flex from 'components/common/Flex';
 import LinePaymentChart from './LinePaymentChart';
 import { useTranslation } from 'react-i18next';
 
-const LinePayment = ({ analytics, isOpen, setIsOpen }) => {
+const LinePayment = ({ analytics, setIsOpen }) => {
   const { t } = useTranslation();
 
   const chartRef = useRef(null);
@@ -25,7 +25,8 @@ const LinePayment = ({ analytics, isOpen, setIsOpen }) => {
           <Col className="light">
             <h4 className="text-white mb-0">{t('total_clicks')}</h4>
             <p className="fs--3 fw-semi-bold text-white">
-              {analytics?.data?.performance?.clicks}
+              {analytics?.data?.performance?.clicks > 0 && analytics?.data?.performance?.clicks}
+              {analytics?.data?.performance?.clicks === 0 && t('no_data')}
             </p>
           </Col>
           <Col xs="auto" className="d-sm-block">

@@ -16,7 +16,6 @@ class SearchConsoleController extends GoogleController
     
     public function getSearchConsoleData(Request $request, SearchConsoleAnalyticsAction $action)
     {
-        // $service = new \Google\Service\Webmasters\Resource\Sites
         $client = GoogleController::getUserClient();
         $rows = $action->handle($client, $request->site, $request->start, $request->end, $request->num);
          

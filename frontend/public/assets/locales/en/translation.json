@@ -38,5 +38,6 @@
   "performace": "Last three months performace",
   "send": "send",
   "start_date": "start date",
-  "end_date": "end date"
+  "end_date": "end date",
+  "no_data": "Data not found"
 }

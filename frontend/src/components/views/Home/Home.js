@@ -22,7 +22,7 @@ const LandingPage = () => {
       .then(response => response.json())
       .then(res => {
         if (res.success && res.token) {
-          login(res.user_data.email, res.token, res.user_data.id);
+          login(res.user_data.name, res.token, res.user_data.id);
 
           navigate('/landing_page');
         } else {

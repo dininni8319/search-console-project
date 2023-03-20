@@ -18,9 +18,10 @@ const FormSelectComponent = ({ handleChange, data }) => {
       >
         <option value="">{t('select')}</option>
         {data?.map((site, id) => {
+          
           return (
             <option key={id} value={site.project}>
-              {getUrl(site.project)}
+              {getUrl(site)}
             </option>
           );
         })}

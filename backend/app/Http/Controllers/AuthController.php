@@ -12,7 +12,14 @@ class AuthController extends GoogleController
         $client = GoogleController::getClient();
 
         $authUrl = $client->createAuthUrl();
-
+        if (!$client || !$authUrl) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Si è verificato un errore',
+                'client' => $client,
+                'authUrl' => $authUrl,
+            ], 404);
+        }
         return response()->json($authUrl, 200);
     }
 
@@ -52,7 +59,7 @@ class AuthController extends GoogleController
         return response()->json([
            'success' => true,
            'token' =>  $token,
-           'user_data' => $userFromGoogle
+           'user_data' => $userFromGoogle,
         ], 201);
     }
 }

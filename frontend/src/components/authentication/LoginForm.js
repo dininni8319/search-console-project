@@ -25,7 +25,6 @@ const LoginForm = ({ hasLabel, layout }) => {
     remember: false
   });
 
-  console.log(formData);
   const handleLogin = event => {
     event.preventDefault();
     setError(null);
@@ -51,9 +50,7 @@ const LoginForm = ({ hasLabel, layout }) => {
           })
             .then(response => response.json())
             .then(data => {
-              console.log(data, 'testing the data');
               let username = `${data.data.name}`;
-
               toast.success(`Logged in as ${formData.email}`, {
                 theme: 'colored'
               });

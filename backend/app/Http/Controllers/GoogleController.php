@@ -16,7 +16,7 @@ class GoogleController extends Controller
         $client = new \Google_Client();
         $client->setApplicationName($applicatinName);
         $client->setAuthConfig($configJson);
-        $client->setAccessType('offline');
+        $client->setAccessType('online');
         $client->setApprovalPrompt('force');
 
         $client->setScopes(

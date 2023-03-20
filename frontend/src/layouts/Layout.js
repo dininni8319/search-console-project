@@ -74,6 +74,15 @@ const Layout = () => {
         />
 
         <Route
+          path="/analytics_page/:slug"
+          element={
+            <ProtectedRoute>
+              <GoogleAuth />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path="/progetti"
           element={
             <ProtectedRoute>

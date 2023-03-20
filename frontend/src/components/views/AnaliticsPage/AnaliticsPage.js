@@ -5,13 +5,11 @@ import {
   useReducer,
   useCallback
 } from 'react';
-// import Flex from 'components/common/Flex';
 import { ConfigContext } from 'context/Config/index';
 import { AuthContext } from 'context/Auth/index';
 import useApiRequest from '../../../store/useApiRequest';
 import authReducer, { initialState } from '../../../store/apiReducer';
 import MainLayout from 'layouts/MainLayout';
-import { useNavigate } from 'react-router';
 import { getUrl } from '../../../utils';
 import Modal from '../../UI/Modal/Modal';
 import * as echarts from 'echarts/core';
@@ -24,16 +22,17 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import Saas from 'components/dashboard/saas';
+import { useParams } from 'react-router';
 
 const GoogleAuth = () => {
-  const navigate = useNavigate();
   const { api_urls } = useContext(ConfigContext);
   const { user } = useContext(AuthContext);
   const [state, dispatch] = useReducer(authReducer, initialState);
   const [isOpen, setIsOpen] = useState(false);
   const [analytics, setAnalytic] = useState({});
   const [formData, setFormData] = useState('');
-
+  const { slug } = useParams();
+  console.log(slug, site, 'testing the slug');
   const params = {
     method: 'GET',
     headers: { Authorization: `Bearer ${user?.token}` }
@@ -58,7 +57,8 @@ const GoogleAuth = () => {
     };
 
     const site = getUrl(formData);
-    fetch(`${api_urls.backend}/search/console/weekly_data/${site}`, paramsGet)
+
+    fetch(`${api_urls.backend}/search/console/weekly_data/${site ? site : slug}`, paramsGet)
       .then(response => response.json())
       .then(data => {
         if (data.success) {
@@ -68,7 +68,7 @@ const GoogleAuth = () => {
           });
         }
       });
-  }, [formData]);
+  }, [formData, slug]);
 
   const handleDispatch = useCallback(action => {
     dispatch(action);

@@ -3,7 +3,6 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import editing from 'assets/img/icons/spot-illustrations/21.png';
 import { GoogleContext } from 'context/Google/index';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GoogleIcon from 'assets/img/icons/icons8-google.png';
 
 const Starter = () => {
