@@ -56,7 +56,6 @@ class ProjectController extends Controller
             $newProjects = [];
 
             foreach ($projects as $key => $value) {
-        
                 array_push($newProjects, $value);
             }
 

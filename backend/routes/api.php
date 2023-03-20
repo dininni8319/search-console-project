@@ -54,7 +54,7 @@ Route::group(['middleware' => 'CORS'],function ($router){
     
     //project
     Route::post('/search/console/new_project', [ProjectController::class, 'storeProject']);
-    // Route::post('/search/console/store_data', [StoreSearchDataController::class, 'storeData']);
+    Route::post('/search/console/store_data', [StoreSearchDataController::class, 'storeData']);
     Route::get('/search/console/all_projects', [ProjectController::class, 'getAllProjects']);
 });
    
