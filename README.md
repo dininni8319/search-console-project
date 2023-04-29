@@ -1,6 +1,6 @@
 ## Falcon, a theme by ThemeWagon team.
 <h1>Search Console<h1>
----
+<h4>React, Laravel Stack</h4>
 
 Get the figma design file here:
 [https://www.figma.com/file/sBAjIWQIpl7FkHyV1ZDWC4/Falcon-Distributed-(v3.5.0)](<https://www.figma.com/file/sBAjIWQIpl7FkHyV1ZDWC4/Falcon-Distributed-(v3.5.0)>)
@@ -15,7 +15,7 @@ Attended remote HackJS course, based in Bari, Italy. Topics learned during the p
 </p>
 <br/>
 <p>
-Attended remote Hackademy course, based in Bari, Italy. The technology involved were HTML5, CSS3, Bootstrap5, PHP, JS, Laravel, Vue, React, and React Native. As a final project, I implemented Presto, an E-commerce announcement application.
+Attended remote Hackademy course, based in Bari, Italy. The technology involved were HTML5, CSS3, Bootstrap5, PHP, JS, Laravel, Vue, React, and React Native. As a final project, implemented Presto, an E-commerce announcement application.
 </p>
 <br/>
 <p>
@@ -29,8 +29,8 @@ Spoken languages: Italian, English, German.</p>
 I will share GitLab and Github accounts upon request.</p>
 <br/>
 <br/>
-
-<b>linkedIn Profile: <a href="https://www.linkedin.com/in/salvatoredininni/" >https://www.linkedin.com/in/salvatoredininni/ </a></b>
+<strong>More details...<strong>
+<b>LinkedIn Profile: <a href="https://www.linkedin.com/in/salvatoredininni/" >https://www.linkedin.com/in/salvatoredininni/ </a></b>
 
 <b>Portfolio Website: <a href="https://salvatore-dininni.com/" >https://salvatore-dininni.com</a></b> 
 
