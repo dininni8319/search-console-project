@@ -37,6 +37,7 @@ const ProjectPage = () => {
   }, [getAllProjects]);
 
   const handleDelete = async (e ,id) => {
+    console.log(id, 'TESTANDO L\'ID');
       e.preventDefault();
       try {
         const response = await fetch(
@@ -75,7 +76,10 @@ const ProjectPage = () => {
                   </Link>
                   
                   <button
-                    onClick={(e) => handleDelete(e, site?.id)}
+                    onClick={(e) => {
+                       console.log(site?.id, 'TESTANDO  L\'ID');
+                      handleDelete(e, site?.id)}
+                    }
                     className='btn-transparent float-end btn-style-none'
                   >
                     <FontAwesomeIcon

@@ -32,7 +32,7 @@ const GoogleAuth = () => {
   const [analytics, setAnalytic] = useState({});
   const [formData, setFormData] = useState('');
   const { slug } = useParams();
-  console.log(slug, site, 'testing the slug');
+  
   const params = {
     method: 'GET',
     headers: { Authorization: `Bearer ${user?.token}` }
