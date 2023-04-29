@@ -5,8 +5,6 @@
 Get the figma design file here:
 [https://www.figma.com/file/sBAjIWQIpl7FkHyV1ZDWC4/Falcon-Distributed-(v3.5.0)](<https://www.figma.com/file/sBAjIWQIpl7FkHyV1ZDWC4/Falcon-Distributed-(v3.5.0)>)
 
-<h2>Full-Stack DEveloper ___ <span>Salvatore Dininni</span></h2>
-
 <h2>Full-Stack Developer ___ <span>Salvatore Dininni</span></h2>
 
 <h4>Something about Me<h4>
